@@ -1,0 +1,14 @@
+server:
+  port: 8088
+spring:
+  datasource:
+    username: root
+    password: 12345
+    url: jdbc:mysql://49.232.199.44:3306/bsp?useUnicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mappers/*/*Mapper.xml
+  type-aliases-package: com.neusoft.bsp_backend.*.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
