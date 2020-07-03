@@ -19,6 +19,7 @@ public class BaseController {
     @ResponseBody
     public BaseModel exp(HttpServletRequest request, Exception exception) {
         BaseModel baseModel = new BaseModel();
+        exception.printStackTrace();
         if (exception instanceof BusinessException) {
             baseModel.message = exception.getMessage();
             baseModel.code = ((BusinessException) exception).getCode();
