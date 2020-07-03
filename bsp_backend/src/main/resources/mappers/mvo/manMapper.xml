@@ -28,6 +28,22 @@
 
     <select id="getAllByFilter" parameterType="java.util.Map">
         select * from man_manufacturer
+        <where>
+            <if test="MAN_ID != null">MAN_ID = #{man_id}</if>
+            <if test="name_en != null">name_en = #{name_en}</if>
+            <if test="name_cn != null">name_cn = #{name_cn}</if>
+            <if test="gmc_report_type != null">gmc_report_type = #{gmc_report_type}</if>
+            <if test="gmc_report_url != null">gmc_report_url = #{gmc_report_url}</if>
+            <if test="description != null">description = #{description}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+            <if test="user_id != null">user_id = #{user_id}</if>
+        </where>
     </select>
 
 

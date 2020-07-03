@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("manService")
 public class ManServiceImpl implements ManService {
 
     @Autowired
