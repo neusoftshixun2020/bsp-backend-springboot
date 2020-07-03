@@ -18,5 +18,4 @@ import java.util.Map;
 @Repository
 public interface BrandMapper extends BaseMapper<Integer, Brand> {
 
-
 }

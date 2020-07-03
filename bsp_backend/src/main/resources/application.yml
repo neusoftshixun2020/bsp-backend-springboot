@@ -1,5 +1,7 @@
 server:
   port: 8088
+  tomcat:
+    basedir: /home/happym/tmp/
 spring:
   datasource:
     username: root
@@ -9,6 +11,8 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mappers/*/*Mapper.xml
-  type-aliases-package: com.neusoft.bsp_backend.*.entity
+  type-aliases-package: com.neusoft.bsp_backend.*.entity, com.neusoft.bsp_backend.common.*.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
