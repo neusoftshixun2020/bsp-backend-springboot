@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.mvoinfo.mapper.ManMapper">
+    <insert id="insert"  parameterType="Manufacturer">
+        insert into man_manufacturer values(#{man_id}, #{name_en}, #{name_cn}, #{gmc_report_type}, #{gmc_report_url},
+            #{description}, #{created_by}, #{creation_date}, #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark}, #{sts_cd}, #{user_id})
+    </insert>
+
+    <update id="update" parameterType="Manufacturer">
+        update man_manufacturer set name_en=#{name_en}, name_cn=#{name_cn}, gmc_report_type=#{gmc_report_type},
+            gmc_report_url=#{gmc_report_url}, description=#{description}, created_by=#{created_by}, creation_date=#{creation_date}, last_update_by=#{last_update_by}, last_update_date=#{last_update_date}, call_cnt=#{call_cnt}, remark=#{remark},
+            sts_cd=#{sts_cd} user_id=#{user_id} where man_id=#{man_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from man_manufacturer where man_id=#{man_id}
+    </delete>
+
+    <select id="getAll" resultType="Manufacturer">
+        select * from man_manufacturer
+    </select>
+
+    <select id="getById" parameterType="java.lang.String">
+        select * from man_manufacturer where man_id=#{man_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map">
+        select * from man_manufacturer
+    </select>
+
+
+</mapper>
