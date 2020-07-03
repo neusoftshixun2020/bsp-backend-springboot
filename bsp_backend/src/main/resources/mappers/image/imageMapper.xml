@@ -11,11 +11,11 @@
 
 
     <delete id="delete" parameterType="java.lang.Integer">
-        delete from img_image where IMAGE_ID= #{image_id}
+        delete from img_image where IMG_ID= #{image_id}
     </delete>
 
     <select id="getById" resultType="Image" parameterType="java.lang.Integer">
-        select * from img_image where IMAGE_ID = #{image_id}
+        select * from img_image where IMG_ID = #{pk}
     </select>
 
 </mapper>

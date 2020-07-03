@@ -1,25 +1,17 @@
 package com.neusoft.bsp_backend.controller;
 
 import com.neusoft.bsp_backend.common.base.BaseController;
-import com.neusoft.bsp_backend.common.base.BaseModel;
 import com.neusoft.bsp_backend.common.base.BaseModelJson;
 import com.neusoft.bsp_backend.common.exception.BusinessException;
 import com.neusoft.bsp_backend.common.file.service.FilesStorageService;
 import com.neusoft.bsp_backend.common.image.entity.Image;
 import com.neusoft.bsp_backend.common.image.service.ImageService;
+import com.neusoft.bsp_backend.common.validationGroup.SelectGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.net.Inet4Address;
 
 @CrossOrigin
 @RestController
@@ -35,8 +27,8 @@ public class ImageController extends BaseController {
     @Autowired
     Environment environment;
 
-    @RequestMapping("/uploadImage")
-    public BaseModelJson<Integer> uploadImage(@RequestParam("file")MultipartFile file) {
+    @PostMapping("/uploadImage")
+    public BaseModelJson<Image> uploadImage(@RequestParam("file")MultipartFile file) {
         String extension = "";
         String fileName = file.getOriginalFilename();
         int i = fileName.lastIndexOf('.');
@@ -49,7 +41,7 @@ public class ImageController extends BaseController {
         }
         try {
             storageService.save(file);
-            BaseModelJson<Integer> result = new BaseModelJson<>();
+            BaseModelJson<Image> result = new BaseModelJson<>();
             Image image = new Image();
             System.out.println(environment.getProperty("local.server.port"));
             String url = "http://localhost:" + environment.getProperty("local.server.port") + "/File/files/" + file.getOriginalFilename();
@@ -59,7 +51,7 @@ public class ImageController extends BaseController {
             if (j == 1) {
                 result.code = 200;
                 result.message = "upload file success";
-                result.data = image.getImg_id();
+                result.data = image;
                 return result;
             } else {
                 throw BusinessException.INSERT_FAIL;
@@ -67,6 +59,19 @@ public class ImageController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             throw BusinessException.UPLOAD_FILE_FAIL;
+        }
+    }
+
+    @PostMapping("getById")
+    public BaseModelJson<Image> getImgById(@Validated({SelectGroup.class})int img_id) {
+       Image image = imageService.getById(img_id);
+        if (image == null) {
+            throw BusinessException.NOT_EXISTS;
+        } else {
+            BaseModelJson<Image> result = new BaseModelJson<>();
+            result.code = 200;
+            result.data = image;
+            return result;
         }
     }
 }

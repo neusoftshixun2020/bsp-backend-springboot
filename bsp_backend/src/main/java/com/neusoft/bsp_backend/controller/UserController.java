@@ -51,7 +51,7 @@ public class UserController extends BaseController {
         map.put("password", user.getPassword());
         List<User> users = userService.getAllByFilter(map);
         if (users.size() == 0) {
-            throw BusinessException.USERNAME_NOT_EXISTS;
+            throw BusinessException.NOT_EXISTS;
         } else {
             BaseModel result = new BaseModel();
             result.code = 200;

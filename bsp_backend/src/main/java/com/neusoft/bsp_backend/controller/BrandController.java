@@ -9,7 +9,6 @@ import com.neusoft.bsp_backend.common.validationGroup.InsertGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 import com.neusoft.bsp_backend.mvoinfo.service.BrandService;
-import com.neusoft.bsp_backend.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -33,7 +32,7 @@ public class BrandController extends BaseController {
         map.put("man_id", brand.getMan_id());
         List<Brand> brands = brandService.getAllByFilter(map);
         if (brands.size() == 0) {
-            throw BusinessException.USERNAME_NOT_EXISTS;
+            throw BusinessException.NOT_EXISTS;
         } else {
             BaseModelJson<List<Brand>> result = new BaseModelJson<>();
             result.code = 200;
@@ -43,7 +42,7 @@ public class BrandController extends BaseController {
     }
 
     @PostMapping("/addBrand")
-    public BaseModel addBrand(@Validated({InsertGroup.class}) @RequestBody Brand brand, BindingResult bindingResult) {
+    public BaseModel addBrand(@RequestBody Brand brand, BindingResult bindingResult) {
         System.out.println(brand);
         if (bindingResult.hasErrors()) {
             throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{brand.toString()});
@@ -58,6 +57,30 @@ public class BrandController extends BaseController {
             }
         }
     }
+
+    @PostMapping("/addOrUpdateBrand")
+    public BaseModel addOrUpdateBrand(@Validated({UpdateGroup.class}) @RequestBody Brand brand, BindingResult bindingResult) {
+        System.out.println(brand);
+        if (bindingResult.hasErrors()) {
+            throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{brand.toString()});
+        } else {
+            BaseModel result = new BaseModel();
+            int i = brandService.insert(brand);
+            if (i == 1) {
+                result.code = 200;
+                return result;
+            } else {
+                int j = brandService.update(brand);
+                if (j == 1) {
+                    result.code = 200;
+                    return result;
+                } else {
+                    throw BusinessException.OPERATION_FAIL;
+                }
+            }
+        }
+    }
+
 
     @PostMapping("/deleteBrand")
     public BaseModel deleteBrand(@Validated({DeleteGroup.class}) @RequestBody Brand brand, BindingResult bindingResult) {

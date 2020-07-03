@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.bsp_backend.mvoinfo.mapper.ManMapper">
     <insert id="insert"  parameterType="Manufacturer">
-        insert into man_manufacturer values(#{man_id}, #{name_en}, #{name_cn}, #{gmc_report_type}, #{gmc_report_url},
+        insert into man_manufacturer values(null, #{name_en}, #{name_cn}, #{gmc_report_type}, #{gmc_report_url},
             #{description}, #{created_by}, #{creation_date}, #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark}, #{sts_cd}, #{user_id})
     </insert>
 
@@ -18,7 +18,7 @@
         delete from man_manufacturer where man_id=#{man_id}
     </delete>
 
-    <select id="getAll" resultType="Manufacturer">
+    <select id="getAll" resultMap="_man">
         select * from man_manufacturer
     </select>
 
@@ -26,7 +26,7 @@
         select * from man_manufacturer where man_id=#{man_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_man">
         select * from man_manufacturer
         <where>
             <if test="MAN_ID != null">MAN_ID = #{man_id}</if>
@@ -45,6 +45,23 @@
             <if test="user_id != null">user_id = #{user_id}</if>
         </where>
     </select>
+
+    <resultMap id="_man" type="Manufacturer">
+        <id column="MAN_ID" property="man_id" />
+       <result column="NAME_EN" property="name_en" />
+       <result column="NAME_CN" property="name_cn" />
+       <result column="GMC_REPORT_TYPE" property="gmc_report_type" />
+       <result column="GMC_REPORT_URL" property="gmc_report_url" />
+       <result column="DESCRIPTION" property="description" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="REMARK" property="remark" />
+       <result column="STS_CD" property="sts_cd" />
+       <result column="USER_ID" property="user_id" />
+    </resultMap>
 
 
 </mapper>
