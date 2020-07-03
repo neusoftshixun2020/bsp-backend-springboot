@@ -3,6 +3,8 @@ package com.neusoft.bsp_backend;
 import com.neusoft.bsp_backend.mvoinfo.entity.Manufacturer;
 import com.neusoft.bsp_backend.mvoinfo.mapper.ManMapper;
 
+import com.neusoft.bsp_backend.common.image.entity.Image;
+import com.neusoft.bsp_backend.common.image.mapper.ImageMapper;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 import com.neusoft.bsp_backend.mvoinfo.mapper.BrandMapper;
 
@@ -21,6 +23,9 @@ class BspBackendApplicationTests {
     @Autowired
     BrandMapper brandMapper;
 
+    @Autowired
+    ImageMapper imageMapper;
+
     @Test
     void contextLoads() {
         List<Manufacturer> manufacturers = manMapper.getAll();
@@ -37,5 +42,11 @@ class BspBackendApplicationTests {
         for (Brand brand : brands) {
             System.out.println(brand);
         }
+    }
+
+    @Test
+    void contextLoads2() {
+        Image image = new Image();
+        imageMapper.insert(image);
     }
 }

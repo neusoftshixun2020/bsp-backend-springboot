@@ -7,6 +7,9 @@ public class BusinessException extends RuntimeException {
     public static final BusinessException UPDATE_FAIL = new BusinessException(504, "update operation failed", new Object[0]);
     public static final BusinessException DELETE_FAIL = new BusinessException(504, "delete operation failed", new Object[0]);
     public static final BusinessException USERID_NULL_ERROR = new BusinessException(504, "userid cannot be null", new Object[0]);
+    public static final BusinessException UPLOAD_FILE_FAIL = new BusinessException(504, "file upload failed", new Object[0]);
+    public static final BusinessException FILETYPE_NOT_PICTURE = new BusinessException(504, "file type is not picture", new Object[0]);
+
     int code;
     String msg;
 
@@ -27,6 +30,7 @@ public class BusinessException extends RuntimeException {
     }
 
     public BusinessException() {}
+
     public BusinessException(int code, String msg, Object... args) {
         super(String.format(msg, args));
         this.code = code;

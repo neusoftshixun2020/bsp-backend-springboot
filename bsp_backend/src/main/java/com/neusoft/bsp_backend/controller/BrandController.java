@@ -27,7 +27,7 @@ public class BrandController extends BaseController {
     @Autowired
     BrandService brandService;
 
-    @GetMapping("/getBrandByFilter")
+    @PostMapping("/getBrandByFilter")
     public BaseModelJson<List<Brand>> getAllByFilter(@RequestBody Brand brand) {
         Map<String, Object> map = new HashMap<>();
         map.put("man_id", brand.getMan_id());
