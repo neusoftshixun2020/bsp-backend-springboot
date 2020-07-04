@@ -44,8 +44,23 @@ public class UserController extends BaseController {
         }
     }
 
+//    @PostMapping("/checkUser")
+//    public BaseModel getAllByFilter(@RequestBody User user) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("username", user.getUsername());
+//        map.put("password", user.getPassword());
+//        List<User> users = userService.getAllByFilter(map);
+//        if (users.size() == 0) {
+//            throw BusinessException.NOT_EXISTS;
+//        } else {
+//            BaseModel result = new BaseModel();
+//            result.code = 200;
+//            return result;
+//        }
+//    }
+
     @PostMapping("/checkUser")
-    public BaseModel getAllByFilter(@RequestBody User user) {
+    public BaseModelJson<User> getAllByFilter(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
         map.put("username", user.getUsername());
         map.put("password", user.getPassword());
@@ -53,8 +68,9 @@ public class UserController extends BaseController {
         if (users.size() == 0) {
             throw BusinessException.NOT_EXISTS;
         } else {
-            BaseModel result = new BaseModel();
+            BaseModelJson<User> result = new BaseModelJson();
             result.code = 200;
+            result.data=users.get(0);
             return result;
         }
     }
