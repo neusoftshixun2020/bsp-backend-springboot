@@ -1,6 +1,7 @@
 package com.neusoft.bsp_backend;
 
 import com.neusoft.bsp_backend.mvoinfo.entity.Manufacturer;
+import com.neusoft.bsp_backend.mvoinfo.entity.ProductCategory;
 import com.neusoft.bsp_backend.mvoinfo.mapper.ManMapper;
 
 import com.neusoft.bsp_backend.common.image.entity.Image;
@@ -8,6 +9,7 @@ import com.neusoft.bsp_backend.common.image.mapper.ImageMapper;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 import com.neusoft.bsp_backend.mvoinfo.mapper.BrandMapper;
 
+import com.neusoft.bsp_backend.mvoinfo.mapper.ProductCategoryMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +27,9 @@ class BspBackendApplicationTests {
 
     @Autowired
     ImageMapper imageMapper;
+
+    @Autowired
+    ProductCategoryMapper productCategoryMapper;
 
     @Test
     void contextLoads() {
@@ -48,5 +53,12 @@ class BspBackendApplicationTests {
     void contextLoads2() {
         Image image = new Image();
         imageMapper.insert(image);
+    }
+
+    @Test
+    void contextLoads3() {
+        ProductCategory productCategory = new ProductCategory();
+        int i = productCategoryMapper.getProNum(1);
+        System.out.println(i);
     }
 }

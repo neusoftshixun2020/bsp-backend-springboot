@@ -98,8 +98,8 @@ public class BrandController extends BaseController {
             }
         }
     }
-    @PostMapping("/updateUser")
-    public BaseModel updateUser(@Validated({UpdateGroup.class}) @RequestBody Brand brand, BindingResult bindingResult) {  //bindingResult用于获得validate的反馈信息
+    @PostMapping("/updateBrand")
+    public BaseModel updateBrand(@Validated({UpdateGroup.class}) @RequestBody Brand brand, BindingResult bindingResult) {  //bindingResult用于获得validate的反馈信息
         if (bindingResult.hasErrors()) {
             throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
                     new Object[]{brand.toString()});
