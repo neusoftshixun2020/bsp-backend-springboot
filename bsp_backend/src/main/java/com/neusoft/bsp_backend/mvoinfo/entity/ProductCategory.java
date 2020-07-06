@@ -1,22 +1,14 @@
 package com.neusoft.bsp_backend.mvoinfo.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
-import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
-import com.neusoft.bsp_backend.common.validationGroup.InsertGroup;
-import com.neusoft.bsp_backend.common.validationGroup.SelectGroup;
-import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Brand implements BaseEntity<Integer> {
-
-    int brd_id;
-    int man_id;
-    int image_id;
-    String name_en;
-    String name_cn;
+public class ProductCategory implements BaseEntity<Integer> {
+    int prc_id;
+    String category_id;
+    String category_name;
+    String category_path;
     String created_by;
     Timestamp creation_date;
     String last_update_by;
@@ -24,47 +16,44 @@ public class Brand implements BaseEntity<Integer> {
     int call_cnt;
     String remark;
     char sts_cd;
+    String plateform_type;
+    String product_status;
 
-    public Integer getId() {return brd_id;}
-
-    public int getBrd_id() {
-        return brd_id;
+    @Override
+    public Integer getId() {
+        return prc_id;
     }
 
-    public void setBrd_id(int brd_id) {
-        this.brd_id = brd_id;
+    public int getPrc_id() {
+        return prc_id;
     }
 
-    public int getMan_id() {
-        return man_id;
+    public void setPrc_id(int prc_id) {
+        this.prc_id = prc_id;
     }
 
-    public void setMan_id(int man_id) {
-        this.man_id = man_id;
+    public String getCategory_id() {
+        return category_id;
     }
 
-    public int getImage_id() {
-        return image_id;
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
-    public void setImage_id(int image_id) {
-        this.image_id = image_id;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public String getName_en() {
-        return name_en;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
-    public void setName_en(String name_en) {
-        this.name_en = name_en;
+    public String getCategory_path() {
+        return category_path;
     }
 
-    public String getName_cn() {
-        return name_cn;
-    }
-
-    public void setName_cn(String name_cn) {
-        this.name_cn = name_cn;
+    public void setCategory_path(String category_path) {
+        this.category_path = category_path;
     }
 
     public String getCreated_by() {
@@ -123,14 +112,29 @@ public class Brand implements BaseEntity<Integer> {
         this.sts_cd = sts_cd;
     }
 
+    public String getPlateform_type() {
+        return plateform_type;
+    }
+
+    public void setPlateform_type(String plateform_type) {
+        this.plateform_type = plateform_type;
+    }
+
+    public String getProduct_status() {
+        return product_status;
+    }
+
+    public void setProduct_status(String product_status) {
+        this.product_status = product_status;
+    }
+
     @Override
     public String toString() {
-        return "Brand{" +
-                "brd_id=" + brd_id +
-                ", man_id=" + man_id +
-                ", image_id=" + image_id +
-                ", name_en='" + name_en + '\'' +
-                ", name_cn='" + name_cn + '\'' +
+        return "ProductCategory{" +
+                "prc_id=" + prc_id +
+                ", category_id='" + category_id + '\'' +
+                ", category_name='" + category_name + '\'' +
+                ", category_path='" + category_path + '\'' +
                 ", created_by='" + created_by + '\'' +
                 ", creation_date=" + creation_date +
                 ", last_update_by='" + last_update_by + '\'' +
@@ -138,6 +142,8 @@ public class Brand implements BaseEntity<Integer> {
                 ", call_cnt=" + call_cnt +
                 ", remark='" + remark + '\'' +
                 ", sts_cd=" + sts_cd +
+                ", plateform_type='" + plateform_type + '\'' +
+                ", product_status='" + product_status + '\'' +
                 '}';
     }
 }
