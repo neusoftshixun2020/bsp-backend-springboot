@@ -60,8 +60,8 @@ public class ManController extends BaseController {
         }
     }
 
-    @PostMapping("/getManByFilter")
-    public BaseModelJson<PageInfo<Manufacturer>> getManList(Integer pageNum, Integer pageSize,
+    @PostMapping("/getAllByFilter")
+    public BaseModelJson<PageInfo<Manufacturer>> getAllByFilter(Integer pageNum, Integer pageSize,
                                                      @RequestBody Manufacturer manufacturer) {
         Map<String, Object> map = new HashMap<>();
         BaseModelJson<PageInfo<Manufacturer>> result = new BaseModelJson();
