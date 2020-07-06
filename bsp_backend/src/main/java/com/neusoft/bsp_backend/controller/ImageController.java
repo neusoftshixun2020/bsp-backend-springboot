@@ -63,7 +63,7 @@ public class ImageController extends BaseController {
     }
 
     @PostMapping("getById")
-    public BaseModelJson<Image> getImgById(@Validated({SelectGroup.class})int img_id) {
+    public BaseModelJson<Image> getImgById(int img_id) {
        Image image = imageService.getById(img_id);
         if (image == null) {
             throw BusinessException.NOT_EXISTS;
