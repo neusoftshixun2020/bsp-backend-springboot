@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.product.mapper.ProductDescriptionMapper">
+    <insert id="insert"  parameterType="ProductDescription">
+        insert into pdn_product_descrition values(null, #{pro_id}, null, #{descrition},null,null,null,null,null,null,null)
+    </insert>
+
+    <update id="update" parameterType="ProductDescription">
+        update pdn_product_descrition set pro_id=#{pro_id}, descrition=#{descrition}
+         where pdn_id=#{pdn_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from pdn_product_descrition where pdn_id=#{pdn_id}
+    </delete>
+
+    <select id="getAll" resultType="ProductDescription">
+        select * from pdn_product_descrition
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultType="ProductDescription">
+        select * from pdn_product_descrition where pro_id=#{pro_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultType="ProductDescription">
+        select * from pdn_product_descrition
+        <where>
+            <if test="pdn_id != null">pdn_id = #{pdn_id}</if>
+            <if test="pro_id != null">pro_id = #{pro_id}</if>
+            <if test="descrition != null">descrition = #{descrition}</if>
+        </where>
+    </select>
+
+
+</mapper>

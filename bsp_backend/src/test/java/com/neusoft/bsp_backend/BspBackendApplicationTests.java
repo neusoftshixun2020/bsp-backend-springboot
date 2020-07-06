@@ -8,6 +8,8 @@ import com.neusoft.bsp_backend.common.image.mapper.ImageMapper;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 import com.neusoft.bsp_backend.mvoinfo.mapper.BrandMapper;
 
+import com.neusoft.bsp_backend.product.entity.Product;
+import com.neusoft.bsp_backend.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +28,16 @@ class BspBackendApplicationTests {
     @Autowired
     ImageMapper imageMapper;
 
+    @Autowired
+    ProductService productService;
+
+    @Test
+    void testProduct(){
+        List<Product> products = productService.getAll();
+        for (Product product: products){
+            System.out.println(product);
+        }
+    }
     @Test
     void contextLoads() {
         List<Manufacturer> manufacturers = manMapper.getAll();

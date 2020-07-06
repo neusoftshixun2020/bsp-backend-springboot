@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.product.mapper.ProductMapper">
+    <insert id="insert"  parameterType="Product" useGeneratedKeys="true" keyProperty="pro_id">
+        insert into pro_product values(null, #{prc_id}, #{sku_cd}, #{brd_id}, #{man_id}, #{title},
+            #{upc}, #{ean}, #{model}, #{img_id}, #{warranty_day}, null, null, null, null, null, null, null, null, null, #{replenishment_period}, null,#{warranty}, #{time_unit},null)
+    </insert>
+
+    <update id="update" parameterType="Product">
+        update pro_product set sku_cd=#{sku_cd}, brd_id=#{brd_id}, man_id=#{man_id},
+            title=#{title}, upc=#{upc}, ean=#{ean}, model=#{model}, warranty_day=#{warranty_day},
+            replenishment_period=#{replenishment_period}, warranty=#{warranty}, time_unit=#{time_unit}
+             where pro_id=#{pro_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from pro_product where pro_id=#{pro_id}
+    </delete>
+
+    <select id="getAll" resultType="Product">
+        select * from pro_product
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultType="Product">
+        select * from pro_product where pro_id=#{pro_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultType="Product">
+        select * from pro_product
+        <where>
+            <if test="pro_id != null">pro_id = #{pro_id}</if>
+            <if test="sku_cd != null">sku_cd = #{sku_cd}</if>
+            <if test="brd_id != null">brd_id = #{brd_id}</if>
+            <if test="man_id != null">man_id = #{man_id}</if>
+            <if test="title != null">title = #{title}</if>
+            <if test="upc != null">upc = #{upc}</if>
+            <if test="ean != null">ean = #{ean}</if>
+            <if test="model != null">model = #{model}</if>
+            <if test="warranty_day != null">warranty_day = #{warranty_day}</if>
+            <if test="replenishment_period != null">replenishment_period = #{replenishment_period}</if>
+            <if test="warranty != null">warranty = #{warranty}</if>
+            <if test="time_unit != null">time_unit = #{time_unit}</if>
+        </where>
+    </select>
+
+
+</mapper>
