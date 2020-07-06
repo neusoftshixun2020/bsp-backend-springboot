@@ -19,15 +19,15 @@
         delete from pro_product where pro_id=#{pro_id}
     </delete>
 
-    <select id="getAll" resultType="Product">
+    <select id="getAll" resultMap="_product">
         select * from pro_product
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultType="Product">
+    <select id="getById" parameterType="java.lang.String" resultMap="_product">
         select * from pro_product where pro_id=#{pro_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="Product">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_product">
         select * from pro_product
         <where>
             <if test="pro_id != null">pro_id = #{pro_id}</if>
@@ -45,5 +45,21 @@
         </where>
     </select>
 
+    <resultMap id="_product" type="Product">
+       <id column="PRO_ID" property="pro_id"/>
+       <result column="SKU_CD" property="sku_cd" />
+       <result column="BRD_ID" property="brd_id" />
+       <result column="MAN_ID" property="man_id" />
+       <result column="TITLE" property="title" />
+       <result column="UPC" property="upc" />
+       <result column="EAN" property="ean" />
+       <result column="MODEL" property="model" />
+       <result column="WARRANTY_DAY" property="warranty_day" />
+       <result column="REPLENISHMENT_PERIOD" property="replenishment_period" />
+       <result column="WARRANTY" property="warranty" />
+       <result column="TIME_UNIT" property="time_unit" />
+       <result column="IMG_ID" property="img_id" />
+       <result column="PRC_ID" property="prc_id" />
+    </resultMap>
 
 </mapper>

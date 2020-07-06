@@ -16,15 +16,15 @@
         delete from pdn_product_descrition where pdn_id=#{pdn_id}
     </delete>
 
-    <select id="getAll" resultType="ProductDescription">
+    <select id="getAll" resultMap="_productdescription">
         select * from pdn_product_descrition
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultType="ProductDescription">
+    <select id="getById" parameterType="java.lang.String" resultMap="_productdescription">
         select * from pdn_product_descrition where pro_id=#{pro_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="ProductDescription">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_productdescription">
         select * from pdn_product_descrition
         <where>
             <if test="pdn_id != null">pdn_id = #{pdn_id}</if>
@@ -33,5 +33,10 @@
         </where>
     </select>
 
+    <resultMap id="_productdescription" type="ProductDescription">
+        <id property="pdn_id" column="PDN_ID" />
+       <result column="PRO_ID" property="pro_id" />
+       <result column="DESCRITION" property="descrition" />
+    </resultMap>
 
 </mapper>

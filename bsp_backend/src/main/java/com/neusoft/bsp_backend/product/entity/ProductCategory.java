@@ -1,8 +1,8 @@
-package com.neusoft.bsp_backend.mvoinfo.entity;
+package com.neusoft.bsp_backend.product.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
-
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class ProductCategory implements BaseEntity<Integer> {
     int prc_id;
@@ -10,12 +10,11 @@ public class ProductCategory implements BaseEntity<Integer> {
     String category_name;
     String category_path;
     String created_by;
-    Timestamp creation_date;
+    Date creation_date;
     String last_update_by;
-    Timestamp last_update_date;
+    Date last_update_date;
     int call_cnt;
     String remark;
-    char sts_cd;
     String plateform_type;
     String product_status;
 
@@ -64,12 +63,20 @@ public class ProductCategory implements BaseEntity<Integer> {
         this.created_by = created_by;
     }
 
-    public Timestamp getCreation_date() {
+    public Date getCreation_date() {
         return creation_date;
     }
 
-    public void setCreation_date(Timestamp creation_date) {
+    public void setCreation_date(Date creation_date) {
         this.creation_date = creation_date;
+    }
+
+    public Date getLast_update_date() {
+        return last_update_date;
+    }
+
+    public void setLast_update_date(Date last_update_date) {
+        this.last_update_date = last_update_date;
     }
 
     public String getLast_update_by() {
@@ -78,14 +85,6 @@ public class ProductCategory implements BaseEntity<Integer> {
 
     public void setLast_update_by(String last_update_by) {
         this.last_update_by = last_update_by;
-    }
-
-    public Timestamp getLast_update_date() {
-        return last_update_date;
-    }
-
-    public void setLast_update_date(Timestamp last_update_date) {
-        this.last_update_date = last_update_date;
     }
 
     public int getCall_cnt() {
@@ -102,14 +101,6 @@ public class ProductCategory implements BaseEntity<Integer> {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public char getSts_cd() {
-        return sts_cd;
-    }
-
-    public void setSts_cd(char sts_cd) {
-        this.sts_cd = sts_cd;
     }
 
     public String getPlateform_type() {
@@ -141,7 +132,6 @@ public class ProductCategory implements BaseEntity<Integer> {
                 ", last_update_date=" + last_update_date +
                 ", call_cnt=" + call_cnt +
                 ", remark='" + remark + '\'' +
-                ", sts_cd=" + sts_cd +
                 ", plateform_type='" + plateform_type + '\'' +
                 ", product_status='" + product_status + '\'' +
                 '}';

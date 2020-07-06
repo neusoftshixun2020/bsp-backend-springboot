@@ -1,15 +1,14 @@
-package com.neusoft.bsp_backend.mvoinfo.service.impl;
+package com.neusoft.bsp_backend.product.service.Impl;
 
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.neusoft.bsp_backend.mvoinfo.entity.ProductCategory;
-import com.neusoft.bsp_backend.mvoinfo.mapper.ProductCategoryMapper;
-import com.neusoft.bsp_backend.mvoinfo.service.ProductCategoryService;
+import com.neusoft.bsp_backend.product.entity.ProductCategory;
+import com.neusoft.bsp_backend.product.mapper.ProductCategoryMapper;
+import com.neusoft.bsp_backend.product.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

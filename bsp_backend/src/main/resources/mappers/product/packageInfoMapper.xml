@@ -16,15 +16,15 @@
         delete from pck_package_info where pck_id=#{pck_id}
     </delete>
 
-    <select id="getAll" resultType="PackageInfo">
+    <select id="getAll" resultMap="_packageinfo">
         select * from pck_package_info
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultType="PackageInfo">
+    <select id="getById" parameterType="java.lang.String" resultMap="_packageinfo">
         select * from pck_package_info where pro_id=#{pro_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="PackageInfo">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_packageinfo">
         select * from pck_package_info
         <where>
             <if test="pck_id != null">pck_id = #{pck_id}</if>
@@ -36,5 +36,13 @@
         </where>
     </select>
 
-
+   <resultMap id="_packageinfo" type="PackageInfo">
+      <id column="PCK_ID" property="pck_id" />
+      <result column="PRO_ID" property="pro_id" />
+      <result column="WIDTH" property="width" />
+      <result column="HEIGHT" property="height" />
+      <result column="LENGTH" property="length" />
+      <result column="WEIGHT" property="weight" />
+   </resultMap>
+    
 </mapper>

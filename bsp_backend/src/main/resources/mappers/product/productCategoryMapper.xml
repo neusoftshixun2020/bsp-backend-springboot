@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.bsp_backend.mvoinfo.mapper.ProductCategoryMapper">
+<mapper namespace="com.neusoft.bsp_backend.product.mapper.ProductCategoryMapper">
     <insert id="insert"  parameterType="ProductCategory">
         insert into prc_product_category values(null, #{category_id}, #{category_name}, #{category_path},
             #{created_by}, #{creation_date}, #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark},
-            #{sts_cd}, #{plateform_type}, #{product_status})
+            null, #{plateform_type}, #{product_status})
     </insert>
 
 
@@ -14,7 +14,7 @@
     <update id="update" parameterType="ProductCategory">
         update prc_product_category set category_id = #{category_id}, category_name = #{category_name}, category_path = #{category_path}, created_by = #{created_by},
             creation_date = #{creation_date}, last_update_by = #{last_update_by}, last_update_date = #{last_update_date},
-            call_cnt = #{call_cnt}, remark = #{remark}, sts_cd = #{sts_cd}, plateform_type = #{plateform_type},
+            call_cnt = #{call_cnt}, remark = #{remark}, plateform_type = #{plateform_type},
             product_status = #{product_status} where prc_id = #{prc_id}
     </update>
 
@@ -41,7 +41,6 @@
             <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
             <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
             <if test="remark != null">remark = #{remark}</if>
-            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
             <if test="plateform_type != null">plateform_type = #{plateform_type}</if>
             <if test="product_status != null">product_status = #{product_status}</if>
         </where>
@@ -62,7 +61,6 @@
         <result column="LAST_UPDATE_DATE" property="last_update_date"/>
         <result column="CALL_CNT" property="call_cnt"/>
         <result column="REMARK" property="remark"/>
-        <result column="STS_CD" property="sts_cd"/>
         <result column="PLATEFORM_TYPE" property="plateform_type"/>
         <result column="PRODUCT_STATUS" property="product_status"/>
     </resultMap>

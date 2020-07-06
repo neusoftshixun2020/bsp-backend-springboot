@@ -7,8 +7,8 @@ import com.neusoft.bsp_backend.common.exception.BusinessException;
 import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
-import com.neusoft.bsp_backend.mvoinfo.entity.ProductCategory;
-import com.neusoft.bsp_backend.mvoinfo.service.ProductCategoryService;
+import com.neusoft.bsp_backend.product.entity.ProductCategory;
+import com.neusoft.bsp_backend.product.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -120,6 +120,7 @@ public class ProductCategoryController extends BaseController {
         BaseModelJson<Integer> result = new BaseModelJson<>();
         result.code = 200;
         result.data = pro_num;
+        System.out.println(pro_num);
         return result;
     }
 }

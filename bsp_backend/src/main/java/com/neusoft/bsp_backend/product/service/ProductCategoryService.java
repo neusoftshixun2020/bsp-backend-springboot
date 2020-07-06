@@ -1,8 +1,7 @@
-package com.neusoft.bsp_backend.mvoinfo.service;
+package com.neusoft.bsp_backend.product.service;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.bsp_backend.mvoinfo.entity.Manufacturer;
-import com.neusoft.bsp_backend.mvoinfo.entity.ProductCategory;
+import com.neusoft.bsp_backend.product.entity.ProductCategory;
 
 import java.util.List;
 import java.util.Map;

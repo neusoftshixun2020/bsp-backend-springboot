@@ -16,15 +16,15 @@
         delete from ofp_offer_price where ofp_id=#{ofp_id}
     </delete>
 
-    <select id="getAll" resultType="Price">
+    <select id="getAll" resultMap="_price">
         select * from ofp_offer_price
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultType="Price">
+    <select id="getById" parameterType="java.lang.String" resultMap="_price">
         select * from ofp_offer_price where pro_id=#{pro_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="Price">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_price">
         select * from ofp_offer_price
         <where>
             <if test="ofp_id != null">ofp_id = #{ofp_id}</if>
@@ -35,5 +35,13 @@
         </where>
     </select>
 
+
+    <resultMap id="_price" type="Price">
+       <id column="OFP_ID" property="ofp_id" />
+       <result column="PRO_ID" property="pro_id" />
+       <result column="EFFETIVE_START_DATE" property="effetive_start_date" />
+       <result column="EFFECTIVE_END_DATE" property="effective_end_date" />
+       <result column="PRICE" property="price" />
+    </resultMap>
 
 </mapper>
