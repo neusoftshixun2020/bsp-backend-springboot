@@ -15,7 +15,7 @@
              where pro_id=#{pro_id}
     </update>
 
-    <delete id="delete" parameterType="java.lang.String">
+    <delete id="delete" parameterType="java.lang.Integer">
         delete from pro_product where pro_id=#{pro_id}
     </delete>
 
@@ -23,7 +23,7 @@
         select * from pro_product
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultMap="_product">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_product">
         select * from pro_product where pro_id=#{pro_id}
     </select>
 

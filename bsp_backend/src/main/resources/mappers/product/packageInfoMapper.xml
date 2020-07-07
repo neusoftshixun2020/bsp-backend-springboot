@@ -9,10 +9,10 @@
 
     <update id="update" parameterType="PackageInfo">
         update pck_package_info set pro_id=#{pro_id}, width=#{width}, height=#{height},
-            length=#{length} weight=#{weight} where pck_id=#{pck_id}
+            `length`=#{length}, weight=#{weight} where pck_id=#{pck_id}
     </update>
 
-    <delete id="delete" parameterType="java.lang.String">
+    <delete id="delete" parameterType="java.lang.Integer">
         delete from pck_package_info where pck_id=#{pck_id}
     </delete>
 
@@ -20,7 +20,7 @@
         select * from pck_package_info
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultMap="_packageinfo">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_packageinfo">
         select * from pck_package_info where pro_id=#{pro_id}
     </select>
 
@@ -44,5 +44,5 @@
       <result column="LENGTH" property="length" />
       <result column="WEIGHT" property="weight" />
    </resultMap>
-    
+
 </mapper>

@@ -6,5 +6,5 @@ import com.neusoft.bsp_backend.product.entity.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PriceMapper extends BaseMapper<String, Price> {
+public interface PriceMapper extends BaseMapper<Integer, Price> {
 }

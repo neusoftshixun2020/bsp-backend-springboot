@@ -57,17 +57,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int delete(String pk) {
+    public int delete(int pk) {
         Product product = productMapper.getById(pk);
-        int d = priceMapper.delete(String.valueOf(product.getPrice().getOfp_id()));
-        int d1 = packageInfoMapper.delete(String.valueOf(product.getPackageInfo().getPck_id()));
-        int d2 = productDescriptionMapper.delete(String.valueOf(product.getProductDescription().getPdn_id()));
         int d3 = productMapper.delete(pk);
-        return d+d1+d2+d3;
+        return d3;
     }
 
     @Override
-    public Product getById(String proid) {
+    public Product getById(int proid) {
         Price price = priceMapper.getById(proid);
         PackageInfo packageInfo = packageInfoMapper.getById(proid);
         ProductDescription productDescription = productDescriptionMapper.getById(proid);
@@ -82,9 +79,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllByFilter(Map<String, Object> map) {
         List<Product> products = productMapper.getAllByFilter(map);
         for (Product pro: products){
-            Price price = priceMapper.getById(String.valueOf(pro.getPro_id()));
-            PackageInfo packageInfo = packageInfoMapper.getById(String.valueOf(pro.getPro_id()));
-            ProductDescription productDescription = productDescriptionMapper.getById(String.valueOf(pro.getPro_id()));
+            Price price = priceMapper.getById(pro.getPro_id());
+            PackageInfo packageInfo = packageInfoMapper.getById(pro.getPro_id());
+            ProductDescription productDescription = productDescriptionMapper.getById(pro.getPro_id());
             pro.setProductDescription(productDescription);
             pro.setPackageInfo(packageInfo);
             pro.setPrice(price);
@@ -96,9 +93,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAll() {
         List<Product> products = productMapper.getAll();
         for (Product pro: products){
-            Price price = priceMapper.getById(String.valueOf(pro.getPro_id()));
-            PackageInfo packageInfo = packageInfoMapper.getById(String.valueOf(pro.getPro_id()));
-            ProductDescription productDescription = productDescriptionMapper.getById(String.valueOf(pro.getPro_id()));
+            Price price = priceMapper.getById(pro.getPro_id());
+            PackageInfo packageInfo = packageInfoMapper.getById(pro.getPro_id());
+            ProductDescription productDescription = productDescriptionMapper.getById(pro.getPro_id());
             pro.setProductDescription(productDescription);
             pro.setPackageInfo(packageInfo);
             pro.setPrice(price);

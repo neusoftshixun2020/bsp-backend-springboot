@@ -5,7 +5,7 @@ import com.neusoft.bsp_backend.common.base.BaseEntity;
 public class ProductDescription implements BaseEntity<String> {
     int pdn_id;
     int pro_id;
-    String descrition;
+    String description;
 
     public int getPdn_id() {
         return pdn_id;
@@ -15,12 +15,12 @@ public class ProductDescription implements BaseEntity<String> {
         this.pdn_id = pdn_id;
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getPro_id() {
@@ -35,7 +35,7 @@ public class ProductDescription implements BaseEntity<String> {
     public String toString() {
         return "ProductDescription{" +
                 "pro_id=" + pro_id +
-                ", descrition='" + descrition + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 

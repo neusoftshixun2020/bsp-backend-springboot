@@ -5,11 +5,11 @@ import com.neusoft.bsp_backend.common.base.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Price implements BaseEntity<String> {
+public class Price implements BaseEntity<Integer> {
 
     int ofp_id;
     int pro_id;
-    Date effetive_start_date;
+    Date effective_start_date;
     Date effective_end_date;
     BigDecimal price;
 
@@ -29,12 +29,12 @@ public class Price implements BaseEntity<String> {
         this.pro_id = pro_id;
     }
 
-    public Date getEffetive_start_date() {
-        return effetive_start_date;
+    public Date getEffective_start_date() {
+        return effective_start_date;
     }
 
-    public void setEffetive_start_date(Date effetive_start_date) {
-        this.effetive_start_date = effetive_start_date;
+    public void setEffective_start_date(Date effetive_start_date) {
+        this.effective_start_date = effetive_start_date;
     }
 
     public Date getEffective_end_date() {
@@ -58,14 +58,14 @@ public class Price implements BaseEntity<String> {
         return "Price{" +
                 "ofp_id=" + ofp_id +
                 ", pro_id=" + pro_id +
-                ", effetive_start_date=" + effetive_start_date +
+                ", effetive_start_date=" + effective_start_date +
                 ", effective_end_date=" + effective_end_date +
                 ", price=" + price +
                 '}';
     }
 
     @Override
-    public String getId() {
-        return null;
+    public Integer getId() {
+        return ofp_id;
     }
 }

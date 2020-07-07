@@ -27,8 +27,7 @@ public class ProductController extends BaseController {
     ProductService productService;
 
     @PostMapping("/getProducts")
-    public BaseModelJson<PageInfo<Product>> getProducts(Integer pageNum, Integer pageSize,
-                                                        @RequestBody Product product) {
+    public BaseModelJson<PageInfo<Product>> getProducts(Integer pageNum, Integer pageSize) {
         Map<String, Object> map = new HashMap<>();
         BaseModelJson<PageInfo<Product>> result = new BaseModelJson();
         if (pageNum == null) {
@@ -63,6 +62,7 @@ public class ProductController extends BaseController {
 
     @PostMapping("/deleteProduct")
     public BaseModel deleteProduct(@Validated({DeleteGroup.class}) @RequestBody Product product, BindingResult bindingResult) {
+        System.out.println(product);
         if (bindingResult.hasErrors()) {
             throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
                     new Object[]{product.toString()});
@@ -80,6 +80,8 @@ public class ProductController extends BaseController {
 
     @PostMapping("/addAndUpdateProduct")
     public BaseModel addAndUpdateProduct(@RequestBody Product product, BindingResult bindingResult, String operationFlag) {
+        System.out.println(product);
+        System.out.println(operationFlag);
         if (bindingResult.hasErrors()) {
             throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{product.toString()});
         } else {

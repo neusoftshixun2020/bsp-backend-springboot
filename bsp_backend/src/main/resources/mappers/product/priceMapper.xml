@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.bsp_backend.product.mapper.PriceMapper">
     <insert id="insert"  parameterType="Price">
-        insert into ofp_offer_price values(null, null, #{effetive_start_date}, #{effective_end_date}, #{pro_id}, #{price},null,null,null,null,null,null,null,null,null,null)
+        insert into ofp_offer_price values(null, null, #{effective_start_date}, #{effective_end_date}, #{pro_id}, #{price},null,null,null,null,null,null,null,null,null,null)
     </insert>
 
     <update id="update" parameterType="Price">
-        update ofp_offer_price set pro_id=#{pro_id}, effetive_start_date=#{effetive_start_date}, effective_end_date=#{effective_end_date},
+        update ofp_offer_price set pro_id=#{pro_id}, effective_start_date=#{effective_start_date}, effective_end_date=#{effective_end_date},
             price=#{price} where ofp_id=#{ofp_id}
     </update>
 
-    <delete id="delete" parameterType="java.lang.String">
+    <delete id="delete" parameterType="java.lang.Integer">
         delete from ofp_offer_price where ofp_id=#{ofp_id}
     </delete>
 
@@ -20,7 +20,7 @@
         select * from ofp_offer_price
     </select>
 
-    <select id="getById" parameterType="java.lang.String" resultMap="_price">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_price">
         select * from ofp_offer_price where pro_id=#{pro_id}
     </select>
 
@@ -29,7 +29,7 @@
         <where>
             <if test="ofp_id != null">ofp_id = #{ofp_id}</if>
             <if test="pro_id != null">pro_id = #{pro_id}</if>
-            <if test="effetive_start_date != null">effetive_start_date = #{effetive_start_date}</if>
+            <if test="effective_start_date != null">effective_start_date = #{effective_start_date}</if>
             <if test="effective_end_date != null">effective_end_date = #{effective_end_date}</if>
             <if test="price != null">price = #{price}</if>
         </where>
@@ -39,7 +39,7 @@
     <resultMap id="_price" type="Price">
        <id column="OFP_ID" property="ofp_id" />
        <result column="PRO_ID" property="pro_id" />
-       <result column="EFFETIVE_START_DATE" property="effetive_start_date" />
+       <result column="EFFECTIVE_START_DATE" property="effective_start_date" />
        <result column="EFFECTIVE_END_DATE" property="effective_end_date" />
        <result column="PRICE" property="price" />
     </resultMap>

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product implements BaseEntity<String> {
+public class Product implements BaseEntity<Integer> {
     @NotNull(groups={InsertGroup.class, UpdateGroup.class, SelectGroup.class, DeleteGroup.class}, message = "proid should not be null")
     int pro_id;
     String sku_cd;
@@ -29,6 +29,11 @@ public class Product implements BaseEntity<String> {
     ProductDescription productDescription;
     PackageInfo packageInfo;
     Price price;
+
+
+    public Integer getId(){
+        return pro_id;
+    }
 
     public int getImg_id() {
         return img_id;
@@ -189,8 +194,5 @@ public class Product implements BaseEntity<String> {
                 '}';
     }
 
-    @Override
-    public String getId() {
-        return null;
-    }
+
 }

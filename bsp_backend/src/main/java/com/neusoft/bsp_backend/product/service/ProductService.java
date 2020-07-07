@@ -12,9 +12,9 @@ public interface ProductService {
 
     int update(Product product);
 
-    int delete(String pk);
+    int delete(int pk);
 
-    Product getById(String proid);
+    Product getById(int proid);
 
     List<Product> getAllByFilter(Map<String, Object> map);
 

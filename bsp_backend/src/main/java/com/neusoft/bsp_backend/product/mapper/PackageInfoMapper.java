@@ -6,5 +6,5 @@ import com.neusoft.bsp_backend.product.entity.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PackageInfoMapper extends BaseMapper<String, PackageInfo> {
+public interface PackageInfoMapper extends BaseMapper<Integer, PackageInfo> {
 }
