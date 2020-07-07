@@ -24,6 +24,7 @@ public class Brand implements BaseEntity<Integer> {
     Date last_update_date;
     int call_cnt;
     String remark;
+    String img_url;
 
     public Integer getId() {return brd_id;}
 
@@ -115,6 +116,13 @@ public class Brand implements BaseEntity<Integer> {
         this.remark = remark;
     }
 
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 
     @Override
     public String toString() {
@@ -130,6 +138,7 @@ public class Brand implements BaseEntity<Integer> {
                 ", last_update_date=" + last_update_date +
                 ", call_cnt=" + call_cnt +
                 ", remark='" + remark + '\'' +
+                ", img_url='" + img_url + '\'' +
                 '}';
     }
 }

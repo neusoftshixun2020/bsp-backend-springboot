@@ -5,14 +5,14 @@
 <mapper namespace="com.neusoft.bsp_backend.mvoinfo.mapper.BrandMapper">
     <insert id="insert"  parameterType="Brand">
         insert into brd_brand values(null, #{man_id},#{name_en},#{name_cn},#{created_by},#{creation_date},#{last_update_by},#{last_update_date},#{call_cnt},
-            #{remark},null)
+            #{remark},null, #{img_url})
     </insert>
 
     <update id="update" parameterType="User">
         update brd_brand
         set MAN_ID = #{man_id}, NAME_EN = #{name_en}, NAME_CN = #{name_cn}, CREATED_BY = #{created_by},
             CREATION_DATE = #{creation_date}, LAST_UPDATE_BY = #{last_update_by}, LAST_UPDATE_DATE = #{last_update_date},
-            CALL_CNT = #{call_cnt},REMARK = #{remark} where BRD_ID = #{brd_id}
+            CALL_CNT = #{call_cnt},REMARK = #{remark}, IMG_URL=#{img_url} where BRD_ID = #{brd_id}
     </update>
 
     <delete id="delete" parameterType="java.lang.Integer">
@@ -40,6 +40,7 @@
             <if test="LAST_UPDATE_DATE != null">and LAST_UPDATE_DATE = #{last_update_date}</if>
             <if test="CALL_CNT != null">and CALL_CNT = #{call_cnt}</if>
             <if test="REMARK != null">and REMARK = #{remark}</if>
+            <if test="IMG_URL != null">and IMG_URL = #{img_url}</if>
         </where>
     </select>
 
@@ -54,5 +55,6 @@
        <result column="LAST_UPDATE_DATE" property="last_update_date"  />
        <result column="CALL_CNT" property="call_cnt"  />
        <result column="REMARK" property="remark"  />
+        <result column="IMG_URL" property="img_url" />
     </resultMap>
 </mapper>
