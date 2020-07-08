@@ -14,9 +14,11 @@ public class ProductCategory implements BaseEntity<Integer> {
     String last_update_by;
     Date last_update_date;
     int call_cnt;
+    int pro_num;
     String remark;
     String plateform_type;
     String product_status;
+    String img_url;
 
     @Override
     public Integer getId() {
@@ -119,6 +121,22 @@ public class ProductCategory implements BaseEntity<Integer> {
         this.product_status = product_status;
     }
 
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
+    public int getPro_num() {
+        return pro_num;
+    }
+
+    public void setPro_num(int pro_num) {
+        this.pro_num = pro_num;
+    }
+
     @Override
     public String toString() {
         return "ProductCategory{" +
@@ -134,6 +152,7 @@ public class ProductCategory implements BaseEntity<Integer> {
                 ", remark='" + remark + '\'' +
                 ", plateform_type='" + plateform_type + '\'' +
                 ", product_status='" + product_status + '\'' +
+                ", img_url='" + img_url + '\'' +
                 '}';
     }
 }

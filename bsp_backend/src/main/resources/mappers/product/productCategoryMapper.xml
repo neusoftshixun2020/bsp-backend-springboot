@@ -6,7 +6,7 @@
     <insert id="insert"  parameterType="ProductCategory">
         insert into prc_product_category values(null, #{category_id}, #{category_name}, #{category_path},
             #{created_by}, #{creation_date}, #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark},
-            null, #{plateform_type}, #{product_status})
+            null, #{plateform_type}, #{product_status}, #{img_url})
     </insert>
 
 
@@ -15,7 +15,7 @@
         update prc_product_category set category_id = #{category_id}, category_name = #{category_name}, category_path = #{category_path}, created_by = #{created_by},
             creation_date = #{creation_date}, last_update_by = #{last_update_by}, last_update_date = #{last_update_date},
             call_cnt = #{call_cnt}, remark = #{remark}, plateform_type = #{plateform_type},
-            product_status = #{product_status} where prc_id = #{prc_id}
+            product_status = #{product_status}, img_url=#{img_url} where prc_id = #{prc_id}
     </update>
 
 
@@ -43,6 +43,7 @@
             <if test="remark != null">remark = #{remark}</if>
             <if test="plateform_type != null">plateform_type = #{plateform_type}</if>
             <if test="product_status != null">product_status = #{product_status}</if>
+            <if test="img_url != null">img_url = #{img_url}</if>
         </where>
     </select>
 
@@ -63,6 +64,7 @@
         <result column="REMARK" property="remark"/>
         <result column="PLATEFORM_TYPE" property="plateform_type"/>
         <result column="PRODUCT_STATUS" property="product_status"/>
+        <result column="IMG_URL" property="img_url"/>
     </resultMap>
 
 
