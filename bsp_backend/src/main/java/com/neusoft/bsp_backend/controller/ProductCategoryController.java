@@ -26,62 +26,57 @@ public class ProductCategoryController extends BaseController {
     @Autowired
     ProductCategoryService productCategoryService;
 
-    @PostMapping("/getProductCategoryByFilter")
-    public BaseModelJson<List<ProductCategory>> getAllByFilter(@RequestBody Brand brand) {
+    @PostMapping("/getAllCategory")
+    public BaseModelJson<List<ProductCategory>> getAllCategory() {
         Map<String, Object> map = new HashMap<>();
         List<ProductCategory> productCategories = productCategoryService.getAllByFilter(map);
-        if (productCategories.size() == 0) {
-            throw BusinessException.NOT_EXISTS;
-        } else {
-            BaseModelJson<List<ProductCategory>> result = new BaseModelJson<>();
-            result.code = 200;
-            result.data = productCategories;
-            return result;
+        for (ProductCategory productCategory: productCategories) {
+            System.out.println("pro_num"+ productCategoryService.getProNum(productCategory.getPrc_id()));
+            productCategory.setPro_num(productCategoryService.getProNum(productCategory.getPrc_id()));
         }
+        BaseModelJson<List<ProductCategory>> result = new BaseModelJson<>();
+        result.code = 200;
+        result.data = productCategories;
+        return result;
     }
 
-    @PostMapping("/addProductCategory")
-    public BaseModel addBrand(@RequestBody ProductCategory productCategory, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{productCategory.toString()});
-        } else {
-            BaseModel result = new BaseModel();
-            int i = productCategoryService.insert(productCategory);
-            if (i == 1) {
-                result.code = 200;
-                return result;
-            } else {
-                throw BusinessException.INSERT_FAIL;
-            }
-        }
-    }
+
 
     @PostMapping("/addOrUpdateProductCategory")
-    public BaseModel addOrUpdateProductCategory(@Validated({UpdateGroup.class}) @RequestBody ProductCategory productCategory, BindingResult bindingResult) {
+    public BaseModel addOrUpdateProductCategory(@Validated({UpdateGroup.class}) @RequestBody ProductCategory productCategory, String operationFlag, BindingResult bindingResult) {
         System.out.println(productCategory);
+        System.out.println(operationFlag);
         if (bindingResult.hasErrors()) {
             throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{productCategory.toString()});
         } else {
             BaseModel result = new BaseModel();
-            int i = productCategoryService.insert(productCategory);
-            if (i == 1) {
-                result.code = 200;
-                return result;
-            } else {
+            if (operationFlag.equals("add")) {
+                int i = productCategoryService.insert(productCategory);
+                if (i == 1) {
+                    result.code = 200;
+                    result.message = "add success";
+                    return result;
+                } else {
+                    throw BusinessException.INSERT_FAIL;
+                }
+            } else if (operationFlag.equals("update")) {
                 int j = productCategoryService.update(productCategory);
                 if (j == 1) {
                     result.code = 200;
+                    result.message = "update success";
                     return result;
                 } else {
-                    throw BusinessException.OPERATION_FAIL;
+                    throw BusinessException.UPDATE_FAIL;
                 }
+            } else {
+                throw BusinessException.OPERATION_FAIL;
             }
         }
     }
 
 
     @PostMapping("/deleteProductCategory")
-    public BaseModel deleteBrand(@Validated({DeleteGroup.class}) @RequestBody ProductCategory productCategory, BindingResult bindingResult) {
+    public BaseModel deleteProductCategory(@Validated({DeleteGroup.class}) @RequestBody ProductCategory productCategory, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
                     new Object[]{productCategory.toString()});
@@ -96,22 +91,7 @@ public class ProductCategoryController extends BaseController {
             }
         }
     }
-    @PostMapping("/updateBrand")
-    public BaseModel updateBrand(@Validated({UpdateGroup.class}) @RequestBody ProductCategory productCategory, BindingResult bindingResult) {  //bindingResult用于获得validate的反馈信息
-        if (bindingResult.hasErrors()) {
-            throw BusinessException.NOT_EXISTS.newInstance("504", this.getErrorResponse(bindingResult),
-                    new Object[]{productCategory.toString()});
-        } else {
-            BaseModel result = new BaseModel();
-            int i = productCategoryService.update(productCategory);
-            if(i==1){
-                result.code = 200;
-                return result;
-            }else{
-                throw BusinessException.UPDATE_FAIL;
-            }
-        }
-    }
+
 
     @PostMapping("getProNum")
     public BaseModelJson<Integer> getProNum(@RequestBody ProductCategory productCategory) {

@@ -5,7 +5,6 @@ import com.neusoft.bsp_backend.common.base.BaseModel;
 import com.neusoft.bsp_backend.common.base.BaseModelJson;
 import com.neusoft.bsp_backend.common.exception.BusinessException;
 import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
-import com.neusoft.bsp_backend.common.validationGroup.InsertGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 import com.neusoft.bsp_backend.mvoinfo.service.BrandService;
@@ -98,6 +97,7 @@ public class BrandController extends BaseController {
             }
         }
     }
+
     @PostMapping("/updateBrand")
     public BaseModel updateBrand(@Validated({UpdateGroup.class}) @RequestBody Brand brand,  BindingResult bindingResult) {  //bindingResult用于获得validate的反馈信息
         if (bindingResult.hasErrors()) {
