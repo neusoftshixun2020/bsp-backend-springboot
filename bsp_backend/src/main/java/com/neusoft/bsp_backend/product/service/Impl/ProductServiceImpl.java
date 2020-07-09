@@ -68,10 +68,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(String proid) {
-        Price price = priceMapper.getById(proid);
-        PackageInfo packageInfo = packageInfoMapper.getById(proid);
-        ProductDescription productDescription = productDescriptionMapper.getById(proid);
         Product product = productMapper.getById(proid);
+        Price price = priceMapper.getById(String.valueOf(product.getPrice().getOfp_id()));
+        PackageInfo packageInfo = packageInfoMapper.getById(String.valueOf(product.getPackageInfo().getPck_id()));
+        ProductDescription productDescription = productDescriptionMapper.getById(String.valueOf(product.getProductDescription().getPdn_id()));
         product.setPrice(price);
         product.setPackageInfo(packageInfo);
         product.setProductDescription(productDescription);
