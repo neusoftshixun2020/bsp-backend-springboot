@@ -124,4 +124,12 @@ public class UserController extends BaseController {
 
         return result;
     }
+
+    @PostMapping("logout")
+    public BaseModel logout() {
+        BaseModel result = new BaseModel();
+        result.code = 200;
+        return result;
+    }
+
 }
