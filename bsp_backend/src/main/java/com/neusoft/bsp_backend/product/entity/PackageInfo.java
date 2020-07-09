@@ -4,7 +4,7 @@ import com.neusoft.bsp_backend.common.base.BaseEntity;
 
 import java.math.BigDecimal;
 
-public class PackageInfo implements BaseEntity<String> {
+public class PackageInfo implements BaseEntity<Integer> {
     int pck_id;
     int pro_id;
     BigDecimal width;
@@ -73,7 +73,7 @@ public class PackageInfo implements BaseEntity<String> {
     }
 
     @Override
-    public String getId() {
+    public Integer getId() {
         return null;
     }
 }

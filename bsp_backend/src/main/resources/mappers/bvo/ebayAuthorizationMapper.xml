@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.bvo.mapper.EbayAuthorizationMapper">
+    <insert id="insert"  parameterType="EbayAuthorization">
+        insert into eba_ebay_authorization values(null, #{str_id}, #{app_id}, #{secret_key}, #{token}, #{created_by}, #{creation_date},
+        #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark}, #{sts_cd}, #{exp_date}, #{cancle_date}, #{account_id})
+    </insert>
+
+    <update id="update" parameterType="EbayAuthorization">
+        update eba_ebay_authorization set str_id=#{str_id}, app_id=#{app_id}, secret_key=#{secret_key}, token=#{token}, created_by=#{created_by}, creation_date=#{creation_date},
+        last_update_by=#{last_update_by}, last_update_date=#{last_update_date}, call_cnt=#{call_cnt}, remark=#{remark},
+            sts_cd=#{sts_cd}, exp_date=#{exp_date}, cancle_date=#{cancle_date}, account_id=#{account_id} where eba_id=#{eba_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from eba_ebay_authorization where eba_id=#{eba_id}
+    </delete>
+
+    <select id="getAll" resultMap="_ebayauthorization">
+        select * from eba_ebay_authorization
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_ebayauthorization">
+        select * from eba_ebay_authorization where eba_id=#{eba_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_ebayauthorization">
+        select * from eba_ebay_authorization
+        <where>
+            <if test="eba_id != null">eba_id = #{eba_id}</if>
+            <if test="str_id != null">str_id = #{str_id}</if>
+            <if test="app_id != null">app_id = #{app_id}</if>
+            <if test="secret_key != null">secret_key = #{secret_key}</if>
+            <if test="token != null">token = #{token}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+            <if test="exp_date != null">exp_date = #{exp_date}</if>
+            <if test="cancle_date != null">cancle_date = #{cancle_date}</if>
+            <if test="account_id != null">account_id = #{account_id}</if>
+        </where>
+    </select>
+
+    <resultMap id="_ebayauthorization" type="EbayAuthorization">
+       <id column="EBA_ID" property="eba_id" />
+       <result column="STR_ID" property="str_id" />
+       <result column="APP_ID" property="app_id" />
+       <result column="SECRET_KEY" property="secret_key" />
+       <result column="TOKEN" property="token" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="REMARK" property="remark" />
+       <result column="STS_CD" property="sts_cd" />
+       <result column="EXP_DATE" property="exp_date" />
+       <result column="CANCLE_DATE" property="cancle_date" />
+       <result column="ACCOUNT_ID" property="account_id" />
+    </resultMap>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.bvo.mapper.WishListMapper">
+    <insert id="insert"  parameterType="WishList">
+        insert into wit_wishlist values(null, #{dsr_id}, #{pro_id}, #{created_by}, #{creation_date},
+        #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark}, #{sts_cd})
+    </insert>
+
+    <update id="update" parameterType="WishList">
+        update wit_wishlist set dsr_id=#{dsr_id}, pro_id=#{pro_id}, created_by=#{created_by}, creation_date=#{creation_date},
+        last_update_by=#{last_update_by}, last_update_date=#{last_update_date}, call_cnt=#{call_cnt}, remark=#{remark},
+            sts_cd=#{sts_cd} where wit_id=#{wit_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from wit_wishlist where wit_id=#{wit_id}
+    </delete>
+
+    <select id="getAll" resultMap="_wishlist">
+        select * from wit_wishlist
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_wishlist">
+        select * from wit_wishlist where wit_id=#{wit_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_wishlist">
+        select * from wit_wishlist
+        <where>
+            <if test="wit_id != null">wit_id = #{wit_id}</if>
+            <if test="pro_id != null">pro_id = #{pro_id}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+        </where>
+    </select>
+
+    <resultMap id="_wishlist" type="WishList">
+       <id column="WIT_ID" property="wit_id" />
+       <result column="DSR_ID" property="dsr_id" />
+       <result column="PRO_ID" property="pro_id" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="REMARK" property="remark" />
+       <result column="STS_CD" property="sts_cd" />
+    </resultMap>
+
+</mapper>

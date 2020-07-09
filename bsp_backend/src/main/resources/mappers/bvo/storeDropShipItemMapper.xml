@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.bvo.mapper.StoreDropShipItemMapper">
+    <insert id="insert"  parameterType="StoreDropShipItem">
+        insert into sdi_store_dropship_item values(null, #{pro_id}, #{str_id}, #{store_retention}, #{dropship_price}, #{dropship_status}, #{created_by}, #{creation_date},
+        #{last_update_by}, #{call_cnt}, #{last_update_date}, #{remark}, #{sts_cd}, #{shelf_stock}, #{prefer_date})
+    </insert>
+
+    <update id="update" parameterType="StoreDropShipItem">
+        update sdi_store_dropship_item set str_id=#{str_id}, pro_id=#{pro_id}, store_retention=#{store_retention}, dropship_price=#{dropship_price}, dropship_status=#{dropship_status}, created_by=#{created_by}, creation_date=#{creation_date},
+        last_update_by=#{last_update_by}, last_update_date=#{last_update_date}, call_cnt=#{call_cnt}, remark=#{remark},
+            sts_cd=#{sts_cd}, shelf_stock=#{shelf_stock}, prefer_date=#{prefer_date} where dil_id=#{dil_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from sdi_store_dropship_item where dil_id=#{dil_id}
+    </delete>
+
+    <select id="getAll" resultMap="_storedropshipitem">
+        select * from sdi_store_dropship_item
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_storedropshipitem">
+        select * from sdi_store_dropship_item where dil_id=#{dil_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_storedropshipitem">
+        select * from sdi_store_dropship_item
+        <where>
+            <if test="dil_id != null">dil_id = #{dil_id}</if>
+            <if test="str_id != null">str_id = #{str_id}</if>
+            <if test="pro_id != null">pro_id = #{pro_id}</if>
+            <if test="dropship_price != null">dropship_price = #{dropship_price}</if>
+            <if test="dropship_status != null">dropship_status = #{dropship_status}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+            <if test="exp_date != null">exp_date = #{exp_date}</if>
+            <if test="cancle_date != null">cancle_date = #{cancle_date}</if>
+            <if test="store_retention != null">store_retention = #{store_retention}</if>
+        </where>
+    </select>
+
+    <resultMap id="_storedropshipitem" type="StoreDropShipItem">
+        <id column="DIL_ID" property="dil_id" />
+        <result column="PRO_ID" property="pro_id" />
+        <result column="STR_ID" property="str_id" />
+        <result column="STORE_RETENTION" property="store_retention" />
+        <result column="DROPSHIP_PRICE" property="dropship_price" />
+        <result column="DROPSHIP_STATUS" property="dropship_status" />
+        <result column="CREATED_BY" property="created_by" />
+        <result column="CREATION_DATE" property="creation_date" />
+        <result column="LAST_UPDATE_BY" property="last_update_by" />
+        <result column="CALL_CNT" property="call_cnt" />
+        <result column="LAST_UPDATE_DATE" property="last_update_date" />
+        <result column="REMARK" property="remark" />
+        <result column="STS_CD" property="sts_cd" />
+        <result column="SHELF_STOCK" property="shelf_stock" />
+        <result column="PREFER_DATE" property="prefer_date" />
+    </resultMap>
+</mapper>

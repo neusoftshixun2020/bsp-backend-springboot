@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.bvo.mapper.DropShipPriceMapper">
+    <insert id="insert"  parameterType="DropShipPrice">
+        insert into drp_dropship_price values(null, #{ofp_id}, #{dsr_id}, #{war_id}, #{created_by}, #{creation_date},
+        #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark}, #{sts_cd})
+    </insert>
+
+    <update id="update" parameterType="DropShipPrice">
+        update drp_dropship_price set ofp_id=#{ofp_id}, dsr_id=#{dsr_id}, war_id=#{war_id}, created_by=#{created_by}, creation_date=#{creation_date},
+        last_update_by=#{last_update_by}, last_update_date=#{last_update_date}, call_cnt=#{call_cnt}, remark=#{remark},
+            sts_cd=#{sts_cd} where drp_id=#{drp_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from drp_dropship_price where drp_id=#{drp_id}
+    </delete>
+
+    <select id="getAll" resultMap="_dropshipprice">
+        select * from drp_dropship_price
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_dropshipprice">
+        select * from drp_dropship_price where drp_id=#{drp_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_dropshipprice">
+        select * from drp_dropship_price
+        <where>
+            <if test="drp_id != null">drp_id = #{drp_id}</if>
+            <if test="ofp_id != null">ofp_id = #{ofp_id}</if>
+            <if test="dsr_id != null">dsr_id = #{dsr_id}</if>
+            <if test="war_id != null">war_id = #{war_id}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+        </where>
+    </select>
+
+    <resultMap id="_dropshipprice" type="DropShipPrice">
+       <result column="drp_id" property="drp_id" />
+       <result column="ofp_id" property="ofp_id" />
+       <result column="dsr_id" property="dsr_id" />
+       <result column="war_id" property="war_id" />
+       <result column="created_by" property="created_by" />
+       <result column="creation_date" property="creation_date" />
+       <result column="last_update_by" property="last_update_by" />
+       <result column="last_update_date" property="last_update_date" />
+       <result column="call_cnt" property="call_cnt" />
+       <result column="remark" property="remark" />
+       <result column="sts_cd" property="sts_cd" />
+    </resultMap>
+
+</mapper>
