@@ -13,6 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/image")
@@ -29,8 +32,9 @@ public class ImageController extends BaseController {
 
     @PostMapping("/uploadImage")
     public BaseModelJson<Image> uploadImage(@RequestParam("file")MultipartFile file) {
+
         String extension = "";
-        String fileName = file.getOriginalFilename();
+        String fileName =  file.getOriginalFilename();
         int i = fileName.lastIndexOf('.');
         if (i > 0) {
             extension = fileName.substring(i+1);
@@ -40,11 +44,11 @@ public class ImageController extends BaseController {
             throw BusinessException.FILETYPE_NOT_PICTURE.newInstance("504", "File type is not picture", new Object[]{file.getOriginalFilename()});
         }
         try {
-            storageService.save(file);
+            String filename = storageService.save(file);
             BaseModelJson<Image> result = new BaseModelJson<>();
             Image image = new Image();
             System.out.println(environment.getProperty("local.server.port"));
-            String url = "http://localhost:" + environment.getProperty("local.server.port") + "/File/files/" + file.getOriginalFilename();
+            String url = "http://localhost:" + environment.getProperty("local.server.port") + "/File/files/" + filename;
             System.out.println(url);
             image.setUri(url);
             int j = imageService.insert(image);

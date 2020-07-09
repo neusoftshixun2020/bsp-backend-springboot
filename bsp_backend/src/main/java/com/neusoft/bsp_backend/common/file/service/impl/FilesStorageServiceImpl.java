@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.stream.Stream;
 
 import com.neusoft.bsp_backend.common.file.service.FilesStorageService;
@@ -30,9 +32,13 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     }
 
     @Override
-    public void save(MultipartFile file) {
+    public String save(MultipartFile file) {
         try {
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+            Date date = new Date();
+            SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
+            String filename = ft.format(date) + file.getOriginalFilename();
+            Files.copy(file.getInputStream(), this.root.resolve(filename));
+            return filename;
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
