@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.bsp_backend.product.entity.ProductCategory;
 import com.neusoft.bsp_backend.product.mapper.ProductCategoryMapper;
+import com.neusoft.bsp_backend.product.mapper.ProductMapper;
 import com.neusoft.bsp_backend.product.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class ProductCategoryServiceImpl implements  ProductCategoryService {
 
     @Autowired
     ProductCategoryMapper productCategoryMapper;
+
+    @Autowired
+    ProductMapper productMapper;
 
     @Override
     public int insert(ProductCategory productCategory) {
@@ -40,7 +44,11 @@ public class ProductCategoryServiceImpl implements  ProductCategoryService {
 
     @Override
     public List<ProductCategory> getAllByFilter(Map<String, Object> map) {
-        return productCategoryMapper.getAllByFilter(map);
+        List<ProductCategory> productCategories =  productCategoryMapper.getAllByFilter(map);
+        for (ProductCategory productCategory:productCategories) {
+            productCategory.setProduct(productMapper.getById(productCategory.getPro_id()));
+        }
+        return productCategories;
     }
 
     @Override

@@ -7,8 +7,10 @@ import com.neusoft.bsp_backend.common.exception.BusinessException;
 import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
+import com.neusoft.bsp_backend.product.entity.Product;
 import com.neusoft.bsp_backend.product.entity.ProductCategory;
 import com.neusoft.bsp_backend.product.service.ProductCategoryService;
+import com.neusoft.bsp_backend.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,14 +28,13 @@ public class ProductCategoryController extends BaseController {
     @Autowired
     ProductCategoryService productCategoryService;
 
+    @Autowired
+    ProductService productService;
+
     @PostMapping("/getAllCategory")
     public BaseModelJson<List<ProductCategory>> getAllCategory() {
         Map<String, Object> map = new HashMap<>();
         List<ProductCategory> productCategories = productCategoryService.getAllByFilter(map);
-        for (ProductCategory productCategory: productCategories) {
-            System.out.println("pro_num"+ productCategoryService.getProNum(productCategory.getPrc_id()));
-            productCategory.setPro_num(productCategoryService.getProNum(productCategory.getPrc_id()));
-        }
         BaseModelJson<List<ProductCategory>> result = new BaseModelJson<>();
         result.code = 200;
         result.data = productCategories;
@@ -51,6 +52,15 @@ public class ProductCategoryController extends BaseController {
         } else {
             BaseModel result = new BaseModel();
             if (operationFlag.equals("add")) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("title", productCategory.getProduct().getTitle());
+                List<Product> productList = productService.getAllByFilter(map);
+                if (productList.size() == 0) {
+                    throw BusinessException.PRODUCT_NOT_EXISTS.newInstance("504", "product not exist", new Object[]{productCategory.getProduct().getTitle()});
+                } else {
+                    Product product = productList.get(0);
+                    productCategory.setPro_id(product.getPro_id());
+                }
                 int i = productCategoryService.insert(productCategory);
                 if (i == 1) {
                     result.code = 200;
@@ -90,17 +100,5 @@ public class ProductCategoryController extends BaseController {
                 throw BusinessException.DELETE_FAIL;
             }
         }
-    }
-
-
-    @PostMapping("getProNum")
-    public BaseModelJson<Integer> getProNum(@RequestBody ProductCategory productCategory) {
-        Integer prc_id =  productCategory.getPrc_id();
-        Integer pro_num = productCategoryService.getProNum(prc_id);
-        BaseModelJson<Integer> result = new BaseModelJson<>();
-        result.code = 200;
-        result.data = pro_num;
-        System.out.println(pro_num);
-        return result;
     }
 }

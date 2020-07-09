@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.bsp_backend.product.mapper.ProductCategoryMapper">
     <insert id="insert"  parameterType="ProductCategory">
-        insert into prc_product_category values(null, #{category_id}, #{category_name}, #{category_path},
+        insert into prc_product_category values(null, #{pro_id},#{category_id}, #{category_name}, #{category_path},
             #{created_by}, #{creation_date}, #{last_update_by}, #{last_update_date}, #{call_cnt}, #{remark},
             null, #{plateform_type}, #{product_status}, #{img_url})
     </insert>
@@ -12,7 +12,7 @@
 
 
     <update id="update" parameterType="ProductCategory">
-        update prc_product_category set category_id = #{category_id}, category_name = #{category_name}, category_path = #{category_path}, created_by = #{created_by},
+        update prc_product_category set pro_id = #{pro_id} ,category_id = #{category_id}, category_name = #{category_name}, category_path = #{category_path}, created_by = #{created_by},
             creation_date = #{creation_date}, last_update_by = #{last_update_by}, last_update_date = #{last_update_date},
             call_cnt = #{call_cnt}, remark = #{remark}, plateform_type = #{plateform_type},
             product_status = #{product_status}, img_url=#{img_url} where prc_id = #{prc_id}
@@ -31,6 +31,7 @@
     <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_product_category">
         select * from prc_product_category
         <where>
+            <if test="pro_id != null">pro_id = #{pro_id}</if>
             <if test="prc_id != null">prc_id = #{prc_id}</if>
             <if test="category_id != null">category_id = #{category_id}</if>
             <if test="category_name != null">category_name = #{category_name}</if>
@@ -53,6 +54,7 @@
 
     <resultMap id="_product_category" type="ProductCategory">
         <id column="PRC_ID" property="prc_id" />
+        <result column="PRO_ID" property="pro_id"/>
         <result column="CATEGORY_ID" property="category_id"/>
         <result column="CATEGORY_NAME" property="category_name"/>
         <result column="CATEGORY_PATH" property="category_path"/>

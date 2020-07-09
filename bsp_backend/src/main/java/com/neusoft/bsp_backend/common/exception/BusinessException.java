@@ -2,6 +2,7 @@ package com.neusoft.bsp_backend.common.exception;
 
 public class BusinessException extends RuntimeException {
     public static final BusinessException NOT_EXISTS = new BusinessException(504, "doesn't exist", new Object[0]);
+    public static final BusinessException PRODUCT_NOT_EXISTS = new BusinessException(504, "product doesn't exist", new Object[0]);
     public static final BusinessException PASSWORD_WRONG = new BusinessException(504, "password wrong", new Object[0]);
     public static final BusinessException INSERT_FAIL = new BusinessException(504, "add operation failed", new Object[0]);
     public static final BusinessException UPDATE_FAIL = new BusinessException(504, "update operation failed", new Object[0]);

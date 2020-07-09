@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class ProductCategory implements BaseEntity<Integer> {
     int prc_id;
+    int pro_id;
     String category_id;
     String category_name;
     String category_path;
@@ -19,6 +20,7 @@ public class ProductCategory implements BaseEntity<Integer> {
     String plateform_type;
     String product_status;
     String img_url;
+    Product product;
 
     @Override
     public Integer getId() {
@@ -137,10 +139,27 @@ public class ProductCategory implements BaseEntity<Integer> {
         this.pro_num = pro_num;
     }
 
+    public int getPro_id() {
+        return pro_id;
+    }
+
+    public void setPro_id(int pro_id) {
+        this.pro_id = pro_id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "ProductCategory{" +
                 "prc_id=" + prc_id +
+                ", pro_id=" + pro_id +
                 ", category_id='" + category_id + '\'' +
                 ", category_name='" + category_name + '\'' +
                 ", category_path='" + category_path + '\'' +
@@ -149,10 +168,12 @@ public class ProductCategory implements BaseEntity<Integer> {
                 ", last_update_by='" + last_update_by + '\'' +
                 ", last_update_date=" + last_update_date +
                 ", call_cnt=" + call_cnt +
+                ", pro_num=" + pro_num +
                 ", remark='" + remark + '\'' +
                 ", plateform_type='" + plateform_type + '\'' +
                 ", product_status='" + product_status + '\'' +
                 ", img_url='" + img_url + '\'' +
+                ", product=" + product +
                 '}';
     }
 }
