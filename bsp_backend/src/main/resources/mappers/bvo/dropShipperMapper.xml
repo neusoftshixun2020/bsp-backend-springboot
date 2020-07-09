@@ -18,15 +18,15 @@
         delete from dsr_dropshipper where dsr_id=#{dsr_id}
     </delete>
 
-    <select id="getAll" resultType="DropShipper">
+    <select id="getAll" resultMap="_dropshipper">
         select * from dsr_dropshipper
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultType="DropShipper">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_dropshipper">
         select * from dsr_dropshipper where dsr_id=#{dsr_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="DropShipper">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_dropshipper">
         select * from dsr_dropshipper
         <where>
             <if test="dsr_id != null">dsr_id = #{dsr_id}</if>
@@ -43,5 +43,18 @@
         </where>
     </select>
 
+    <resultMap id="_dropshipper" type="DropShipper">
+       <id column="DSR_ID" property="dsr_id" />
+       <result column="OFP_ID" property="ofp_id" />
+       <result column="DSR_ID" property="dsr_id" />
+       <result column="WAR_ID" property="war_id" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="REMARK" property="remark" />
+       <result column="STS_CD" property="sts_cd" />
+    </resultMap>
 
 </mapper>

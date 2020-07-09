@@ -18,15 +18,15 @@
         delete from sdi_store_dropship_item where dil_id=#{dil_id}
     </delete>
 
-    <select id="getAll" resultType="StoreDropShipItem">
+    <select id="getAll" resultMap="_storedropshipitem">
         select * from sdi_store_dropship_item
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultType="StoreDropShipItem">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_storedropshipitem">
         select * from sdi_store_dropship_item where dil_id=#{dil_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="StoreDropShipItem">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_storedropshipitem">
         select * from sdi_store_dropship_item
         <where>
             <if test="dil_id != null">dil_id = #{dil_id}</if>
@@ -47,5 +47,21 @@
         </where>
     </select>
 
-
+    <resultMap id="_storedropshipitem" type="StoreDropShipItem">
+        <id column="DIL_ID" property="dil_id" />
+        <result column="PRO_ID" property="pro_id" />
+        <result column="STR_ID" property="str_id" />
+        <result column="STORE_RETENTION" property="store_retention" />
+        <result column="DROPSHIP_PRICE" property="dropship_price" />
+        <result column="DROPSHIP_STATUS" property="dropship_status" />
+        <result column="CREATED_BY" property="created_by" />
+        <result column="CREATION_DATE" property="creation_date" />
+        <result column="LAST_UPDATE_BY" property="last_update_by" />
+        <result column="CALL_CNT" property="call_cnt" />
+        <result column="LAST_UPDATE_DATE" property="last_update_date" />
+        <result column="REMARK" property="remark" />
+        <result column="STS_CD" property="sts_cd" />
+        <result column="SHELF_STOCK" property="shelf_stock" />
+        <result column="PREFER_DATE" property="prefer_date" />
+    </resultMap>
 </mapper>

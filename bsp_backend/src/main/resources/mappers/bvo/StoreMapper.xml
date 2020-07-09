@@ -18,15 +18,15 @@
         delete from str_store where str_id=#{str_id}
     </delete>
 
-    <select id="getAll" resultType="Store">
+    <select id="getAll" resultMap="_store">
         select * from str_store
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultType="Store">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_store">
         select * from str_store where str_id=#{str_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="Store">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_store">
         select * from str_store
         <where>
             <if test="str_id != null">str_id = #{str_id}</if>
@@ -44,5 +44,19 @@
         </where>
     </select>
 
+    <resultMap id="_store" type="Store">
+       <id column="STR_ID" property="str_id" />
+       <result column="DSR_ID" property="dsr_id" />
+       <result column="PLATAEFORM_TYPE" property="plataeform_type" />
+       <result column="STORE_NAME" property="store_name" />
+       <result column="STORE_STS_CD" property="store_sts_cd" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="STS_CD" property="sts_cd" />
+       <result column="REMARK" property="remark" />
+    </resultMap>
 
 </mapper>

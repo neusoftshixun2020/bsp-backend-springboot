@@ -18,15 +18,15 @@
         delete from eba_ebay_authorization where eba_id=#{eba_id}
     </delete>
 
-    <select id="getAll" resultType="EbayAuthorization">
+    <select id="getAll" resultMap="_ebayauthorization">
         select * from eba_ebay_authorization
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultType="EbayAuthorization">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_ebayauthorization">
         select * from eba_ebay_authorization where eba_id=#{eba_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="EbayAuthorization">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_ebayauthorization">
         select * from eba_ebay_authorization
         <where>
             <if test="eba_id != null">eba_id = #{eba_id}</if>
@@ -47,5 +47,21 @@
         </where>
     </select>
 
-
+    <resultMap id="_ebayauthorization" type="EbayAuthorization">
+       <id column="EBA_ID" property="eba_id" />
+       <result column="STR_ID" property="str_id" />
+       <result column="APP_ID" property="app_id" />
+       <result column="SECRET_KEY" property="secret_key" />
+       <result column="TOKEN" property="token" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="REMARK" property="remark" />
+       <result column="STS_CD" property="sts_cd" />
+       <result column="EXP_DATE" property="exp_date" />
+       <result column="CANCLE_DATE" property="cancle_date" />
+       <result column="ACCOUNT_ID" property="account_id" />
+    </resultMap>
 </mapper>

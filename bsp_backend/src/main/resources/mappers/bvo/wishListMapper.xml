@@ -18,15 +18,15 @@
         delete from wit_wishlist where wit_id=#{wit_id}
     </delete>
 
-    <select id="getAll" resultType="WishList">
+    <select id="getAll" resultMap="_wishlist">
         select * from wit_wishlist
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultType="WishList">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_wishlist">
         select * from wit_wishlist where wit_id=#{wit_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="WishList">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_wishlist">
         select * from wit_wishlist
         <where>
             <if test="wit_id != null">wit_id = #{wit_id}</if>
@@ -41,5 +41,17 @@
         </where>
     </select>
 
+    <resultMap id="_wishlist" type="WishList">
+       <id column="WIT_ID" property="wit_id" />
+       <result column="DSR_ID" property="dsr_id" />
+       <result column="PRO_ID" property="pro_id" />
+       <result column="CREATED_BY" property="created_by" />
+       <result column="CREATION_DATE" property="creation_date" />
+       <result column="LAST_UPDATE_BY" property="last_update_by" />
+       <result column="LAST_UPDATE_DATE" property="last_update_date" />
+       <result column="CALL_CNT" property="call_cnt" />
+       <result column="REMARK" property="remark" />
+       <result column="STS_CD" property="sts_cd" />
+    </resultMap>
 
 </mapper>

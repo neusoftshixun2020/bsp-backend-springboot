@@ -18,15 +18,15 @@
         delete from drp_dropship_price where drp_id=#{drp_id}
     </delete>
 
-    <select id="getAll" resultType="DropShipPrice">
+    <select id="getAll" resultMap="_dropshipprice">
         select * from drp_dropship_price
     </select>
 
-    <select id="getById" parameterType="java.lang.Integer" resultType="DropShipPrice">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_dropshipprice">
         select * from drp_dropship_price where drp_id=#{drp_id}
     </select>
 
-    <select id="getAllByFilter" parameterType="java.util.Map" resultType="DropShipPrice">
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_dropshipprice">
         select * from drp_dropship_price
         <where>
             <if test="drp_id != null">drp_id = #{drp_id}</if>
@@ -43,5 +43,18 @@
         </where>
     </select>
 
+    <resultMap id="_dropshipprice" type="DropShipPrice">
+       <result column="drp_id" property="drp_id" />
+       <result column="ofp_id" property="ofp_id" />
+       <result column="dsr_id" property="dsr_id" />
+       <result column="war_id" property="war_id" />
+       <result column="created_by" property="created_by" />
+       <result column="creation_date" property="creation_date" />
+       <result column="last_update_by" property="last_update_by" />
+       <result column="last_update_date" property="last_update_date" />
+       <result column="call_cnt" property="call_cnt" />
+       <result column="remark" property="remark" />
+       <result column="sts_cd" property="sts_cd" />
+    </resultMap>
 
 </mapper>
