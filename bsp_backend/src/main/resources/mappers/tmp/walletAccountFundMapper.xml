@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.tmp.mapper.WalletAccountFundMapper">
+    <insert id="insert"  parameterType="WalletAccountFund">
+        insert into waf_wallet_account_fund values(
+         {buyer_id}, {available_money}, {depositing_money}, {withdrawing_money},
+         {create_by}, {create_time}, {last_update_by}, {last_update_time}, {currency}
+        )
+    </insert>
+
+    <update id="update" parameterType="WalletAccountFund">
+        update waf_wallet_account_fund
+        set
+        available_money = #{available_money},
+        depositing_money = #{depositing_money},
+        withdrawing_money = #{withdrawing_money},
+        create_by = #{create_by},
+        create_time = #{create_time},
+        last_update_by = #{last_update_by},
+        last_update_time = #{last_update_time},
+        currency = #{currency}
+        where  buyer_id = #{buyer_id}
+    </update>
+
+    <delete id="delete" parameterType="WalletAccountFund">
+        delete from waf_wallet_account_fund where buyer_id=#{buyer_id}
+    </delete>
+
+    <select id="getAll" resultMap="_walletAccountFund">
+        select * from waf_wallet_account_fund
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_walletAccountFund">
+        select * from waf_wallet_account_fund where buyer_id=#{buyer_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_walletAccountFund">
+        select * from waf_wallet_account_fund
+        <where>
+            <if test="buyer_id != null">buyer_id = #{buyer_id}</if>
+            <if test="available_money != null">available_money = #{available_money}</if>
+            <if test="depositing_money != null">depositing_money = #{depositing_money}</if>
+            <if test="withdrawing_money != null">withdrawing_money = #{withdrawing_money}</if>
+            <if test="create_by != null">create_by = #{create_by}</if>
+            <if test="create_time != null">create_time = #{create_time}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_time != null">last_update_time = #{last_update_time}</if>
+            <if test="currency != null">currency = #{currency}</if>
+        </where>
+    </select>
+
+    <resultMap id="_walletAccountFund" type="WalletAccountFund">
+        <result column="buyer_id" property="buyer_id" />
+        <result column="available_money" property="available_money" />
+        <result column="depositing_money" property="depositing_money" />
+        <result column="withdrawing_money" property="withdrawing_money" />
+        <result column="create_by" property="create_by" />
+        <result column="create_time" property="create_time" />
+        <result column="last_update_by" property="last_update_by" />
+        <result column="last_update_time" property="last_update_time" />
+        <result column="currency" property="currency" />
+    </resultMap>
+</mapper>
+
+
+
+
+

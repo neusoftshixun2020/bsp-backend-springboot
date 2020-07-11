@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.tmp.mapper.CodeMasterMapper">
+    <insert id="insert"  parameterType="CodeMaster">
+        insert into  cdm_code_master values(null, {code_type}, {description}, {type_cd},
+        {code_val}, {seq_no}, {created_by}, {creation_date}, {last_update_by},
+         {last_update_date}, {call_cnt}, {remark}, {sts_cd})
+    </insert>
+
+    <update id="update" parameterType="CodeMaster">
+        update cdm_code_master
+        set code_type = #{code_type}, description = #{description}, type_cd = #{type_cd}, code_val = #{code_val}, seq_no = #{seq_no},
+         created_by = #{created_by}, creation_date = #{creation_date}, last_update_by = #{last_update_by}, last_update_date = #{last_update_date},
+         call_cnt = #{call_cnt}, remark = #{remark}, sts_cd = #{sts_cd}
+        where cdm_id = #{cdm_id}
+    </update>
+
+    <delete id="delete" parameterType="CodeMaster">
+        delete from cdm_code_master where cdm_id=#{cdm_id}
+    </delete>
+
+    <select id="getAll" resultMap="_codeMaster">
+        select * from cdm_code_master
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_codeMaster">
+        select * from cdm_code_master where cdm_id=#{cdm_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_codeMaster">
+        select * from cdm_code_master
+        <where>
+            <if test="cdm_id != null">cdm_id = #{cdm_id}</if>
+            <if test="code_type != null">code_type = #{code_type}</if>
+            <if test="description != null">description = #{description}</if>
+            <if test="type_cd != null">type_cd = #{type_cd}</if>
+            <if test="code_val != null">code_val = #{code_val}</if>
+            <if test="seq_no != null">seq_no = #{seq_no}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+        </where>
+    </select>
+
+    <resultMap id="_codeMaster" type="CodeMaster">
+        <id column="cdm_id" property="cdm_id"/>
+        <result column="code_type" property="code_type" />
+        <result column="description" property="description" />
+        <result column="type_cd" property="type_cd" />
+        <result column="code_val" property="code_val" />
+        <result column="seq_no" property="seq_no" />
+        <result column="created_by" property="created_by" />
+        <result column="creation_date" property="creation_date" />
+        <result column="last_update_by" property="last_update_by" />
+        <result column="last_update_date" property="last_update_date" />
+        <result column="call_cnt" property="call_cnt" />
+        <result column="remark" property="remark" />
+        <result column="sts_cd" property="sts_cd" />
+    </resultMap>
+</mapper>
+
+
+
+
+

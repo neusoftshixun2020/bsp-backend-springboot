@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.tmp.mapper.MonitorResultMapper">
+    <insert id="insert"  parameterType="MonitorResult">
+        insert into mor_monitor_result values(
+            null, {class_name}, {json_string}, {create_date}, {create_by}, {update_date},
+            {update_by}, {remark}, {sts_cd}
+        )
+
+    </insert>
+
+    <update id="update" parameterType="MonitorResult">
+        update mor_monitor_result
+        set
+        class_name = #{class_name}, json_string = #{json_string},
+        create_date = #{create_date}, create_by = #{create_by},
+        update_date = #{update_date}, update_by = #{update_by},
+        remark = #{remark}, sts_cd = #{sts_cd}
+        where mor_id = #{mor_id}
+    </update>
+
+    <delete id="delete" parameterType="MonitorResult">
+        delete from mor_monitor_result where mor_id=#{mor_id}
+    </delete>
+
+    <select id="getAll" resultMap="_monitorResult">
+        select * from mor_monitor_result
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_monitorResult">
+        select * from mor_monitor_result where mor_id=#{mor_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_monitorResult">
+        select * from mor_monitor_result
+        <where>
+            <if test="mor_id != null">mor_id = #{mor_id}</if>
+            <if test="class_name != null">class_name = #{class_name}</if>
+            <if test="json_string != null">json_string = #{json_string}</if>
+            <if test="create_date != null">create_date = #{create_date}</if>
+            <if test="create_by != null">create_by = #{create_by}</if>
+            <if test="update_date != null">update_date = #{update_date}</if>
+            <if test="update_by != null">update_by = #{update_by}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+        </where>
+    </select>
+
+    <resultMap id="_monitorResult" type="MonitorResult">
+        <id column="mor_id" property="mor_id" />
+        <result column="class_name" property="class_name" />
+        <result column="json_string" property="json_string" />
+        <result column="create_date" property="create_date" />
+        <result column="create_by" property="create_by" />
+        <result column="update_date" property="update_date" />
+        <result column="update_by" property="update_by" />
+        <result column="remark" property="remark" />
+        <result column="sts_cd" property="sts_cd" />
+    </resultMap>
+</mapper>
+
+
+
+
+
