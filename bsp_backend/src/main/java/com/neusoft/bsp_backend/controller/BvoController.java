@@ -52,6 +52,7 @@ public class BvoController extends BaseController {
     public BaseModelJson<List<Store>> getEbayStore(@RequestBody Store store){
         Map<String, Object> map = new HashMap<>();
         map.put("plataeform_type", store.getPlataeform_type());
+        map.put("dsr_id", store.getDsr_id());
         BaseModelJson<List<Store>> result = new BaseModelJson<>();
         result.code = 200;
         result.data = storeService.getAllByFilter(map);
@@ -62,23 +63,20 @@ public class BvoController extends BaseController {
     public BaseModelJson<List<Store>> getAmazonStore(@RequestBody Store store){
         Map<String, Object> map = new HashMap<>();
         map.put("plataeform_type", store.getPlataeform_type());
+        map.put("dsr_id", store.getDsr_id());
         BaseModelJson<List<Store>> result = new BaseModelJson<>();
         result.code = 200;
         result.data = storeService.getAllByFilter(map);
         return result;
     }
     @PostMapping("/getWishListProducts")
-    public BaseModelJson<List<Product>> getWishListProducts(@RequestBody WishList wishList){
+    public BaseModelJson<List<WishList>> getWishListProducts(@RequestBody WishList wishList){
         Map<String, Object> map = new HashMap<>();
         map.put("dsr_id", wishList.getDsr_id());
         List<WishList> wishLists= wishListService.getAllByFilter(map);
-        List<Product> products = new ArrayList<Product>();
-        for(WishList wishList1:wishLists){
-            products.add(productService.getById(wishList1.getPro_id()));
-        }
-        BaseModelJson<List<Product>> result = new BaseModelJson<>();
+        BaseModelJson<List<WishList>> result = new BaseModelJson<>();
         result.code = 200;
-        result.data = products;
+        result.data = wishLists;
         return result;
     }
     @PostMapping("/addWishList")
@@ -113,18 +111,20 @@ public class BvoController extends BaseController {
         }
     }
     @PostMapping("/addDropShipItem")
-    public BaseModel addDropShipItem(@RequestBody StoreDropShipItem storeDropShipItem, BindingResult bindingResult){
+    public BaseModel addDropShipItem(@RequestBody List<StoreDropShipItem> storeDropShipItems, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{storeDropShipItem.toString()});
+            throw BusinessException.INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{storeDropShipItems.toString()});
         }else {
             BaseModel result = new BaseModel();
-            int i = storeDropShipItemService.insert(storeDropShipItem);
-            if (i == 1) {
-                result.code = 200;
-                return result;
-            } else {
-                throw BusinessException.INSERT_FAIL;
+            for (StoreDropShipItem storeDropShipItem: storeDropShipItems){
+                int i = storeDropShipItemService.insert(storeDropShipItem);
+                if (i != 1){
+                    result.code = 504;
+                    throw BusinessException.INSERT_FAIL;
+                }
             }
+            result.code = 200;
+            return result;
         }
     }
 

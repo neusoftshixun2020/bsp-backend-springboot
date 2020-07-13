@@ -5,6 +5,7 @@ import com.neusoft.bsp_backend.bvo.entity.WishList;
 import com.neusoft.bsp_backend.bvo.mapper.WishListMapper;
 import com.neusoft.bsp_backend.bvo.service.WishListService;
 import com.neusoft.bsp_backend.product.entity.Product;
+import com.neusoft.bsp_backend.product.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public class WishListServiceImpl implements WishListService {
 
     @Autowired
     WishListMapper wishListMapper;
+
+    @Autowired
+    ProductMapper productMapper;
 
     @Override
     public int insert(WishList wishList) {
@@ -36,17 +40,30 @@ public class WishListServiceImpl implements WishListService {
 
     @Override
     public WishList getById(int pk) {
-        return wishListMapper.getById(pk);
+        WishList wishList = wishListMapper.getById(pk);
+        Product product = productMapper.getById(wishList.getPro_id());
+        wishList.setProduct(product);
+        return wishList;
     }
 
     @Override
     public List<WishList> getAllByFilter(Map<String, Object> map) {
-        return wishListMapper.getAllByFilter(map);
+        List<WishList> wishLists = wishListMapper.getAllByFilter(map);
+        for (WishList wishList: wishLists){
+            Product product = productMapper.getById(wishList.getPro_id());
+            wishList.setProduct(product);
+        }
+        return wishLists;
     }
 
     @Override
     public List<WishList> getAll() {
-        return wishListMapper.getAll();
+        List<WishList> wishLists = wishListMapper.getAll();
+        for (WishList wishList: wishLists){
+            Product product = productMapper.getById(wishList.getPro_id());
+            wishList.setProduct(product);
+        }
+        return wishLists;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.neusoft.bsp_backend.bvo.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
+import com.neusoft.bsp_backend.product.entity.Product;
 
 import java.util.Date;
 
@@ -16,6 +17,15 @@ public class WishList implements BaseEntity<Integer> {
     int call_cnt;
     String remark;
     String sts_cd;
+    Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public int getWit_id() {
         return wit_id;
@@ -110,6 +120,7 @@ public class WishList implements BaseEntity<Integer> {
                 ", call_cnt=" + call_cnt +
                 ", remark='" + remark + '\'' +
                 ", sts_cd='" + sts_cd + '\'' +
+                ", product=" + product +
                 '}';
     }
 
