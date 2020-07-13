@@ -6,6 +6,7 @@ import com.neusoft.bsp_backend.bvo.mapper.WishListMapper;
 import com.neusoft.bsp_backend.bvo.service.WishListService;
 import com.neusoft.bsp_backend.product.entity.Product;
 import com.neusoft.bsp_backend.product.mapper.ProductMapper;
+import com.neusoft.bsp_backend.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class WishListServiceImpl implements WishListService {
     WishListMapper wishListMapper;
 
     @Autowired
-    ProductMapper productMapper;
+    ProductService productService;
 
     @Override
     public int insert(WishList wishList) {
@@ -41,7 +42,7 @@ public class WishListServiceImpl implements WishListService {
     @Override
     public WishList getById(int pk) {
         WishList wishList = wishListMapper.getById(pk);
-        Product product = productMapper.getById(wishList.getPro_id());
+        Product product = productService.getById(wishList.getPro_id());
         wishList.setProduct(product);
         return wishList;
     }
@@ -50,7 +51,7 @@ public class WishListServiceImpl implements WishListService {
     public List<WishList> getAllByFilter(Map<String, Object> map) {
         List<WishList> wishLists = wishListMapper.getAllByFilter(map);
         for (WishList wishList: wishLists){
-            Product product = productMapper.getById(wishList.getPro_id());
+            Product product = productService.getById(wishList.getPro_id());
             wishList.setProduct(product);
         }
         return wishLists;
@@ -60,7 +61,7 @@ public class WishListServiceImpl implements WishListService {
     public List<WishList> getAll() {
         List<WishList> wishLists = wishListMapper.getAll();
         for (WishList wishList: wishLists){
-            Product product = productMapper.getById(wishList.getPro_id());
+            Product product = productService.getById(wishList.getPro_id());
             wishList.setProduct(product);
         }
         return wishLists;
