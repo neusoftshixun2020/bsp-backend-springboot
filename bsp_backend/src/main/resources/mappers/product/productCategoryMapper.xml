@@ -28,6 +28,10 @@
         select * from prc_product_category
     </select>
 
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_product_category">
+        select * from prc_product_category where prc_id=#{prc_id}
+    </select>
+
     <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_product_category">
         select * from prc_product_category
         <where>

@@ -23,7 +23,7 @@
         select * from brd_brand
     </select>
 
-    <select id="getById" parameterType="java.lang.String">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_brand">
         select * from brd_brand where BRD_ID=#{brd_id}
     </select>
 

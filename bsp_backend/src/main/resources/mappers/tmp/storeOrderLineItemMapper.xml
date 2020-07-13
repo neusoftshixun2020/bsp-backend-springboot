@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.bsp_backend.tmp.mapper.StoreOrderLineItemMapper">
-    <insert id="insert"  parameterType="StoreOrderLine">
+    <insert id="insert"  parameterType="StoreOrderLineItem">
         insert into sol_store_order_line_item values(
         null, {order_item_id}, {sto_id}, {sales_price}, {qty}, {sku_no}, {created_by}, {creation_date}, {last_update_by}, {last_update_date}, {call_cnt}, {remark}, {sts_cd}, {buyer_checkout_message}
         )
     </insert>
 
-    <update id="update" parameterType="StoreOrderLine">
+    <update id="update" parameterType="StoreOrderLineItem">
         update sol_store_order_line_item
         set
         order_item_id = #{order_item_id},
@@ -28,7 +28,7 @@
         where sol_id = #{sol_id}
     </update>
 
-    <delete id="delete" parameterType="StoreOrderLine">
+    <delete id="delete" parameterType="StoreOrderLineItem">
         delete from sol_store_order_line_item where sol_id=#{sol_id}
     </delete>
 
@@ -60,7 +60,7 @@
         </where>
     </select>
 
-    <resultMap id="_storeOrderLine" type="StoreOrderLine">
+    <resultMap id="_storeOrderLine" type="StoreOrderLineItem">
         <id column="sol_id" property="sol_id" />
         <result column="order_item_id" property="order_item_id" />
         <result column="sto_id" property="sto_id" />

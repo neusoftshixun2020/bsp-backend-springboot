@@ -2,24 +2,22 @@ package com.neusoft.bsp_backend.product.service.Impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.neusoft.bsp_backend.product.entity.PackageInfo;
-import com.neusoft.bsp_backend.product.entity.Price;
-import com.neusoft.bsp_backend.product.entity.Product;
-import com.neusoft.bsp_backend.product.entity.ProductDescription;
-import com.neusoft.bsp_backend.product.mapper.PackageInfoMapper;
-import com.neusoft.bsp_backend.product.mapper.PriceMapper;
-import com.neusoft.bsp_backend.product.mapper.ProductDescriptionMapper;
-import com.neusoft.bsp_backend.product.mapper.ProductMapper;
+import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
+import com.neusoft.bsp_backend.mvoinfo.mapper.BrandMapper;
+import com.neusoft.bsp_backend.product.entity.*;
+import com.neusoft.bsp_backend.product.mapper.*;
 import com.neusoft.bsp_backend.product.service.ProductService;
 import com.neusoft.bsp_backend.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Transactional
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
 
@@ -34,6 +32,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductDescriptionMapper productDescriptionMapper;
+
+    @Autowired
+    BrandMapper brandMapper;
+
+    @Autowired
+    ProductCategoryMapper productCategoryMapper;
 
     @Override
     public int insert(Product product) {
@@ -59,19 +63,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int delete(int pk) {
         Product product = productMapper.getById(pk);
-        int d3 = productMapper.delete(pk);
-        return d3;
+        return productMapper.delete(pk);
     }
 
     @Override
     public Product getById(int proid) {
+        Product product = productMapper.getById(proid);
         Price price = priceMapper.getById(proid);
         PackageInfo packageInfo = packageInfoMapper.getById(proid);
         ProductDescription productDescription = productDescriptionMapper.getById(proid);
-        Product product = productMapper.getById(proid);
+        Brand brand = brandMapper.getById(product.getBrd_id());
+        ProductCategory productCategory = productCategoryMapper.getById(product.getPrc_id());
         product.setPrice(price);
         product.setPackageInfo(packageInfo);
         product.setProductDescription(productDescription);
+        product.setBrand(brand);
+        product.setProductCategory(productCategory);
         return product;
     }
 
@@ -82,9 +89,13 @@ public class ProductServiceImpl implements ProductService {
             Price price = priceMapper.getById(pro.getPro_id());
             PackageInfo packageInfo = packageInfoMapper.getById(pro.getPro_id());
             ProductDescription productDescription = productDescriptionMapper.getById(pro.getPro_id());
+            Brand brand = brandMapper.getById(pro.getBrd_id());
+            ProductCategory productCategory = productCategoryMapper.getById(pro.getPrc_id());
             pro.setProductDescription(productDescription);
             pro.setPackageInfo(packageInfo);
             pro.setPrice(price);
+            pro.setBrand(brand);
+            pro.setProductCategory(productCategory);
         }
         return products;
     }
@@ -96,9 +107,13 @@ public class ProductServiceImpl implements ProductService {
             Price price = priceMapper.getById(pro.getPro_id());
             PackageInfo packageInfo = packageInfoMapper.getById(pro.getPro_id());
             ProductDescription productDescription = productDescriptionMapper.getById(pro.getPro_id());
+            Brand brand = brandMapper.getById(pro.getBrd_id());
+            ProductCategory productCategory = productCategoryMapper.getById(pro.getPrc_id());
             pro.setProductDescription(productDescription);
             pro.setPackageInfo(packageInfo);
             pro.setPrice(price);
+            pro.setBrand(brand);
+            pro.setProductCategory(productCategory);
         }
         return products;
     }

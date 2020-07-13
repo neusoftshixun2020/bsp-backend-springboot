@@ -5,10 +5,12 @@ import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp_backend.common.validationGroup.InsertGroup;
 import com.neusoft.bsp_backend.common.validationGroup.SelectGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
+import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Locale;
 
 public class Product implements BaseEntity<Integer> {
     @NotNull(groups={InsertGroup.class, UpdateGroup.class, SelectGroup.class, DeleteGroup.class}, message = "proid should not be null")
@@ -29,7 +31,24 @@ public class Product implements BaseEntity<Integer> {
     ProductDescription productDescription;
     PackageInfo packageInfo;
     Price price;
+    Brand brand;
+    ProductCategory productCategory;
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
 
     public Integer getId(){
         return pro_id;
@@ -191,8 +210,8 @@ public class Product implements BaseEntity<Integer> {
                 ", productDescription=" + productDescription +
                 ", packageInfo=" + packageInfo +
                 ", price=" + price +
+                ", brand=" + brand +
+                ", productCategory=" + productCategory +
                 '}';
     }
-
-
 }
