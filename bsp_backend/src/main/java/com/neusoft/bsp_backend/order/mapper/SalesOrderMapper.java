@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SalesOrderMapper extends BaseMapper<Integer, SalesOrder> {
-
+    SalesOrder getByStoreOrderId(int sto_id);
 }

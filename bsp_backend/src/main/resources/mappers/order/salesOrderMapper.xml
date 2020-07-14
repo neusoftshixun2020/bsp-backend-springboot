@@ -38,39 +38,43 @@
         select * from sao_sales_order where sao_id=#{sao_id}
     </select>
 
+    <select id="getByStoreOrderId" parameterType="java.lang.Integer" resultMap="_salesOrder">
+        select * from sao_sales_order where sto_id=#{sto_id}
+    </select>
+
     <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_salesOrder">
         select * from sao_sales_order
         <where>
             <if test="sao_id != null">sao_id = #{sao_id}</if>
-            <if test="created_by != null">created_by = #{created_by}</if>
-            <if test="creation_date != null">creation_date = #{creation_date}</if>
-            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
-            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
-            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
-            <if test="remark != null">remark = #{remark}</if>
-            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
-            <if test="man_id != null">man_id = #{man_id}</if>
-            <if test="war_id != null">war_id = #{war_id}</if>
-            <if test="sync_date != null">sync_date = #{sync_date}</if>
-            <if test="payment_date != null">payment_date = #{payment_date}</if>
-            <if test="push_date != null">push_date = #{push_date}</if>
-            <if test="track_no_date != null">track_no_date = #{track_no_date}</if>
-            <if test="fulfillment_date != null">fulfillment_date = #{fulfillment_date}</if>
-            <if test="settlement_date != null">settlement_date = #{settlement_date}</if>
-            <if test="product_amount != null">product_amount = #{product_amount}</if>
-            <if test="freight_cost != null">freight_cost = #{freight_cost}</if>
-            <if test="handling_fee != null">handling_fee = #{handling_fee}</if>
-            <if test="customer_remark != null">customer_remark = #{customer_remark}</if>
-            <if test="order_no != null">order_no = #{order_no}</if>
-            <if test="order_sts != null">order_sts = #{order_sts}</if>
-            <if test="refund_sts != null">refund_sts = #{refund_sts}</if>
-            <if test="delivery_sts != null">delivery_sts = #{delivery_sts}</if>
-            <if test="sto_id != null">sto_id = #{sto_id}</if>
-            <if test="last_freight_cost != null">last_freight_cost = #{last_freight_cost}</if>
-            <if test="cancle_time != null">cancle_time = #{cancle_time}</if>
-            <if test="auto_pay_status != null">auto_pay_status = #{auto_pay_status}</if>
-            <if test="buyer_checkout_message != null">buyer_checkout_message = #{buyer_checkout_message}</if>
-            <if test="auto_pay_time != null">auto_pay_time = #{auto_pay_time}</if>
+            <if test="created_by != null">and created_by = #{created_by}</if>
+            <if test="creation_date != null">and creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">and last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">and last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">and call_cnt = #{call_cnt}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+            <if test="sts_cd != null">and sts_cd = #{sts_cd}</if>
+            <if test="man_id != null">and man_id = #{man_id}</if>
+            <if test="war_id != null">and war_id = #{war_id}</if>
+            <if test="sync_date != null">and sync_date = #{sync_date}</if>
+            <if test="payment_date != null">and payment_date = #{payment_date}</if>
+            <if test="push_date != null">and push_date = #{push_date}</if>
+            <if test="track_no_date != null">and track_no_date = #{track_no_date}</if>
+            <if test="fulfillment_date != null">and fulfillment_date = #{fulfillment_date}</if>
+            <if test="settlement_date != null">and settlement_date = #{settlement_date}</if>
+            <if test="product_amount != null">and product_amount = #{product_amount}</if>
+            <if test="freight_cost != null">and freight_cost = #{freight_cost}</if>
+            <if test="handling_fee != null">and handling_fee = #{handling_fee}</if>
+            <if test="customer_remark != null">and customer_remark = #{customer_remark}</if>
+            <if test="order_no != null">and order_no = #{order_no}</if>
+            <if test="order_sts != null">and order_sts = #{order_sts}</if>
+            <if test="refund_sts != null">and refund_sts = #{refund_sts}</if>
+            <if test="delivery_sts != null">and delivery_sts = #{delivery_sts}</if>
+            <if test="sto_id != null">and sto_id = #{sto_id}</if>
+            <if test="last_freight_cost != null">and last_freight_cost = #{last_freight_cost}</if>
+            <if test="cancle_time != null">and cancle_time = #{cancle_time}</if>
+            <if test="auto_pay_status != null">and auto_pay_status = #{auto_pay_status}</if>
+            <if test="buyer_checkout_message != null">and buyer_checkout_message = #{buyer_checkout_message}</if>
+            <if test="auto_pay_time != null">and auto_pay_time = #{auto_pay_time}</if>
         </where>
     </select>
 

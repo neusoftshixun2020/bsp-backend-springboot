@@ -1,8 +1,10 @@
 package com.neusoft.bsp_backend.controller;
 
+import com.neusoft.bsp_backend.bvo.entity.DropShipper;
 import com.neusoft.bsp_backend.bvo.entity.Store;
 import com.neusoft.bsp_backend.bvo.entity.StoreDropShipItem;
 import com.neusoft.bsp_backend.bvo.entity.WishList;
+import com.neusoft.bsp_backend.bvo.service.DropShipperService;
 import com.neusoft.bsp_backend.bvo.service.StoreDropShipItemService;
 import com.neusoft.bsp_backend.bvo.service.StoreService;
 import com.neusoft.bsp_backend.bvo.service.WishListService;
@@ -32,6 +34,20 @@ public class BvoController extends BaseController {
     StoreService storeService;
     @Autowired
     ProductService productService;
+
+    @Autowired
+    DropShipperService dropShipperService;
+
+    @PostMapping("/getDsr")
+    public BaseModel getDsr(@RequestBody String userid){
+        BaseModelJson<List<DropShipper>> result = new BaseModelJson<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id", userid);
+        result.code = 200;
+        result.data = dropShipperService.getAllByFilter(map);
+        return result;
+    }
+
     @PostMapping("/addStore")
     public BaseModel addStore(@RequestBody Store store, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {

@@ -3,6 +3,7 @@ package com.neusoft.bsp_backend.order.entity;
 import com.neusoft.bsp_backend.common.base.BaseEntity;
 
 import java.util.Date;
+import java.util.List;
 
 public class StoreOrder implements BaseEntity<Integer> {
 
@@ -21,10 +22,37 @@ public class StoreOrder implements BaseEntity<Integer> {
     char sts_cd;
     String plateform_type;
     String cancel_complete_date;
+    ShippingAddress shippingAddress;
+    List<StoreOrderLineItem> storeOrderLineItems;
+    SalesOrder salesOrder;
+
+    public SalesOrder getSalesOrder() {
+        return salesOrder;
+    }
+
+    public void setSalesOrder(SalesOrder salesOrder) {
+        this.salesOrder = salesOrder;
+    }
 
     @Override
     public Integer getId() {
         return sto_id;
+    }
+
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public List<StoreOrderLineItem> getStoreOrderLineItems() {
+        return storeOrderLineItems;
+    }
+
+    public void setStoreOrderLineItems(List<StoreOrderLineItem> storeOrderLineItems) {
+        this.storeOrderLineItems = storeOrderLineItems;
     }
 
     public int getSto_id() {
@@ -145,5 +173,29 @@ public class StoreOrder implements BaseEntity<Integer> {
 
     public void setCancel_complete_date(String cancel_complete_date) {
         this.cancel_complete_date = cancel_complete_date;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreOrder{" +
+                "sto_id=" + sto_id +
+                ", str_id=" + str_id +
+                ", order_id='" + order_id + '\'' +
+                ", order_created_time='" + order_created_time + '\'' +
+                ", paid_time='" + paid_time + '\'' +
+                ", last_modified_time='" + last_modified_time + '\'' +
+                ", created_by='" + created_by + '\'' +
+                ", creation_date=" + creation_date +
+                ", last_update_by='" + last_update_by + '\'' +
+                ", last_update_date=" + last_update_date +
+                ", call_cnt=" + call_cnt +
+                ", remark='" + remark + '\'' +
+                ", sts_cd=" + sts_cd +
+                ", plateform_type='" + plateform_type + '\'' +
+                ", cancel_complete_date='" + cancel_complete_date + '\'' +
+                ", shippingAddress=" + shippingAddress +
+                ", storeOrderLineItems=" + storeOrderLineItems +
+                ", salesOrder=" + salesOrder +
+                '}';
     }
 }

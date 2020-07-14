@@ -15,6 +15,8 @@ public interface SalesOrderService {
 
     SalesOrder getById(int pk);
 
+    SalesOrder getByStoreOrderId(int sto_id);
+
     List<SalesOrder> getAllByFilter(Map<String, Object> map);
 
     List<SalesOrder> getAll();

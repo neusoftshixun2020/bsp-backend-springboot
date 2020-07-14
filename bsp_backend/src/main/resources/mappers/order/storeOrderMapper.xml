@@ -48,20 +48,20 @@
         select * from sto_store_order
         <where>
             <if test="sto_id != null">sto_id = #{sto_id}</if>
-            <if test="str_id != null">str_id = #{str_id}</if>
-            <if test="order_id != null">order_id = #{order_id}</if>
-            <if test="order_created_time != null">order_created_time = #{order_created_time}</if>
-            <if test="paid_time != null">paid_time = #{paid_time}</if>
-            <if test="last_modified_time != null">last_modified_time = #{last_modified_time}</if>
-            <if test="created_by != null">created_by = #{created_by}</if>
-            <if test="creation_date != null">creation_date = #{creation_date}</if>
-            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
-            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
-            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
-            <if test="remark != null">remark = #{remark}</if>
-            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
-            <if test="plateform_type != null">plateform_type = #{plateform_type}</if>
-            <if test="cancel_complete_date != null">cancel_complete_date = #{cancel_complete_date}</if>
+            <if test="str_id != null">and str_id = #{str_id}</if>
+            <if test="order_id != null">and order_id = #{order_id}</if>
+            <if test="order_created_time != null">and order_created_time = #{order_created_time}</if>
+            <if test="paid_time != null">and paid_time = #{paid_time}</if>
+            <if test="last_modified_time != null">and last_modified_time = #{last_modified_time}</if>
+            <if test="created_by != null">and created_by = #{created_by}</if>
+            <if test="creation_date != null">and creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">and last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">and last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">and call_cnt = #{call_cnt}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+            <if test="sts_cd != null">and sts_cd = #{sts_cd}</if>
+            <if test="plateform_type != null">and plateform_type = #{plateform_type}</if>
+            <if test="cancel_complete_date != null">and cancel_complete_date = #{cancel_complete_date}</if>
         </where>
     </select>
 

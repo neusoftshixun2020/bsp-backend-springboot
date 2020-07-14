@@ -4,6 +4,7 @@ import com.neusoft.bsp_backend.common.base.BaseEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class SalesOrder implements BaseEntity<Integer> {
 
@@ -37,6 +38,15 @@ public class SalesOrder implements BaseEntity<Integer> {
     String auto_pay_status;
     String buyer_checkout_message;
     String auto_pay_time;
+    List<SalesOrderLineItem> salesOrderLineItems;
+
+    public List<SalesOrderLineItem> getSalesOrderLineItems() {
+        return salesOrderLineItems;
+    }
+
+    public void setSalesOrderLineItems(List<SalesOrderLineItem> salesOrderLineItems) {
+        this.salesOrderLineItems = salesOrderLineItems;
+    }
 
     @Override
     public Integer getId() {
@@ -281,5 +291,42 @@ public class SalesOrder implements BaseEntity<Integer> {
 
     public void setAuto_pay_time(String auto_pay_time) {
         this.auto_pay_time = auto_pay_time;
+    }
+
+    @Override
+    public String toString() {
+        return "SalesOrder{" +
+                "sao_id=" + sao_id +
+                ", created_by='" + created_by + '\'' +
+                ", creation_date=" + creation_date +
+                ", last_update_by='" + last_update_by + '\'' +
+                ", last_update_date=" + last_update_date +
+                ", call_cnt=" + call_cnt +
+                ", remark='" + remark + '\'' +
+                ", sts_cd=" + sts_cd +
+                ", man_id=" + man_id +
+                ", war_id=" + war_id +
+                ", sync_date=" + sync_date +
+                ", payment_date=" + payment_date +
+                ", push_date=" + push_date +
+                ", track_no_date=" + track_no_date +
+                ", fulfillment_date=" + fulfillment_date +
+                ", settlement_date=" + settlement_date +
+                ", product_amount=" + product_amount +
+                ", freight_cost=" + freight_cost +
+                ", handling_fee=" + handling_fee +
+                ", customer_remark='" + customer_remark + '\'' +
+                ", order_no='" + order_no + '\'' +
+                ", order_sts='" + order_sts + '\'' +
+                ", refund_sts='" + refund_sts + '\'' +
+                ", delivery_sts='" + delivery_sts + '\'' +
+                ", sto_id=" + sto_id +
+                ", last_freight_cost=" + last_freight_cost +
+                ", cancle_time=" + cancle_time +
+                ", auto_pay_status='" + auto_pay_status + '\'' +
+                ", buyer_checkout_message='" + buyer_checkout_message + '\'' +
+                ", auto_pay_time='" + auto_pay_time + '\'' +
+                ", salesOrderLineItem=" + salesOrderLineItems +
+                '}';
     }
 }

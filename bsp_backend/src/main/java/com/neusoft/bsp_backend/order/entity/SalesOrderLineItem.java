@@ -147,4 +147,25 @@ public class SalesOrderLineItem implements BaseEntity<Integer> {
     public void setWsp_name(String wsp_name) {
         this.wsp_name = wsp_name;
     }
+
+    @Override
+    public String toString() {
+        return "SalesOrderLineItem{" +
+                "sal_id=" + sal_id +
+                ", created_by='" + created_by + '\'' +
+                ", creation_date=" + creation_date +
+                ", last_update_by='" + last_update_by + '\'' +
+                ", last_update_date=" + last_update_date +
+                ", call_cnt=" + call_cnt +
+                ", remark='" + remark + '\'' +
+                ", sts_cd=" + sts_cd +
+                ", sao_id=" + sao_id +
+                ", pro_id=" + pro_id +
+                ", qty=" + qty +
+                ", price=" + price +
+                ", sol_id=" + sol_id +
+                ", tracking_no='" + tracking_no + '\'' +
+                ", wsp_name='" + wsp_name + '\'' +
+                '}';
+    }
 }
