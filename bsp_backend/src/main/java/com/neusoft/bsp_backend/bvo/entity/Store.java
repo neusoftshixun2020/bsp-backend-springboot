@@ -8,7 +8,7 @@ public class Store implements BaseEntity<Integer> {
 
     int str_id;
     int dsr_id;
-    String plataeform_type;
+    String platform_type;
     String store_name;
     String store_sts_cd;
     String created_by;
@@ -35,12 +35,12 @@ public class Store implements BaseEntity<Integer> {
         this.dsr_id = dsr_id;
     }
 
-    public String getPlataeform_type() {
-        return plataeform_type;
+    public String getPlatform_type() {
+        return platform_type;
     }
 
-    public void setPlataeform_type(String plataeform_type) {
-        this.plataeform_type = plataeform_type;
+    public void setPlatform_type(String plataeform_type) {
+        this.platform_type = plataeform_type;
     }
 
     public String getStore_name() {
@@ -120,7 +120,7 @@ public class Store implements BaseEntity<Integer> {
         return "Store{" +
                 "str_id=" + str_id +
                 ", dsr_id=" + dsr_id +
-                ", plataeform_type='" + plataeform_type + '\'' +
+                ", plataeform_type='" + platform_type + '\'' +
                 ", store_name='" + store_name + '\'' +
                 ", store_sts_cd='" + store_sts_cd + '\'' +
                 ", created_by='" + created_by + '\'' +

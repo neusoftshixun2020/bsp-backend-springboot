@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.order.mapper.StoreOrderLineItemMapper">
+    <insert id="insert"  parameterType="StoreOrderLineItem">
+        insert into sol_store_order_line_item values(
+        null, {order_item_id}, {sto_id}, {sales_price}, {qty}, {sku_no}, {created_by}, {creation_date}, {last_update_by}, {last_update_date}, {call_cnt}, {remark}, {sts_cd}, {buyer_checkout_message}
+        )
+    </insert>
+
+    <update id="update" parameterType="StoreOrderLineItem">
+        update sol_store_order_line_item
+        set
+        order_item_id = #{order_item_id},
+        sto_id = #{sto_id},
+        sales_price = #{sales_price},
+        qty = #{qty},
+        sku_no = #{sku_no},
+        created_by = #{created_by},
+        creation_date = #{creation_date},
+        last_update_by = #{last_update_by},
+        last_update_date = #{last_update_date},
+        call_cnt = #{call_cnt},
+        remark = #{remark},
+        sts_cd = #{sts_cd},
+        buyer_checkout_message = #{buyer_checkout_message}
+        where sol_id = #{sol_id}
+    </update>
+
+    <delete id="delete" parameterType="StoreOrderLineItem">
+        delete from sol_store_order_line_item where sol_id=#{sol_id}
+    </delete>
+
+    <select id="getAll" resultMap="_storeOrderLine">
+        select * from sol_store_order_line_item
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_storeOrderLine">
+        select * from sol_store_order_line_item where sol_id=#{sol_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_storeOrderLine">
+        select * from sol_store_order_line_item
+        <where>
+            <if test="sol_id != null">sol_id = #{sol_id}</if>
+            <if test="order_item_id != null">order_item_id = #{order_item_id}</if>
+            <if test="sto_id != null">sto_id = #{sto_id}</if>
+            <if test="sales_price != null">sales_price = #{sales_price}</if>
+            <if test="qty != null">qty = #{qty}</if>
+            <if test="sku_no != null">sku_no = #{sku_no}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+            <if test="buyer_checkout_message != null">buyer_checkout_message = #{buyer_checkout_message}</if>
+        </where>
+    </select>
+
+    <resultMap id="_storeOrderLine" type="StoreOrderLineItem">
+        <id column="sol_id" property="sol_id" />
+        <result column="order_item_id" property="order_item_id" />
+        <result column="sto_id" property="sto_id" />
+        <result column="sales_price" property="sales_price" />
+        <result column="qty" property="qty" />
+        <result column="sku_no" property="sku_no" />
+        <result column="created_by" property="created_by" />
+        <result column="creation_date" property="creation_date" />
+        <result column="last_update_by" property="last_update_by" />
+        <result column="last_update_date" property="last_update_date" />
+        <result column="call_cnt" property="call_cnt" />
+        <result column="remark" property="remark" />
+        <result column="sts_cd" property="sts_cd" />
+        <result column="buyer_checkout_message" property="buyer_checkout_message" />
+    </resultMap>
+</mapper>
+
+
+

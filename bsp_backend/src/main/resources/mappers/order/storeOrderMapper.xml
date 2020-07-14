@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.order.mapper.StoreOrderMapper">
+    <insert id="insert"  parameterType="StoreOrder">
+        insert into sto_store_order values(
+         null, {str_id}, {order_id}, {order_created_time}, {paid_time}, {last_modified_time},
+          {created_by}, {creation_date}, {last_update_by}, {last_update_date}, {call_cnt},
+          {remark}, {sts_cd}, {plateform_type}, {cancel_complete_date}
+        )
+    </insert>
+
+    <update id="update" parameterType="StoreOrder">
+        update sto_store_order
+        set
+        str_id = #{str_id},
+        order_id = #{order_id},
+        order_created_time = #{order_created_time},
+        paid_time = #{paid_time},
+        last_modified_time = #{last_modified_time},
+        created_by = #{created_by},
+        creation_date = #{creation_date},
+        last_update_by = #{last_update_by},
+        last_update_date = #{last_update_date},
+        call_cnt = #{call_cnt},
+        remark = #{remark},
+        sts_cd = #{sts_cd},
+        plateform_type = #{plateform_type},
+        cancel_complete_date = #{cancel_complete_date}
+        where
+        sto_id = #{sto_id}
+    </update>
+
+    <delete id="delete" parameterType="StoreOrder">
+        delete from sto_store_order where sto_id=#{sto_id}
+    </delete>
+
+    <select id="getAll" resultMap="_storeOrder">
+        select * from sto_store_order
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_storeOrder">
+        select * from sto_store_order where sto_id=#{sto_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_storeOrder">
+        select * from sto_store_order
+        <where>
+            <if test="sto_id != null">sto_id = #{sto_id}</if>
+            <if test="str_id != null">str_id = #{str_id}</if>
+            <if test="order_id != null">order_id = #{order_id}</if>
+            <if test="order_created_time != null">order_created_time = #{order_created_time}</if>
+            <if test="paid_time != null">paid_time = #{paid_time}</if>
+            <if test="last_modified_time != null">last_modified_time = #{last_modified_time}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+            <if test="plateform_type != null">plateform_type = #{plateform_type}</if>
+            <if test="cancel_complete_date != null">cancel_complete_date = #{cancel_complete_date}</if>
+        </where>
+    </select>
+
+    <resultMap id="_storeOrder" type="StoreOrder">
+        <id column="sto_id" property="sto_id" />
+        <result column="str_id" property="str_id" />
+        <result column="order_id" property="order_id" />
+        <result column="order_created_time" property="order_created_time" />
+        <result column="paid_time" property="paid_time" />
+        <result column="last_modified_time" property="last_modified_time" />
+        <result column="created_by" property="created_by" />
+        <result column="creation_date" property="creation_date" />
+        <result column="last_update_by" property="last_update_by" />
+        <result column="last_update_date" property="last_update_date" />
+        <result column="call_cnt" property="call_cnt" />
+        <result column="remark" property="remark" />
+        <result column="sts_cd" property="sts_cd" />
+        <result column="plateform_type" property="plateform_type" />
+        <result column="cancel_complete_date" property="cancel_complete_date" />
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -51,7 +51,7 @@ public class BvoController extends BaseController {
     @PostMapping("/getEbayStore")
     public BaseModelJson<List<Store>> getEbayStore(@RequestBody Store store){
         Map<String, Object> map = new HashMap<>();
-        map.put("plataeform_type", store.getPlataeform_type());
+        map.put("platform_type", String.valueOf(store.getPlatform_type()));
         map.put("dsr_id", store.getDsr_id());
         BaseModelJson<List<Store>> result = new BaseModelJson<>();
         result.code = 200;
@@ -62,7 +62,7 @@ public class BvoController extends BaseController {
     @PostMapping("/getAmazonStore")
     public BaseModelJson<List<Store>> getAmazonStore(@RequestBody Store store){
         Map<String, Object> map = new HashMap<>();
-        map.put("plataeform_type", store.getPlataeform_type());
+        map.put("platform_type", String.valueOf(store.getPlatform_type()));
         map.put("dsr_id", store.getDsr_id());
         BaseModelJson<List<Store>> result = new BaseModelJson<>();
         result.code = 200;

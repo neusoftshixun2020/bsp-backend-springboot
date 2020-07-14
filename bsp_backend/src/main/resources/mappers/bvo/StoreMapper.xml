@@ -4,12 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.bsp_backend.bvo.mapper.StoreMapper">
     <insert id="insert"  parameterType="Store">
-        insert into str_store values(null, #{dsr_id}, #{plataeform_type}, #{store_name}, #{store_sts_cd}, #{created_by}, #{creation_date},
+        insert into str_store values(null, #{dsr_id}, #{platform_type}, #{store_name}, #{store_sts_cd}, #{created_by}, #{creation_date},
         #{last_update_by}, #{last_update_date}, #{call_cnt}, #{sts_cd}, #{remark})
     </insert>
 
     <update id="update" parameterType="Store">
-        update str_store set dsr_id=#{dsr_id}, plataeform_type=#{plataeform_type}, store_name=#{store_name}, store_sts_cd=#{store_sts_cd}, created_by=#{created_by}, creation_date=#{creation_date},
+        update str_store set dsr_id=#{dsr_id}, platform_type=#{platform_type}, store_name=#{store_name}, store_sts_cd=#{store_sts_cd}, created_by=#{created_by}, creation_date=#{creation_date},
         last_update_by=#{last_update_by}, last_update_date=#{last_update_date}, call_cnt=#{call_cnt}, remark=#{remark},
             sts_cd=#{sts_cd} where str_id=#{str_id}
     </update>
@@ -30,24 +30,24 @@
         select * from str_store
         <where>
             <if test="str_id != null">str_id = #{str_id}</if>
-            <if test="dsr_id != null">dsr_id = #{dsr_id}</if>
-            <if test="plataeform_type != null">plataeform_type = #{plataeform_type}</if>
-            <if test="store_name != null">store_name = #{store_name}</if>
-            <if test="store_sts_cd != null">store_sts_cd=#{store_sts_cd}</if>
-            <if test="created_by != null">created_by = #{created_by}</if>
-            <if test="creation_date != null">creation_date = #{creation_date}</if>
-            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
-            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
-            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
-            <if test="remark != null">remark = #{remark}</if>
-            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+            <if test="dsr_id != null">and dsr_id = #{dsr_id}</if>
+            <if test="platform_type != null">and platform_type = #{platform_type}</if>
+            <if test="store_name != null">and store_name = #{store_name}</if>
+            <if test="store_sts_cd != null"> and store_sts_cd=#{store_sts_cd}</if>
+            <if test="created_by != null">and created_by = #{created_by}</if>
+            <if test="creation_date != null">and creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">and last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">and last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">and call_cnt = #{call_cnt}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+            <if test="sts_cd != null">and sts_cd = #{sts_cd}</if>
         </where>
     </select>
 
     <resultMap id="_store" type="Store">
        <id column="STR_ID" property="str_id" />
        <result column="DSR_ID" property="dsr_id" />
-       <result column="PLATAEFORM_TYPE" property="plataeform_type" />
+       <result column="PLATFORM_TYPE" property="platform_type" />
        <result column="STORE_NAME" property="store_name" />
        <result column="STORE_STS_CD" property="store_sts_cd" />
        <result column="CREATED_BY" property="created_by" />

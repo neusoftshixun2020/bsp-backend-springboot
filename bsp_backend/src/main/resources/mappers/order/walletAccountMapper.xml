@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.order.mapper.WalletAccountMapper">
+    <insert id="insert"  parameterType="WalletAccount">
+        insert into waa_wallet_account values(
+         null, {account_name}, {email}, {password}, {active_time}, {is_active},
+         {status}, {create_by}, {create_time}, {last_update_by}, {last_update_time},
+          {account_type}, {hold_order_time}, {auto_pay_status}
+        )
+    </insert>
+
+    <update id="update" parameterType="WalletAccount">
+        update waa_wallet_account
+        set
+        account_name = #{account_name},
+        email = #{email},
+        password = #{password},
+        active_time = #{active_time},
+        is_active = #{is_active},
+        status = #{status},
+        create_by = #{create_by},
+        create_time = #{create_time},
+        last_update_by = #{last_update_by},
+        last_update_time = #{last_update_time},
+        account_type = #{account_type},
+        hold_order_time = #{hold_order_time},
+        auto_pay_status = #{auto_pay_status},
+         where
+         buyer_id = #{buyer_id}
+    </update>
+
+    <delete id="delete" parameterType="WalletAccount">
+        delete from waa_wallet_account where buyer_id=#{buyer_id}
+    </delete>
+
+    <select id="getAll" resultMap="_walletAccount">
+        select * from waa_wallet_account
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_walletAccount">
+        select * from waa_wallet_account where buyer_id=#{buyer_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_walletAccount">
+        select * from waa_wallet_account
+        <where>
+            <if test="buyer_id != null">buyer_id = #{buyer_id}</if>
+            <if test="account_name != null">account_name = #{account_name}</if>
+            <if test="email != null">email = #{email}</if>
+            <if test="password != null">password = #{password}</if>
+            <if test="active_time != null">active_time = #{active_time}</if>
+            <if test="is_active != null">is_active = #{is_active}</if>
+            <if test="status != null">status = #{status}</if>
+            <if test="create_by != null">create_by = #{create_by}</if>
+            <if test="create_time != null">create_time = #{create_time}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="last_update_time != null">last_update_time = #{last_update_time}</if>
+            <if test="account_type != null">account_type = #{account_type}</if>
+            <if test="hold_order_time != null">hold_order_time = #{hold_order_time}</if>
+            <if test="auto_pay_status != null">auto_pay_status = #{auto_pay_status}</if>
+        </where>
+    </select>
+
+    <resultMap id="_walletAccount" type="WalletAccount">
+        <id column="buyer_id" property="buyer_id" />
+        <result column="account_name" property="account_name" />
+        <result column="email" property="email" />
+        <result column="password" property="password" />
+        <result column="active_time" property="active_time" />
+        <result column="is_active" property="is_active" />
+        <result column="status" property="status" />
+        <result column="create_by" property="create_by" />
+        <result column="create_time" property="create_time" />
+        <result column="last_update_by" property="last_update_by" />
+        <result column="last_update_time" property="last_update_time" />
+        <result column="account_type" property="account_type" />
+        <result column="hold_order_time" property="hold_order_time" />
+        <result column="auto_pay_status" property="auto_pay_status" />
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

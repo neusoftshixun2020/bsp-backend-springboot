@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.order.mapper.GovernmentAreaMapper">
+    <insert id="insert"  parameterType="GovernmentArea">
+        insert into goa_government_area values(
+         null, {zip_code}, {state}, {state_shorthand}, {city}, {created_by},
+         {creation_date}, {last_update_by}, {call_cnt}, {last_update_date}, {remark}, {sts_cd})
+    </insert>
+
+    <update id="update" parameterType="GovernmentArea">
+        update goa_government_area
+        set zip_code = #{zip_code}, state = #{state}, state_shorthand = #{state_shorthand}, city = #{city}, created_by = #{created_by},
+         creation_date = #{creation_date}, last_update_by = #{last_update_by}, call_cnt = #{call_cnt},
+         last_update_date = #{last_update_date}, remark = #{remark}, sts_cd = #{sts_cd}
+        where goa_id = #{goa_id}
+    </update>
+
+    <delete id="delete" parameterType="GovernmentArea">
+        delete from goa_government_area where goa_id=#{goa_id}
+    </delete>
+
+    <select id="getAll" resultMap="_governmentArea">
+        select * from goa_government_area
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="_governmentArea">
+        select * from goa_government_area where goa_id =#{goa_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_governmentArea">
+        select * from goa_government_area
+        <where>
+            <if test="goa_id != null">goa_id = #{goa_id}</if>
+            <if test="zip_code != null">zip_code = #{zip_code}</if>
+            <if test="state != null">state = #{state}</if>
+            <if test="state_shorthand != null">state_shorthand = #{state_shorthand}</if>
+            <if test="city != null">city = #{city}</if>
+            <if test="created_by != null">created_by = #{created_by}</if>
+            <if test="creation_date != null">creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
+            <if test="call_cnt != null">call_cnt = #{call_cnt}</if>
+            <if test="last_update_date != null">last_update_date = #{last_update_date}</if>
+            <if test="remark != null">remark = #{remark}</if>
+            <if test="sts_cd != null">sts_cd = #{sts_cd}</if>
+        </where>
+    </select>
+
+    <resultMap id="_governmentArea" type="GovernmentArea">
+        <id column="goa_id" property="goa_id" />
+        <result column="zip_code" property="zip_code" />
+        <result column="state" property="state" />
+        <result column="state_shorthand" property="state_shorthand" />
+        <result column="city" property="city" />
+        <result column="created_by" property="created_by" />
+        <result column="creation_date" property="creation_date" />
+        <result column="last_update_by" property="last_update_by" />
+        <result column="call_cnt" property="call_cnt" />
+        <result column="last_update_date" property="last_update_date" />
+        <result column="remark" property="remark" />
+        <result column="sts_cd" property="sts_cd" />
+    </resultMap>
+</mapper>
+
+
+
+
+
+
+
+
