@@ -1,6 +1,7 @@
 package com.neusoft.bsp_backend.order.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
+import com.neusoft.bsp_backend.product.entity.Product;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,6 +40,15 @@ public class SalesOrder implements BaseEntity<Integer> {
     String buyer_checkout_message;
     String auto_pay_time;
     List<SalesOrderLineItem> salesOrderLineItems;
+    List<Product> products;
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public List<SalesOrderLineItem> getSalesOrderLineItems() {
         return salesOrderLineItems;
@@ -326,7 +336,8 @@ public class SalesOrder implements BaseEntity<Integer> {
                 ", auto_pay_status='" + auto_pay_status + '\'' +
                 ", buyer_checkout_message='" + buyer_checkout_message + '\'' +
                 ", auto_pay_time='" + auto_pay_time + '\'' +
-                ", salesOrderLineItem=" + salesOrderLineItems +
+                ", salesOrderLineItems=" + salesOrderLineItems +
+                ", products=" + products +
                 '}';
     }
 }

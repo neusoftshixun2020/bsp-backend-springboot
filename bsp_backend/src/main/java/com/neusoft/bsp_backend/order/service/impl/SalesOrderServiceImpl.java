@@ -5,10 +5,13 @@ import com.neusoft.bsp_backend.order.entity.SalesOrderLineItem;
 import com.neusoft.bsp_backend.order.mapper.SalesOrderLineItemMapper;
 import com.neusoft.bsp_backend.order.mapper.SalesOrderMapper;
 import com.neusoft.bsp_backend.order.service.SalesOrderService;
+import com.neusoft.bsp_backend.product.entity.Product;
+import com.neusoft.bsp_backend.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +23,8 @@ public class SalesOrderServiceImpl implements SalesOrderService {
     SalesOrderMapper salesOrderMapper;
     @Autowired
     SalesOrderLineItemMapper salesOrderLineItemMapper;
+    @Autowired
+    ProductService productService;
 
     @Override
     public int insert(SalesOrder salesOrder) {
@@ -56,7 +61,13 @@ public class SalesOrderServiceImpl implements SalesOrderService {
         Map<String, Object> map1 = new HashMap<>();
         map1.put("sao_id", salesOrder.getSao_id());
         List<SalesOrderLineItem> salesOrderLineItems = salesOrderLineItemMapper.getAllByFilter(map1);
+        List<Product> products = new ArrayList<>();
+        for (SalesOrderLineItem salesOrderLineItem: salesOrderLineItems){
+            Product product = productService.getById(salesOrderLineItem.getPro_id());
+            products.add(product);
+        }
         salesOrder.setSalesOrderLineItems(salesOrderLineItems);
+        salesOrder.setProducts(products);
         return salesOrder;
     }
 
@@ -67,6 +78,12 @@ public class SalesOrderServiceImpl implements SalesOrderService {
         map1.put("sao_id", salesOrder.getSao_id());
         List<SalesOrderLineItem> salesOrderLineItems = salesOrderLineItemMapper.getAllByFilter(map1);
         salesOrder.setSalesOrderLineItems(salesOrderLineItems);
+        List<Product> products = new ArrayList<>();
+        for (SalesOrderLineItem salesOrderLineItem: salesOrderLineItems){
+            Product product = productService.getById(salesOrderLineItem.getPro_id());
+            products.add(product);
+        }
+        salesOrder.setProducts(products);
         return salesOrder;
     }
 
@@ -78,6 +95,12 @@ public class SalesOrderServiceImpl implements SalesOrderService {
             map1.put("sao_id", salesOrder.getSao_id());
             List<SalesOrderLineItem> salesOrderLineItems = salesOrderLineItemMapper.getAllByFilter(map1);
             salesOrder.setSalesOrderLineItems(salesOrderLineItems);
+            List<Product> products = new ArrayList<>();
+            for (SalesOrderLineItem salesOrderLineItem: salesOrderLineItems){
+                Product product = productService.getById(salesOrderLineItem.getPro_id());
+                products.add(product);
+            }
+            salesOrder.setProducts(products);
         }
         return salesOrders;
     }
