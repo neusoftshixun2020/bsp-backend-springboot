@@ -182,10 +182,11 @@ public class OrderController extends BaseController {
         return result;
     }
     @PostMapping("/getDsr")
-    public BaseModel getDsr(@RequestBody String userid){
+    public BaseModelJson<List<DropShipper>> getDsr(@RequestBody String userid){
+        String userid1 = userid.substring(0, userid.length()-1);
         BaseModelJson<List<DropShipper>> result = new BaseModelJson<>();
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id", userid);
+        map.put("user_id", userid1);
         result.code = 200;
         result.data = dropShipperService.getAllByFilter(map);
         return result;

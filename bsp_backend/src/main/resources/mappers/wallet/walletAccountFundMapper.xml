@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.bsp_backend.order.mapper.WalletAccountFundMapper">
+<mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletAccountFundMapper">
     <insert id="insert"  parameterType="WalletAccountFund">
         insert into waf_wallet_account_fund values(
          {buyer_id}, {available_money}, {depositing_money}, {withdrawing_money},

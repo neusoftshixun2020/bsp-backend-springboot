@@ -1,4 +1,4 @@
-package com.neusoft.bsp_backend.order.entity;
+package com.neusoft.bsp_backend.wallet.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
 
@@ -36,6 +36,15 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
     String transaction_desc;
     BigDecimal foreign_exchange_fee;
     BigDecimal withdraw_fee;
+    WalletTransactionAudit walletTransactionAudit;
+
+    public WalletTransactionAudit getWalletTransactionAudit() {
+        return walletTransactionAudit;
+    }
+
+    public void setWalletTransactionAudit(WalletTransactionAudit walletTransactionAudit) {
+        this.walletTransactionAudit = walletTransactionAudit;
+    }
 
     @Override
     public Integer getId() {
@@ -306,6 +315,7 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
                 ", transaction_desc='" + transaction_desc + '\'' +
                 ", foreign_exchange_fee=" + foreign_exchange_fee +
                 ", withdraw_fee=" + withdraw_fee +
+                ", walletTransactionAudit=" + walletTransactionAudit +
                 '}';
     }
 }

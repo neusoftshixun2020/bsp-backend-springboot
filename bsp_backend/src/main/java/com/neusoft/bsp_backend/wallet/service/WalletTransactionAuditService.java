@@ -1,6 +1,6 @@
-package com.neusoft.bsp_backend.order.service;
+package com.neusoft.bsp_backend.wallet.service;
 
-import com.neusoft.bsp_backend.order.entity.WalletTransactionAudit;
+import com.neusoft.bsp_backend.wallet.entity.WalletTransactionAudit;
 
 import java.util.List;
 import java.util.Map;

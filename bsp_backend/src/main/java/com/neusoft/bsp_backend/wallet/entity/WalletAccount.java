@@ -1,4 +1,4 @@
-package com.neusoft.bsp_backend.order.entity;
+package com.neusoft.bsp_backend.wallet.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
 
@@ -11,7 +11,7 @@ public class WalletAccount implements BaseEntity<Integer> {
     String email;
     String password;
     Date active_time;
-    char is_active;
+    String is_active;
     int status;
     String create_by;
     Date create_time;
@@ -20,6 +20,15 @@ public class WalletAccount implements BaseEntity<Integer> {
     int account_type;
     String hold_order_time;
     String auto_pay_status;
+    WalletAccountFund walletAccountFund;
+
+    public WalletAccountFund getWalletAccountFund() {
+        return walletAccountFund;
+    }
+
+    public void setWalletAccountFund(WalletAccountFund walletAccountFund) {
+        this.walletAccountFund = walletAccountFund;
+    }
 
     @Override
     public Integer getId() {
@@ -66,11 +75,11 @@ public class WalletAccount implements BaseEntity<Integer> {
         this.active_time = active_time;
     }
 
-    public char getIs_active() {
+    public String getIs_active() {
         return is_active;
     }
 
-    public void setIs_active(char is_active) {
+    public void setIs_active(String is_active) {
         this.is_active = is_active;
     }
 
@@ -155,6 +164,7 @@ public class WalletAccount implements BaseEntity<Integer> {
                 ", account_type=" + account_type +
                 ", hold_order_time='" + hold_order_time + '\'' +
                 ", auto_pay_status='" + auto_pay_status + '\'' +
+                ", walletAccountFund=" + walletAccountFund +
                 '}';
     }
 }

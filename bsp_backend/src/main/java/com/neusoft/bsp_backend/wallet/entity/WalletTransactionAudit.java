@@ -1,4 +1,4 @@
-package com.neusoft.bsp_backend.order.entity;
+package com.neusoft.bsp_backend.wallet.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
 
@@ -24,6 +24,15 @@ public class WalletTransactionAudit implements BaseEntity<Integer>{
     Date create_time;
     String last_update_by;
     Date last_update_time;
+    String img_url;
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 
     @Override
     public Integer getId() {
@@ -186,6 +195,7 @@ public class WalletTransactionAudit implements BaseEntity<Integer>{
                 ", create_time=" + create_time +
                 ", last_update_by='" + last_update_by + '\'' +
                 ", last_update_time=" + last_update_time +
+                ", img_url='" + img_url + '\'' +
                 '}';
     }
 }

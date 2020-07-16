@@ -7,6 +7,7 @@ import com.neusoft.bsp_backend.common.exception.BusinessException;
 import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
+import com.neusoft.bsp_backend.mvoinfo.entity.Manufacturer;
 import com.neusoft.bsp_backend.mvoinfo.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -26,9 +27,9 @@ public class BrandController extends BaseController {
     BrandService brandService;
 
     @PostMapping("/getBrandByFilter")
-    public BaseModelJson<List<Brand>> getAllByFilter(@RequestBody Brand brand) {
+    public BaseModelJson<List<Brand>> getAllByFilter(@RequestBody Manufacturer manufacturer) {
         Map<String, Object> map = new HashMap<>();
-        map.put("man_id", brand.getMan_id());
+        map.put("man_id", manufacturer.getMan_id());
         List<Brand> brands = brandService.getAllByFilter(map);
         if (brands.size() == 0) {
             throw BusinessException.NOT_EXISTS;

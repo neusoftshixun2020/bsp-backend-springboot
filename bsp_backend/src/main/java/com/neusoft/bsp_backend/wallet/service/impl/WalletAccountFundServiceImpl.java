@@ -1,8 +1,8 @@
-package com.neusoft.bsp_backend.order.service.impl;
+package com.neusoft.bsp_backend.wallet.service.impl;
 
-import com.neusoft.bsp_backend.order.entity.WalletAccountFund;
-import com.neusoft.bsp_backend.order.mapper.WalletAccountFundMapper;
-import com.neusoft.bsp_backend.order.service.WalletAccountFundService;
+import com.neusoft.bsp_backend.wallet.entity.WalletAccountFund;
+import com.neusoft.bsp_backend.wallet.mapper.WalletAccountFundMapper;
+import com.neusoft.bsp_backend.wallet.service.WalletAccountFundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

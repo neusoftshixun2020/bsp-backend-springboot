@@ -1,13 +1,14 @@
-package com.neusoft.bsp_backend.order.service.impl;
+package com.neusoft.bsp_backend.wallet.service.impl;
 
-import com.neusoft.bsp_backend.order.entity.WalletTransactionAudit;
-import com.neusoft.bsp_backend.order.mapper.WalletTransactionAuditMapper;
-import com.neusoft.bsp_backend.order.service.WalletTransactionAuditService;
+import com.neusoft.bsp_backend.wallet.entity.WalletTransactionAudit;
+import com.neusoft.bsp_backend.wallet.mapper.WalletTransactionAuditMapper;
+import com.neusoft.bsp_backend.wallet.service.WalletTransactionAuditService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class WalletTransactionAuditServiceImpl implements WalletTransactionAuditService {
 
     @Autowired

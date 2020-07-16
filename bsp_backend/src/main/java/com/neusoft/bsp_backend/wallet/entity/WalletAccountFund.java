@@ -1,4 +1,4 @@
-package com.neusoft.bsp_backend.order.entity;
+package com.neusoft.bsp_backend.wallet.entity;
 
 import com.neusoft.bsp_backend.common.base.BaseEntity;
 
@@ -92,5 +92,20 @@ public class WalletAccountFund implements BaseEntity<Integer> {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    @Override
+    public String toString() {
+        return "WalletAccountFund{" +
+                "buyer_id=" + buyer_id +
+                ", available_money=" + available_money +
+                ", depositing_money=" + depositing_money +
+                ", withdrawing_money=" + withdrawing_money +
+                ", create_by='" + create_by + '\'' +
+                ", create_time=" + create_time +
+                ", last_update_by='" + last_update_by + '\'' +
+                ", last_update_time=" + last_update_time +
+                ", currency='" + currency + '\'' +
+                '}';
     }
 }

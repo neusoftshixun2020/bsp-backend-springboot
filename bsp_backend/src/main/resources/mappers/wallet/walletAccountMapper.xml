@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.bsp_backend.order.mapper.WalletAccountMapper">
+<mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletAccountMapper">
     <insert id="insert"  parameterType="WalletAccount">
         insert into waa_wallet_account values(
          null, {account_name}, {email}, {password}, {active_time}, {is_active},
@@ -47,19 +47,19 @@
         select * from waa_wallet_account
         <where>
             <if test="buyer_id != null">buyer_id = #{buyer_id}</if>
-            <if test="account_name != null">account_name = #{account_name}</if>
-            <if test="email != null">email = #{email}</if>
-            <if test="password != null">password = #{password}</if>
-            <if test="active_time != null">active_time = #{active_time}</if>
-            <if test="is_active != null">is_active = #{is_active}</if>
-            <if test="status != null">status = #{status}</if>
-            <if test="create_by != null">create_by = #{create_by}</if>
-            <if test="create_time != null">create_time = #{create_time}</if>
-            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
-            <if test="last_update_time != null">last_update_time = #{last_update_time}</if>
-            <if test="account_type != null">account_type = #{account_type}</if>
-            <if test="hold_order_time != null">hold_order_time = #{hold_order_time}</if>
-            <if test="auto_pay_status != null">auto_pay_status = #{auto_pay_status}</if>
+            <if test="account_name != null">and account_name = #{account_name}</if>
+            <if test="email != null">and email = #{email}</if>
+            <if test="password != null">and password = #{password}</if>
+            <if test="active_time != null">and active_time = #{active_time}</if>
+            <if test="is_active != null">and is_active = #{is_active}</if>
+            <if test="status != null">and status = #{status}</if>
+            <if test="create_by != null">and create_by = #{create_by}</if>
+            <if test="create_time != null">and create_time = #{create_time}</if>
+            <if test="last_update_by != null">and last_update_by = #{last_update_by}</if>
+            <if test="last_update_time != null">and last_update_time = #{last_update_time}</if>
+            <if test="account_type != null">and account_type = #{account_type}</if>
+            <if test="hold_order_time != null">and hold_order_time = #{hold_order_time}</if>
+            <if test="auto_pay_status != null">and auto_pay_status = #{auto_pay_status}</if>
         </where>
     </select>
 

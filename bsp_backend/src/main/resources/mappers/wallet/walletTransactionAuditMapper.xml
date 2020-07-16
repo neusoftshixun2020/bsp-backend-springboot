@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.bsp_backend.order.mapper.WalletTransactionAuditMapper">
+<mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletTransactionAuditMapper">
     <insert id="insert"  parameterType="WalletTransactionAudit">
         insert into wta_wallet_transaction_aduit values(
        null, {buyer_id}, {transaction_id}, {available_money_before},
        {depositing_money_before}, {withdrawing_money_before}, {operate_money},
        {operate_type}, {available_money_after}, {depositing_money_after},
        {withdrawing_money_after}, {operate_by}, {status}, {create_by},
-        {create_time}, {last_update_by}, {last_update_time}
+        {create_time}, {last_update_by}, {last_update_time}, {img_url}
         )
     </insert>
 
@@ -31,7 +31,8 @@
         create_by = #{create_by},
         create_time = #{create_time},
         last_update_by = #{last_update_by},
-        last_update_time = #{last_update_time}
+        last_update_time = #{last_update_time},
+        img_url = #{img_url}
          where
          transaction_audit_id = #{transaction_audit_id}
     </update>
@@ -45,7 +46,7 @@
     </select>
 
     <select id="getById" parameterType="java.lang.Integer" resultMap="_walletTransactionAudit">
-        select * from wta_wallet_transaction_aduit where transaction_audit_id=#{transaction_audit_id}
+        select * from wta_wallet_transaction_aduit where transaction_id=#{transaction_id}
     </select>
 
     <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_walletTransactionAudit">
@@ -68,6 +69,7 @@
             <if test="create_time != null">create_time = #{create_time}</if>
             <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
             <if test="last_update_time != null">last_update_time = #{last_update_time}</if>
+            <if test="img_url != null">img_url = #{img_url}</if>
         </where>
     </select>
 
@@ -89,6 +91,7 @@
         <result column="create_time" property="create_time" />
         <result column="last_update_by" property="last_update_by" />
         <result column="last_update_time" property="last_update_time" />
+        <result column="img_url" property="img_url" />
     </resultMap>
 </mapper>
 
