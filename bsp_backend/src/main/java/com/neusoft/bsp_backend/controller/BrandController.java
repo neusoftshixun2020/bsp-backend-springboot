@@ -58,7 +58,7 @@ public class BrandController extends BaseController {
             }
         }
     }
-    @PostMapping("/deleteAllBrand")
+    @PostMapping("/deleteAllBrand")//不一定正确
     public BaseModel deleteAllBrand(@Validated({DeleteGroup.class}) @RequestBody List<Brand> brands, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new BusinessException().UPDATE_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{brands.toString()});
