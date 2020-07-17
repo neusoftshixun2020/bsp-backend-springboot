@@ -78,7 +78,7 @@ public class UserController extends BaseController {
     @PostMapping("/searchUser")
     public BaseModelJson<User> searchUser(@RequestBody User user) {
         Map<String, Object> map = new HashMap<>();
-        map.put("username", user.getUsername());
+        map.put("user_id", user.getId());
         List<User> users = userService.getAllByFilter(map);
         if (users.size() == 0) {
             throw BusinessException.NOT_EXISTS;
