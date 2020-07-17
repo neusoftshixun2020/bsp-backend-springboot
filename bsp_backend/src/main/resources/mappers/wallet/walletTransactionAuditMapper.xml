@@ -5,11 +5,11 @@
 <mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletTransactionAuditMapper">
     <insert id="insert"  parameterType="WalletTransactionAudit">
         insert into wta_wallet_transaction_aduit values(
-       null, {buyer_id}, {transaction_id}, {available_money_before},
-       {depositing_money_before}, {withdrawing_money_before}, {operate_money},
-       {operate_type}, {available_money_after}, {depositing_money_after},
-       {withdrawing_money_after}, {operate_by}, {status}, {create_by},
-        {create_time}, {last_update_by}, {last_update_time}, {img_id}, {img_url}
+       null, #{buyer_id}, #{transaction_id}, #{available_money_before},
+       #{depositing_money_before}, #{withdrawing_money_before}, #{operate_money},
+       #{operate_type}, #{available_money_after}, #{depositing_money_after},
+       #{withdrawing_money_after}, #{operate_by}, #{status}, #{create_by},
+        #{create_time}, #{last_update_by}, #{last_update_time}, #{img_id}, #{img_url}
         )
     </insert>
 

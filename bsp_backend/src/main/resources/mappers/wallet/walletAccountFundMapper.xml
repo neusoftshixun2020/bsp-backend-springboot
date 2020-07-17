@@ -5,8 +5,8 @@
 <mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletAccountFundMapper">
     <insert id="insert"  parameterType="WalletAccountFund">
         insert into waf_wallet_account_fund values(
-         {buyer_id}, {available_money}, {depositing_money}, {withdrawing_money},
-         {create_by}, {create_time}, {last_update_by}, {last_update_time}, {currency}
+         #{buyer_id}, #{available_money}, #{depositing_money}, #{withdrawing_money},
+         #{create_by}, #{create_time}, #{last_update_by}, #{last_update_time}, #{currency}
         )
     </insert>
 
