@@ -248,21 +248,22 @@ public class WalletController extends BaseController {
             if (walletAccounts.size() == 0) {
                 throw BusinessException.NOT_EXISTS;
             } else {
-                WalletAccountFund walletAccountFund = walletAccounts.get(0).getWalletAccountFund();
+                WalletAccount walletAccount1 = walletAccounts.get(0);
+                WalletAccountFund walletAccountFund = walletAccount1.getWalletAccountFund();
                 WalletTransactionAudit walletTransactionAudit = new WalletTransactionAudit();
                 WalletTransactionRecord walletTransactionRecord = new WalletTransactionRecord();
 
                 walletTransactionAudit.setAvailable_money_before(walletAccountFund.getAvailable_money());
                 walletTransactionAudit.setCreate_time(new Date());
                 walletTransactionAudit.setDepositing_money_before(walletAccountFund.getDepositing_money());
-                walletTransactionAudit.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionAudit.setBuyer_id(walletAccount1.getBuyer_id());
                 walletTransactionAudit.setStatus(2);
                 walletTransactionAudit.setOperate_type(3);
                 walletTransactionAudit.setWithdrawing_money_before(walletAccountFund.getWithdrawing_money());
                 walletTransactionAudit.setOperate_money(walletAccountFund.getWithdrawing_money());
 
-                walletTransactionRecord.setAccount_name(walletAccount.getAccount_name());
-                walletTransactionRecord.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionRecord.setAccount_name(walletAccount1.getAccount_name());
+                walletTransactionRecord.setBuyer_id(walletAccount1.getBuyer_id());
                 walletTransactionRecord.setCreate_time(new Date());
                 walletTransactionRecord.setTransaction_type(3);
                 walletTransactionRecord.setFinance_type(2);
@@ -271,8 +272,8 @@ public class WalletController extends BaseController {
 
                 walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().subtract(walletAccountFund.getWithdrawing_money()));
                 walletAccountFund.setWithdrawing_money(BigDecimal.valueOf(0));
-                walletAccounts.get(0).setWalletAccountFund(walletAccountFund);
-                int i = walletAccountService.update(walletAccounts.get(0));
+                walletAccount1.setWalletAccountFund(walletAccountFund);
+                int i = walletAccountService.update(walletAccount1);
                 if (i == 1) {
                     walletTransactionAudit.setAvailable_money_after(walletAccountFund.getAvailable_money());
                     walletTransactionAudit.setDepositing_money_after(walletAccountFund.getDepositing_money());
