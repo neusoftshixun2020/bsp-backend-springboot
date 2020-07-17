@@ -202,14 +202,14 @@ public class WalletController extends BaseController {
                 walletTransactionAudit.setStatus(2);
                 walletTransactionAudit.setOperate_type(1);
                 walletTransactionAudit.setWithdrawing_money_before(walletAccountFund.getWithdrawing_money());
-                walletTransactionAudit.setOperate_money(walletAccountFund.getWithdrawing_money());
+                walletTransactionAudit.setOperate_money(walletAccountFund.getDepositing_money());
 
                 walletTransactionRecord.setAccount_name(walletAccount.getAccount_name());
                 walletTransactionRecord.setBuyer_id(walletAccount.getBuyer_id());
                 walletTransactionRecord.setCreate_time(new Date());
                 walletTransactionRecord.setTransaction_type(1);
                 walletTransactionRecord.setFinance_type(1);
-                walletTransactionRecord.setTransaction_money(walletAccountFund.getWithdrawing_money());
+                walletTransactionRecord.setTransaction_money(walletAccountFund.getDepositing_money());
                 walletTransactionRecord.setStatus(2);
 
                 walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().add(walletAccountFund.getDepositing_money()));
@@ -234,7 +234,63 @@ public class WalletController extends BaseController {
             }
         }
     }
+    @PostMapping("/pay")
+    public BaseModel pay(@Validated({UpdateGroup.class}) @RequestBody WalletAccount walletAccount, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
+                    new Object[]{walletAccount.toString()});
+        } else {
+            BaseModel result = new BaseModel();
+            Map<String, Object> map = new HashMap<>();
+            map.put("account_name", walletAccount.getAccount_name());
+            map.put("password", walletAccount.getPassword());
+            List<WalletAccount> walletAccounts = walletAccountService.getAllByFilter(map);
+            if (walletAccounts.size() == 0) {
+                throw BusinessException.NOT_EXISTS;
+            } else {
+                WalletAccountFund walletAccountFund = walletAccounts.get(0).getWalletAccountFund();
+                WalletTransactionAudit walletTransactionAudit = new WalletTransactionAudit();
+                WalletTransactionRecord walletTransactionRecord = new WalletTransactionRecord();
 
+                walletTransactionAudit.setAvailable_money_before(walletAccountFund.getAvailable_money());
+                walletTransactionAudit.setCreate_time(new Date());
+                walletTransactionAudit.setDepositing_money_before(walletAccountFund.getDepositing_money());
+                walletTransactionAudit.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionAudit.setStatus(2);
+                walletTransactionAudit.setOperate_type(3);
+                walletTransactionAudit.setWithdrawing_money_before(walletAccountFund.getWithdrawing_money());
+                walletTransactionAudit.setOperate_money(walletAccountFund.getWithdrawing_money());
+
+                walletTransactionRecord.setAccount_name(walletAccount.getAccount_name());
+                walletTransactionRecord.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionRecord.setCreate_time(new Date());
+                walletTransactionRecord.setTransaction_type(3);
+                walletTransactionRecord.setFinance_type(2);
+                walletTransactionRecord.setTransaction_money(walletAccountFund.getWithdrawing_money());
+                walletTransactionRecord.setStatus(2);
+
+                walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().subtract(walletAccountFund.getWithdrawing_money()));
+                walletAccountFund.setWithdrawing_money(BigDecimal.valueOf(0));
+                walletAccounts.get(0).setWalletAccountFund(walletAccountFund);
+                int i = walletAccountService.update(walletAccounts.get(0));
+                if (i == 1) {
+                    walletTransactionAudit.setAvailable_money_after(walletAccountFund.getAvailable_money());
+                    walletTransactionAudit.setDepositing_money_after(walletAccountFund.getDepositing_money());
+                    walletTransactionAudit.setWithdrawing_money_after(walletAccountFund.getWithdrawing_money());
+                    walletTransactionRecord.setWalletTransactionAudit(walletTransactionAudit);
+                    int j = walletTransactionRecordService.insert(walletTransactionRecord);
+                    if (j==1){
+                        result.code = 200;
+                        return result;
+                    }else {
+                        throw BusinessException.INSERT_FAIL;
+                    }
+                } else {
+                    throw BusinessException.UPDATE_FAIL;
+                }
+            }
+        }
+    }
     @PostMapping("/changePassword")
     public BaseModel changePassword(@Validated({UpdateGroup.class}) @RequestBody WalletAccount walletAccount, String newPassword, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

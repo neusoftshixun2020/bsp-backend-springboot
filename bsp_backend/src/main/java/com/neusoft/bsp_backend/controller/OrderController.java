@@ -187,6 +187,16 @@ public class OrderController extends BaseController {
         return result;
     }
 
+    @PostMapping("/getShippingAddress")
+    public BaseModelJson<List<ShippingAddress>> getShippingAddress(@RequestBody SalesOrder salesOrder){
+        Map<String, Object> map = new HashMap<>();
+        map.put("sto_id", salesOrder.getSto_id());
+        BaseModelJson<List<ShippingAddress>> result = new BaseModelJson<>();
+        result.code = 200;
+        result.data = shippingAddressService.getAllByFilter(map);
+        return result;
+    }
+
     @PostMapping("/getDsr")
     public BaseModelJson<List<DropShipper>> getDsr(@RequestBody String userid){
         String userid1 = userid.substring(0, userid.length()-1);

@@ -64,7 +64,7 @@ public class ManController extends BaseController {
     public BaseModelJson<PageInfo<Manufacturer>> getManByFilter(Integer pageNum, Integer pageSize,
                                                      @RequestBody Manufacturer manufacturer) {
         Map<String, Object> map = new HashMap<>();
-        map.put("user_id", manufacturer.getUser_id());
+        map.put("man_id", manufacturer.getMan_id());
         BaseModelJson<PageInfo<Manufacturer>> result = new BaseModelJson<>();
         if (pageNum == null) {
             pageNum = 1;
