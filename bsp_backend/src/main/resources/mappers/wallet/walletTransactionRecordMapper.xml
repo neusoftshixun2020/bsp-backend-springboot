@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          null, #{buyer_id}, #{bank_card_id}, #{transaction_number}, #{transaction_type},
           #{account_name}, #{transaction_money}, #{commission}, #{discount_commission}, #{transaction_method},
            #{complete_time}, #{status}, #{actual_money}, #{actual_commission}, #{actual_discount_commission},
-           #{balance}, #{finance_type}, #{note}, #{operator_name}, #{operator_ip}, #{create_by}, #{create_time},
+           #{balance}, #{business_id}, #{finance_type}, #{note}, #{operator_name}, #{operator_ip}, #{create_by}, #{create_time},
            #{last_update_by}, #{last_update_time}, #{bank_receipt_url}, #{exchange_rate}, #{transaction_desc},
            #{foreign_exchange_fee}, #{withdraw_fee}
         )
@@ -32,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         actual_commission = #{actual_commission},
         actual_discount_commission = #{actual_discount_commission},
         balance = #{balance},
+        business_id = #{business_id}
         finance_type = #{finance_type},
         note = #{note},
         operator_name = #{operator_name},
@@ -80,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="actual_commission != null">actual_commission = #{actual_commission}</if>
             <if test="actual_discount_commission != null">actual_discount_commission = #{actual_discount_commission}</if>
             <if test="balance != null">balance = #{balance}</if>
+            <if test="business_id != null">business_id = #{business_id}</if>
             <if test="finance_type != null">finance_type = #{finance_type}</if>
             <if test="note != null">note = #{note}</if>
             <if test="operator_name != null">operator_name = #{operator_name}</if>
@@ -113,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result column="actual_commission" property="actual_commission" />
         <result column="actual_discount_commission" property="actual_discount_commission" />
         <result column="balance" property="balance" />
+        <result column="business_id" property="business_id"/>
         <result column="finance_type" property="finance_type" />
         <result column="note" property="note" />
         <result column="operator_name" property="operator_name" />

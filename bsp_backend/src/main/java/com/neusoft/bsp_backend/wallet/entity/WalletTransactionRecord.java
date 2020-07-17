@@ -23,6 +23,7 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
     BigDecimal actual_commission;
     BigDecimal actual_discount_commission;
     BigDecimal balance;
+    int business_id;
     int finance_type;
     String note;
     String operator_name;
@@ -283,6 +284,10 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
         this.withdraw_fee = withdraw_fee;
     }
 
+    public int getBusiness_id() {
+        return business_id;
+    }
+
     @Override
     public String toString() {
         return "WalletTransactionRecord{" +
@@ -302,6 +307,7 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
                 ", actual_commission=" + actual_commission +
                 ", actual_discount_commission=" + actual_discount_commission +
                 ", balance=" + balance +
+                ", business_id=" + business_id +
                 ", finance_type=" + finance_type +
                 ", note='" + note + '\'' +
                 ", operator_name='" + operator_name + '\'' +
@@ -317,5 +323,9 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
                 ", withdraw_fee=" + withdraw_fee +
                 ", walletTransactionAudit=" + walletTransactionAudit +
                 '}';
+    }
+
+    public void setBusiness_id(int business_id) {
+        this.business_id = business_id;
     }
 }
