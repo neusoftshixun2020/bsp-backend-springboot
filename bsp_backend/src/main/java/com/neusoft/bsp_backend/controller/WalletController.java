@@ -250,6 +250,7 @@ public class WalletController extends BaseController {
             } else {
                 WalletAccount walletAccount1 = walletAccounts.get(0);
                 WalletAccountFund walletAccountFund = walletAccount1.getWalletAccountFund();
+                walletAccountFund.setWithdrawing_money(walletAccount.getWalletAccountFund().getWithdrawing_money());
                 WalletTransactionAudit walletTransactionAudit = new WalletTransactionAudit();
                 WalletTransactionRecord walletTransactionRecord = new WalletTransactionRecord();
 
