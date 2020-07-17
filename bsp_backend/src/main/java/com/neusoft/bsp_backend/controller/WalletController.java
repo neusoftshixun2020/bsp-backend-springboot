@@ -146,7 +146,58 @@ public class WalletController extends BaseController {
         }
     }
 
+    @PostMapping("/deposit")
+    public BaseModel deposit(@Validated({UpdateGroup.class}) @RequestBody WalletAccount walletAccount, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
+                    new Object[]{walletAccount.toString()});
+        } else {
+            BaseModel result = new BaseModel();
+            Map<String, Object> map = new HashMap<>();
+            map.put("account_name", walletAccount.getAccount_name());
+            map.put("password", walletAccount.getPassword());
+            List<WalletAccount> walletAccounts = walletAccountService.getAllByFilter(map);
+            if (walletAccounts.size() == 0) {
+                throw BusinessException.NOT_EXISTS;
+            } else {
+                WalletAccountFund walletAccountFund = walletAccount.getWalletAccountFund();
+                walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().add(walletAccountFund.getDepositing_money()));
+                walletAccountFund.setDepositing_money(BigDecimal.valueOf(0));
+                walletAccount.setWalletAccountFund(walletAccountFund);
+                int i = walletAccountService.update(walletAccount);
+                if (i == 1) {
+                    result.code = 200;
+                    return result;
+                } else {
+                    throw BusinessException.UPDATE_FAIL;
+                }
+            }
+        }
+    }
 
-
-
+    @PostMapping("/changePassword")
+    public BaseModel changePassword(@Validated({UpdateGroup.class}) @RequestBody WalletAccount walletAccount, String newPassword, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
+                    new Object[]{walletAccount.toString()});
+        } else {
+            BaseModel result = new BaseModel();
+            Map<String, Object> map = new HashMap<>();
+            map.put("account_name", walletAccount.getAccount_name());
+            map.put("password", walletAccount.getPassword());
+            List<WalletAccount> walletAccounts = walletAccountService.getAllByFilter(map);
+            if (walletAccounts.size() == 0){
+                throw BusinessException.NOT_EXISTS;
+            }else {
+                walletAccount.setPassword(newPassword);
+                int i = walletAccountService.update(walletAccount);
+                if (i == 1) {
+                    result.code = 200;
+                    return result;
+                } else {
+                    throw BusinessException.UPDATE_FAIL;
+                }
+            }
+        }
+    }
 }

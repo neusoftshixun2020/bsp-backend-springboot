@@ -25,7 +25,7 @@
         last_update_time = #{last_update_time},
         account_type = #{account_type},
         hold_order_time = #{hold_order_time},
-        auto_pay_status = #{auto_pay_status},
+        auto_pay_status = #{auto_pay_status}
          where
          buyer_id = #{buyer_id}
     </update>
