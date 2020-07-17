@@ -12,6 +12,7 @@ import com.neusoft.bsp_backend.common.validationGroup.InsertGroup;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.user.entity.User;
 import com.neusoft.bsp_backend.wallet.entity.WalletAccount;
+import com.neusoft.bsp_backend.wallet.entity.WalletAccountFund;
 import com.neusoft.bsp_backend.wallet.entity.WalletTransactionRecord;
 import com.neusoft.bsp_backend.wallet.service.WalletAccountService;
 import com.neusoft.bsp_backend.wallet.service.WalletTransactionRecordService;
@@ -20,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +36,10 @@ public class WalletController extends BaseController {
     WalletTransactionRecordService walletTransactionRecordService;
 
     @PostMapping("/getFlow")
-    public BaseModelJson<List<WalletTransactionRecord>> getFlow(@RequestBody WalletAccount walletAccount){
+    public BaseModelJson<List<WalletTransactionRecord>> getFlow(){
         BaseModelJson<List<WalletTransactionRecord>> result = new BaseModelJson<>();
         Map<String, Object> map = new HashMap<>();
-        map.put("buyer_id", walletAccount.getBuyer_id());
+        //map.put("buyer_id", walletAccount.getBuyer_id());
         result.code = 200;
         result.data = walletTransactionRecordService.getAllByFilter(map);
         return result;
@@ -109,13 +111,38 @@ public class WalletController extends BaseController {
                     new Object[]{walletAccount.toString()});
         } else {
             BaseModel result = new BaseModel();
-            int i = walletAccountService.update(walletAccount);
-            if (i == 1) {
-                result.code = 200;
-                return result;
+            Map<String, Object> map = new HashMap<>();
+            map.put("account_name", walletAccount.getAccount_name());
+            map.put("password", walletAccount.getPassword());
+            List<WalletAccount> walletAccounts = walletAccountService.getAllByFilter(map);
+            if (walletAccounts.size() == 0) {
+                throw BusinessException.NOT_EXISTS;
             } else {
-                throw BusinessException.UPDATE_FAIL;
+                WalletAccountFund walletAccountFund = walletAccount.getWalletAccountFund();
+                walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().subtract(walletAccountFund.getWithdrawing_money()));
+                walletAccountFund.setWithdrawing_money(BigDecimal.valueOf(0));
+                walletAccount.setWalletAccountFund(walletAccountFund);
+                int i = walletAccountService.update(walletAccount);
+                if (i == 1) {
+                    result.code = 200;
+                    return result;
+                } else {
+                    throw BusinessException.UPDATE_FAIL;
+                }
             }
+        }
+    }
+
+    @PostMapping("/getFund")
+    public BaseModelJson<WalletAccountFund> getFund(@RequestBody WalletAccount walletAccount) {
+        WalletAccount walletAccount1 = walletAccountService.getById(walletAccount.getBuyer_id());
+        if (walletAccount1 == null) {
+            throw BusinessException.NOT_EXISTS;
+        } else {
+            BaseModelJson<WalletAccountFund> result = new BaseModelJson();
+            result.code = 200;
+            result.data = walletAccount.getWalletAccountFund();
+            return result;
         }
     }
 

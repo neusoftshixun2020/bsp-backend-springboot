@@ -75,6 +75,21 @@ public class UserController extends BaseController {
         }
     }
 
+    @PostMapping("/searchUser")
+    public BaseModelJson<User> searchUser(@RequestBody User user) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", user.getUsername());
+        List<User> users = userService.getAllByFilter(map);
+        if (users.size() == 0) {
+            throw BusinessException.NOT_EXISTS;
+        } else {
+            BaseModelJson<User> result = new BaseModelJson();
+            result.code = 200;
+            result.data=users.get(0);
+            return result;
+        }
+    }
+
     @PostMapping("/deleteUser")
     public BaseModel deleteUser(@Validated({DeleteGroup.class}) @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

@@ -24,7 +24,16 @@ public class WalletTransactionAudit implements BaseEntity<Integer>{
     Date create_time;
     String last_update_by;
     Date last_update_time;
+    int img_id;
     String img_url;
+
+    public int getImg_id() {
+        return img_id;
+    }
+
+    public void setImg_id(int img_id) {
+        this.img_id = img_id;
+    }
 
     public String getImg_url() {
         return img_url;
@@ -195,6 +204,7 @@ public class WalletTransactionAudit implements BaseEntity<Integer>{
                 ", create_time=" + create_time +
                 ", last_update_by='" + last_update_by + '\'' +
                 ", last_update_time=" + last_update_time +
+                ", img_id=" + img_id +
                 ", img_url='" + img_url + '\'' +
                 '}';
     }

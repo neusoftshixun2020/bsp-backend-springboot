@@ -9,7 +9,7 @@
        {depositing_money_before}, {withdrawing_money_before}, {operate_money},
        {operate_type}, {available_money_after}, {depositing_money_after},
        {withdrawing_money_after}, {operate_by}, {status}, {create_by},
-        {create_time}, {last_update_by}, {last_update_time}, {img_url}
+        {create_time}, {last_update_by}, {last_update_time}, {img_id}, {img_url}
         )
     </insert>
 
@@ -32,6 +32,7 @@
         create_time = #{create_time},
         last_update_by = #{last_update_by},
         last_update_time = #{last_update_time},
+        img_id = #{img_id},
         img_url = #{img_url}
          where
          transaction_audit_id = #{transaction_audit_id}
@@ -53,23 +54,24 @@
         select * from wta_wallet_transaction_aduit
         <where>
             <if test="transaction_audit_id != null">transaction_audit_id = #{transaction_audit_id}</if>
-            <if test="buyer_id != null">buyer_id = #{buyer_id}</if>
-            <if test="transaction_id != null">transaction_id = #{transaction_id}</if>
-            <if test="available_money_before != null">available_money_before = #{available_money_before}</if>
-            <if test="depositing_money_before != null">depositing_money_before = #{depositing_money_before}</if>
-            <if test="withdrawing_money_before != null">withdrawing_money_before = #{withdrawing_money_before}</if>
-            <if test="operate_money != null">operate_money = #{operate_money}</if>
-            <if test="operate_type != null">operate_type = #{operate_type}</if>
-            <if test="available_money_after != null">available_money_after = #{available_money_after}</if>
-            <if test="depositing_money_after != null">depositing_money_after = #{depositing_money_after}</if>
-            <if test="withdrawing_money_after != null">withdrawing_money_after = #{withdrawing_money_after}</if>
-            <if test="operate_by != null">operate_by = #{operate_by}</if>
-            <if test="status != null">status = #{status}</if>
-            <if test="create_by != null">create_by = #{create_by}</if>
-            <if test="create_time != null">create_time = #{create_time}</if>
-            <if test="last_update_by != null">last_update_by = #{last_update_by}</if>
-            <if test="last_update_time != null">last_update_time = #{last_update_time}</if>
-            <if test="img_url != null">img_url = #{img_url}</if>
+            <if test="buyer_id != null">and buyer_id = #{buyer_id}</if>
+            <if test="transaction_id != null">and transaction_id = #{transaction_id}</if>
+            <if test="available_money_before != null">and available_money_before = #{available_money_before}</if>
+            <if test="depositing_money_before != null">and depositing_money_before = #{depositing_money_before}</if>
+            <if test="withdrawing_money_before != null">and withdrawing_money_before = #{withdrawing_money_before}</if>
+            <if test="operate_money != null">and operate_money = #{operate_money}</if>
+            <if test="operate_type != null">and operate_type = #{operate_type}</if>
+            <if test="available_money_after != null">and available_money_after = #{available_money_after}</if>
+            <if test="depositing_money_after != null">and depositing_money_after = #{depositing_money_after}</if>
+            <if test="withdrawing_money_after != null">and withdrawing_money_after = #{withdrawing_money_after}</if>
+            <if test="operate_by != null">and operate_by = #{operate_by}</if>
+            <if test="status != null">and status = #{status}</if>
+            <if test="create_by != null">and create_by = #{create_by}</if>
+            <if test="create_time != null">and create_time = #{create_time}</if>
+            <if test="last_update_by != null">and last_update_by = #{last_update_by}</if>
+            <if test="last_update_time != null">and last_update_time = #{last_update_time}</if>
+            <if test="img_id != null">and img_id = #{img_id}</if>
+            <if test="img_url != null">and img_url = #{img_url}</if>
         </where>
     </select>
 
@@ -91,6 +93,7 @@
         <result column="create_time" property="create_time" />
         <result column="last_update_by" property="last_update_by" />
         <result column="last_update_time" property="last_update_time" />
+        <result column="img_id" property="img_id" />
         <result column="img_url" property="img_url" />
     </resultMap>
 </mapper>
