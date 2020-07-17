@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         actual_commission = #{actual_commission},
         actual_discount_commission = #{actual_discount_commission},
         balance = #{balance},
-        business_id = #{business_id}
+        business_id = #{business_id},
         finance_type = #{finance_type},
         note = #{note},
         operator_name = #{operator_name},
