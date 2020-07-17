@@ -9,6 +9,7 @@ import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Brand;
 import com.neusoft.bsp_backend.mvoinfo.entity.Manufacturer;
 import com.neusoft.bsp_backend.mvoinfo.service.BrandService;
+import com.neusoft.bsp_backend.order.entity.SalesOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -57,6 +58,28 @@ public class BrandController extends BaseController {
             }
         }
     }
+    @PostMapping("/deleteAllBrand")
+    public BaseModel deleteAllBrand(@Validated({DeleteGroup.class}) @RequestBody List<Brand> brands, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new BusinessException().UPDATE_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{brands.toString()});
+        } else {
+            int i=0;
+            BaseModel result = new BaseModel();
+            for (Brand brand: brands){
+               i = brandService.delete(brand.getId());
+            }
+            if (i==1){
+                result.code = 200;
+                return result;
+            }else {
+                throw BusinessException.DELETE_FAIL;
+            }
+
+        }
+    }
+
+
+
 
     @PostMapping("/addOrUpdateBrand")
     public BaseModel addOrUpdateBrand(@Validated({UpdateGroup.class}) @RequestBody Brand brand, BindingResult bindingResult) {
