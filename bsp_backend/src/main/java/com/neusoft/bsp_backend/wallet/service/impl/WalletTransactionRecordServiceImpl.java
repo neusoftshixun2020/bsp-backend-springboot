@@ -26,6 +26,7 @@ public class WalletTransactionRecordServiceImpl implements WalletTransactionReco
         if (i==0){
             return 0;
         }
+        walletTransactionRecord.getWalletTransactionAudit().setTransaction_id(walletTransactionRecord.getTransaction_id());
         int i1 = walletTransactionAuditMapper.insert(walletTransactionRecord.getWalletTransactionAudit());
         if (i1==0){
             return 0;

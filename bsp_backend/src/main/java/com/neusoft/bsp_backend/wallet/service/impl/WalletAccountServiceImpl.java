@@ -27,6 +27,7 @@ public class WalletAccountServiceImpl implements WalletAccountService {
         if (i==0){
             return 0;
         }
+        walletAccount.getWalletAccountFund().setBuyer_id(walletAccount.getBuyer_id());
         int i1 = walletAccountFundMapper.insert(walletAccount.getWalletAccountFund());
         if (i1==0){
             return 0;

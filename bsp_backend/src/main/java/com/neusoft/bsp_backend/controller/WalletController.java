@@ -13,6 +13,7 @@ import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.user.entity.User;
 import com.neusoft.bsp_backend.wallet.entity.WalletAccount;
 import com.neusoft.bsp_backend.wallet.entity.WalletAccountFund;
+import com.neusoft.bsp_backend.wallet.entity.WalletTransactionAudit;
 import com.neusoft.bsp_backend.wallet.entity.WalletTransactionRecord;
 import com.neusoft.bsp_backend.wallet.service.WalletAccountService;
 import com.neusoft.bsp_backend.wallet.service.WalletTransactionRecordService;
@@ -22,6 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,14 +120,43 @@ public class WalletController extends BaseController {
             if (walletAccounts.size() == 0) {
                 throw BusinessException.NOT_EXISTS;
             } else {
+                WalletTransactionAudit walletTransactionAudit = new WalletTransactionAudit();
+                WalletTransactionRecord walletTransactionRecord = new WalletTransactionRecord();
                 WalletAccountFund walletAccountFund = walletAccount.getWalletAccountFund();
+
+                walletTransactionAudit.setAvailable_money_before(walletAccountFund.getAvailable_money());
+                walletTransactionAudit.setCreate_time(new Date());
+                walletTransactionAudit.setDepositing_money_before(walletAccountFund.getDepositing_money());
+                walletTransactionAudit.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionAudit.setStatus(2);
+                walletTransactionAudit.setOperate_type(2);
+                walletTransactionAudit.setWithdrawing_money_before(walletAccountFund.getWithdrawing_money());
+                walletTransactionAudit.setOperate_money(walletAccountFund.getWithdrawing_money());
+
+                walletTransactionRecord.setAccount_name(walletAccount.getAccount_name());
+                walletTransactionRecord.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionRecord.setCreate_time(new Date());
+                walletTransactionRecord.setTransaction_type(2);
+                walletTransactionRecord.setFinance_type(2);
+                walletTransactionRecord.setTransaction_money(walletAccountFund.getWithdrawing_money());
+                walletTransactionRecord.setStatus(2);
+
                 walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().subtract(walletAccountFund.getWithdrawing_money()));
                 walletAccountFund.setWithdrawing_money(BigDecimal.valueOf(0));
                 walletAccount.setWalletAccountFund(walletAccountFund);
                 int i = walletAccountService.update(walletAccount);
                 if (i == 1) {
-                    result.code = 200;
-                    return result;
+                    walletTransactionAudit.setAvailable_money_after(walletAccountFund.getAvailable_money());
+                    walletTransactionAudit.setDepositing_money_after(walletAccountFund.getDepositing_money());
+                    walletTransactionAudit.setWithdrawing_money_after(walletAccountFund.getWithdrawing_money());
+                    walletTransactionRecord.setWalletTransactionAudit(walletTransactionAudit);
+                    int j = walletTransactionRecordService.insert(walletTransactionRecord);
+                    if (j==1){
+                        result.code = 200;
+                        return result;
+                    }else {
+                        throw BusinessException.INSERT_FAIL;
+                    }
                 } else {
                     throw BusinessException.UPDATE_FAIL;
                 }
@@ -161,13 +192,42 @@ public class WalletController extends BaseController {
                 throw BusinessException.NOT_EXISTS;
             } else {
                 WalletAccountFund walletAccountFund = walletAccount.getWalletAccountFund();
+                WalletTransactionAudit walletTransactionAudit = new WalletTransactionAudit();
+                WalletTransactionRecord walletTransactionRecord = new WalletTransactionRecord();
+
+                walletTransactionAudit.setAvailable_money_before(walletAccountFund.getAvailable_money());
+                walletTransactionAudit.setCreate_time(new Date());
+                walletTransactionAudit.setDepositing_money_before(walletAccountFund.getDepositing_money());
+                walletTransactionAudit.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionAudit.setStatus(2);
+                walletTransactionAudit.setOperate_type(1);
+                walletTransactionAudit.setWithdrawing_money_before(walletAccountFund.getWithdrawing_money());
+                walletTransactionAudit.setOperate_money(walletAccountFund.getWithdrawing_money());
+
+                walletTransactionRecord.setAccount_name(walletAccount.getAccount_name());
+                walletTransactionRecord.setBuyer_id(walletAccount.getBuyer_id());
+                walletTransactionRecord.setCreate_time(new Date());
+                walletTransactionRecord.setTransaction_type(1);
+                walletTransactionRecord.setFinance_type(1);
+                walletTransactionRecord.setTransaction_money(walletAccountFund.getWithdrawing_money());
+                walletTransactionRecord.setStatus(2);
+
                 walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().add(walletAccountFund.getDepositing_money()));
                 walletAccountFund.setDepositing_money(BigDecimal.valueOf(0));
                 walletAccount.setWalletAccountFund(walletAccountFund);
                 int i = walletAccountService.update(walletAccount);
                 if (i == 1) {
-                    result.code = 200;
-                    return result;
+                    walletTransactionAudit.setAvailable_money_after(walletAccountFund.getAvailable_money());
+                    walletTransactionAudit.setDepositing_money_after(walletAccountFund.getDepositing_money());
+                    walletTransactionAudit.setWithdrawing_money_after(walletAccountFund.getWithdrawing_money());
+                    walletTransactionRecord.setWalletTransactionAudit(walletTransactionAudit);
+                    int j = walletTransactionRecordService.insert(walletTransactionRecord);
+                    if (j==1){
+                        result.code = 200;
+                        return result;
+                    }else {
+                        throw BusinessException.INSERT_FAIL;
+                    }
                 } else {
                     throw BusinessException.UPDATE_FAIL;
                 }
