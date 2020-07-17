@@ -141,7 +141,7 @@ public class WalletController extends BaseController {
         } else {
             BaseModelJson<WalletAccountFund> result = new BaseModelJson();
             result.code = 200;
-            result.data = walletAccount.getWalletAccountFund();
+            result.data = walletAccount1.getWalletAccountFund();
             return result;
         }
     }

@@ -5,12 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletTransactionRecordMapper">
     <insert id="insert"  parameterType="WalletTransactionRecord">
         insert into wtr_wallet_transaction_record values(
-         null, {buyer_id}, {bank_card_id}, {transaction_number}, {transaction_type},
-          {account_name}, {transaction_money}, {commission}, {discount_commission}, {transaction_method},
-           {complete_time}, {status}, {actual_money}, {actual_commission}, {actual_discount_commission},
-           {balance}, {finance_type}, {note}, {operator_name}, {operator_ip}, {create_by}, {create_time},
-           {last_update_by}, {last_update_time}, {bank_receipt_url}, {exchange_rate}, {transaction_desc},
-           {foreign_exchange_fee}, {withdraw_fee}
+         null, #{buyer_id}, #{bank_card_id}, #{transaction_number}, #{transaction_type},
+          #{account_name}, #{transaction_money}, #{commission}, #{discount_commission}, #{transaction_method},
+           #{complete_time}, #{status}, #{actual_money}, #{actual_commission}, #{actual_discount_commission},
+           #{balance}, #{finance_type}, #{note}, #{operator_name}, #{operator_ip}, #{create_by}, #{create_time},
+           #{last_update_by}, #{last_update_time}, #{bank_receipt_url}, #{exchange_rate}, #{transaction_desc},
+           #{foreign_exchange_fee}, #{withdraw_fee}
         )
     </insert>
 

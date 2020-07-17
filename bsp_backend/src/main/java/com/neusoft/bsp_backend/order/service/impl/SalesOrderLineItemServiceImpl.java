@@ -33,6 +33,7 @@ public class SalesOrderLineItemServiceImpl implements SalesOrderLineItemService 
 
     @Override
     public SalesOrderLineItem getById(int pk) {
+
         return salesOrderLineItemMapper.getById(pk);
     }
 

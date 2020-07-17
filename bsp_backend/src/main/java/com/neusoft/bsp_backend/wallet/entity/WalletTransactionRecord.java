@@ -37,6 +37,15 @@ public class WalletTransactionRecord  implements BaseEntity<Integer> {
     BigDecimal foreign_exchange_fee;
     BigDecimal withdraw_fee;
     WalletTransactionAudit walletTransactionAudit;
+    WalletAccount walletAccount;
+
+    public WalletAccount getWalletAccount() {
+        return walletAccount;
+    }
+
+    public void setWalletAccount(WalletAccount walletAccount) {
+        this.walletAccount = walletAccount;
+    }
 
     public WalletTransactionAudit getWalletTransactionAudit() {
         return walletTransactionAudit;

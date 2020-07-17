@@ -11,9 +11,8 @@ import com.neusoft.bsp_backend.common.exception.BusinessException;
 import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import com.neusoft.bsp_backend.mvoinfo.entity.Manufacturer;
 import com.neusoft.bsp_backend.mvoinfo.service.ManService;
-import com.neusoft.bsp_backend.order.entity.SalesOrder;
-import com.neusoft.bsp_backend.order.entity.ShippingAddress;
-import com.neusoft.bsp_backend.order.entity.StoreOrder;
+import com.neusoft.bsp_backend.order.entity.*;
+import com.neusoft.bsp_backend.order.mapper.OrderTrackMapper;
 import com.neusoft.bsp_backend.order.service.SalesOrderService;
 import com.neusoft.bsp_backend.order.service.ShippingAddressService;
 import com.neusoft.bsp_backend.order.service.StoreOrderService;
@@ -43,6 +42,8 @@ public class OrderController extends BaseController {
     StoreService storeService;
     @Autowired
     DropShipperService dropShipperService;
+    @Autowired
+    OrderTrackMapper orderTrackMapper;
 
     @PostMapping("/getAwaitingPayment")
     public BaseModelJson<List<List<SalesOrder>>> getAwaitingPayment(@RequestBody Manufacturer manufacturer){
@@ -172,15 +173,20 @@ public class OrderController extends BaseController {
         result.data = allSalesOrders;
         return result;
     }
+
     @PostMapping("/getTrack")
-    public BaseModelJson<List<ShippingAddress>> getTrack(@RequestBody SalesOrder salesOrder){
-        Map<String, Object> map = new HashMap<>();
-        map.put("sto_id", salesOrder.getSto_id());
-        BaseModelJson<List<ShippingAddress>> result = new BaseModelJson<>();
+    public BaseModelJson<List<OrderTrack>> getTrack(@RequestBody SalesOrder salesOrder){
+        List<SalesOrderLineItem> salesOrderLineItems = salesOrder.getSalesOrderLineItems();
+        List<OrderTrack> orderTracks = new ArrayList<>();
+        for (SalesOrderLineItem salesOrderLineItem: salesOrderLineItems){
+            orderTracks.add(orderTrackMapper.getById(salesOrderLineItem.getTracking_no()));
+        }
+        BaseModelJson<List<OrderTrack>> result = new BaseModelJson<>();
         result.code = 200;
-        result.data = shippingAddressService.getAllByFilter(map);
+        result.data = orderTracks;
         return result;
     }
+
     @PostMapping("/getDsr")
     public BaseModelJson<List<DropShipper>> getDsr(@RequestBody String userid){
         String userid1 = userid.substring(0, userid.length()-1);

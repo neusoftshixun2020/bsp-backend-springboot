@@ -16,7 +16,7 @@ public class SalesOrder implements BaseEntity<Integer> {
     Date last_update_date;
     int call_cnt;
     String remark;
-    char sts_cd;
+    String sts_cd;
     int man_id;
     int war_id;
     Date sync_date;
@@ -119,11 +119,11 @@ public class SalesOrder implements BaseEntity<Integer> {
         this.remark = remark;
     }
 
-    public char getSts_cd() {
+    public String getSts_cd() {
         return sts_cd;
     }
 
-    public void setSts_cd(char sts_cd) {
+    public void setSts_cd(String sts_cd) {
         this.sts_cd = sts_cd;
     }
 

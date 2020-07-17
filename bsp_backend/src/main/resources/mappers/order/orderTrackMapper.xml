@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_backend.order.mapper.OrderTrackMapper">
+    <insert id="insert"  parameterType="OrderTrack">
+        insert into  order_track values(#{track_no}, #{start}, #{start_time}, #{address1},
+        #{address2}, #{address3}, #{update_time1}, #{update_time2}, #{update_time3},
+         #{destination}, #{end_time})
+    </insert>
+
+    <update id="update" parameterType="OrderTrack">
+        update order_track
+        set start = #{start}, start_time = #{start_time}, address1 = #{address1}, address2 = #{address2},
+         address3 = #{address3}, update_time1 = #{update_time1}, update_time2 = #{update_time2}, update_time3 = #{update_time3},
+         destination = #{destination}, end_time = #{end_time}
+        where track_no = #{track_no}
+    </update>
+
+    <delete id="delete" parameterType="OrderTrack">
+        delete from order_track where track_no=#{track_no}
+    </delete>
+
+    <select id="getAll" resultMap="_orderTrack">
+        select * from order_track
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="_orderTrack">
+        select * from order_track where track_no=#{track_no}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_orderTrack">
+        select * from order_track
+        <where>
+            <if test="track_no != null">track_no = #{track_no}</if>
+            <if test="start != null">start = #{start}</if>
+            <if test="start_time != null">start_time = #{start_time}</if>
+            <if test="address1 != null">address1 = #{address1}</if>
+            <if test="address2 != null">address2 = #{address2}</if>
+            <if test="address3 != null">address3 = #{address3}</if>
+            <if test="update_time1 != null">update_time1 = #{update_time1}</if>
+            <if test="update_time2 != null">update_time2 = #{update_time2}</if>
+            <if test="update_time3 != null">update_time3 = #{update_time3}</if>
+            <if test="destination != null">destination = #{destination}</if>
+            <if test="end_time != null">end_time = #{end_time}</if>
+        </where>
+    </select>
+
+    <resultMap id="_orderTrack" type="OrderTrack">
+        <id column="track_no" property="track_no"/>
+        <result column="start" property="start" />
+        <result column="start_time" property="start_time" />
+        <result column="address1" property="address1" />
+        <result column="address2" property="address2" />
+        <result column="address3" property="address3" />
+        <result column="update_time1" property="update_time1" />
+        <result column="update_time2" property="update_time2" />
+        <result column="update_time3" property="update_time3" />
+        <result column="destination" property="destination" />
+        <result column="end_time" property="end_time" />
+    </resultMap>
+</mapper>
+
+
+
+
+
