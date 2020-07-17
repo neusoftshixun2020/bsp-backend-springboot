@@ -10,13 +10,13 @@
 
     <update id="update" parameterType="User">
         update brd_brand
-        set MAN_ID = #{man_id}, NAME_EN = #{name_en}, NAME_CN = #{name_cn}, CREATED_BY = #{created_by},
-            CREATION_DATE = #{creation_date}, LAST_UPDATE_BY = #{last_update_by}, LAST_UPDATE_DATE = #{last_update_date},
-            CALL_CNT = #{call_cnt},REMARK = #{remark}, IMG_URL=#{img_url} where BRD_ID = #{brd_id}
+        set man_id = #{man_id}, name_en = #{name_en}, name_cn = #{name_cn}, created_by = #{created_by},
+            creation_date = #{creation_date}, last_update_by = #{last_update_by}, last_update_date = #{last_update_date},
+            call_cnt = #{call_cnt},remark = #{remark}, img_url=#{img_url} where brd_id = #{brd_id}
     </update>
 
     <delete id="delete" parameterType="java.lang.Integer">
-        delete from brd_brand where BRD_ID=#{brd_id}
+        delete from brd_brand where brd_id=#{brd_id}
     </delete>
 
     <select id="getAll" resultMap="_brand">
@@ -24,23 +24,23 @@
     </select>
 
     <select id="getById" parameterType="java.lang.Integer" resultMap="_brand">
-        select * from brd_brand where BRD_ID=#{brd_id}
+        select * from brd_brand where brd_id=#{brd_id}
     </select>
 
     <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_brand">
         select * from brd_brand
         <where>
-            <if test="BRD_ID != null">BRD_ID = #{brd_id}</if>
-            <if test="MAN_ID != null">and MAN_ID = #{man_id}</if>
-            <if test="NAME_EN != null">and NAME_EN = #{name_en}</if>
-            <if test="NAME_CN != null">and NAME_CN = #{name_cn}</if>
-            <if test="CREATED_BY != null">and CREATED_BY = #{created_by}</if>
-            <if test="CREATION_DATE != null">and CREATION_DATE = #{creation_date}</if>
-            <if test="LAST_UPDATE_BY != null">and LAST_UPDATE_BY = #{last_update_by}</if>
-            <if test="LAST_UPDATE_DATE != null">and LAST_UPDATE_DATE = #{last_update_date}</if>
-            <if test="CALL_CNT != null">and CALL_CNT = #{call_cnt}</if>
-            <if test="REMARK != null">and REMARK = #{remark}</if>
-            <if test="IMG_URL != null">and IMG_URL = #{img_url}</if>
+            <if test="brd_id != null">brd_id = #{brd_id}</if>
+            <if test="man_id != null">and man_id = #{man_id}</if>
+            <if test="name_en != null">and name_en = #{name_en}</if>
+            <if test="name_cn != null">and name_cn = #{name_cn}</if>
+            <if test="created_by != null">and created_by = #{created_by}</if>
+            <if test="creation_date != null">and creation_date = #{creation_date}</if>
+            <if test="last_update_by != null">and last_update_by = #{last_update_by}</if>
+            <if test="last_update_date != null">and last_update_date = #{last_update_date}</if>
+            <if test="call_cnt != null">and call_cnt = #{call_cnt}</if>
+            <if test="remark != null">and remark = #{remark}</if>
+            <if test="img_url != null">and img_url = #{img_url}</if>
         </where>
     </select>
 
