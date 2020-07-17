@@ -1,5 +1,7 @@
 package com.neusoft.bsp_backend.bvo.mapper;
 
+import com.neusoft.bsp_backend.wallet.entity.WalletAccount;
+import com.neusoft.bsp_backend.wallet.mapper.WalletAccountMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class StoreMapperTest {
     @Autowired
     StoreMapper storeMapper;
+    @Autowired
+    WalletAccountMapper walletAccountMapper;
     @Test
     void contextLoads() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("platform_type", "1");
-        //map.put("dsr_id", 1);
-        storeMapper.getAllByFilter(map);
+        WalletAccount walletAccount = new WalletAccount();
+        walletAccountMapper.insert(walletAccount);
     }
 
 }
