@@ -235,7 +235,7 @@ public class WalletController extends BaseController {
         }
     }
     @PostMapping("/pay")
-    public BaseModel pay(@Validated({UpdateGroup.class}) @RequestBody WalletAccount walletAccount, BindingResult bindingResult) {
+    public BaseModel pay(@Validated({UpdateGroup.class}) @RequestBody WalletAccount walletAccount, int man_id, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw BusinessException.USERID_NULL_ERROR.newInstance("504", this.getErrorResponse(bindingResult),
                     new Object[]{walletAccount.toString()});
@@ -271,24 +271,34 @@ public class WalletController extends BaseController {
                 walletTransactionRecord.setTransaction_money(walletAccountFund.getWithdrawing_money());
                 walletTransactionRecord.setStatus(2);
 
-                walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().subtract(walletAccountFund.getWithdrawing_money()));
-                walletAccountFund.setWithdrawing_money(BigDecimal.valueOf(0));
-                walletAccount1.setWalletAccountFund(walletAccountFund);
-                int i = walletAccountService.update(walletAccount1);
-                if (i == 1) {
-                    walletTransactionAudit.setAvailable_money_after(walletAccountFund.getAvailable_money());
-                    walletTransactionAudit.setDepositing_money_after(walletAccountFund.getDepositing_money());
-                    walletTransactionAudit.setWithdrawing_money_after(walletAccountFund.getWithdrawing_money());
-                    walletTransactionRecord.setWalletTransactionAudit(walletTransactionAudit);
-                    int j = walletTransactionRecordService.insert(walletTransactionRecord);
-                    if (j==1){
-                        result.code = 200;
-                        return result;
-                    }else {
-                        throw BusinessException.INSERT_FAIL;
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put("man_id", man_id);
+                List<WalletAccount> man_walletAccounts = walletAccountService.getAllByFilter(map1);
+                if (man_walletAccounts.size() == 0){
+                    throw BusinessException.NOT_EXISTS;
+                }else {
+                    WalletAccount man_wallet = man_walletAccounts.get(0);
+                    man_wallet.getWalletAccountFund().setAvailable_money(man_wallet.getWalletAccountFund().getAvailable_money().add(walletAccountFund.getWithdrawing_money()));
+                    walletAccountFund.setAvailable_money(walletAccountFund.getAvailable_money().subtract(walletAccountFund.getWithdrawing_money()));
+                    walletAccountFund.setWithdrawing_money(BigDecimal.valueOf(0));
+                    walletAccount1.setWalletAccountFund(walletAccountFund);
+                    int i = walletAccountService.update(walletAccount1);
+                    int l = walletAccountService.update(man_wallet);
+                    if (i == 1 && l==1) {
+                        walletTransactionAudit.setAvailable_money_after(walletAccountFund.getAvailable_money());
+                        walletTransactionAudit.setDepositing_money_after(walletAccountFund.getDepositing_money());
+                        walletTransactionAudit.setWithdrawing_money_after(walletAccountFund.getWithdrawing_money());
+                        walletTransactionRecord.setWalletTransactionAudit(walletTransactionAudit);
+                        int j = walletTransactionRecordService.insert(walletTransactionRecord);
+                        if (j==1){
+                            result.code = 200;
+                            return result;
+                        }else {
+                            throw BusinessException.INSERT_FAIL;
+                        }
+                    } else {
+                        throw BusinessException.UPDATE_FAIL;
                     }
-                } else {
-                    throw BusinessException.UPDATE_FAIL;
                 }
             }
         }
