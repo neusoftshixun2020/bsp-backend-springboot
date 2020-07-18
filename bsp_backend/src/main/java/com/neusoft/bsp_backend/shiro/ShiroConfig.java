@@ -25,6 +25,7 @@ public class ShiroConfig {
        filterMap.put("/user/checkUser", "anon");
         filterMap.put("/user/getInfo", "anon");
        filterMap.put("/user/login", "anon");
+       filterMap.put("/image/uploadImage", "anon");
         filterMap.put("/user/addUser", "anon");
         filterMap.put("/user/getVerifyCode", "anon");
         filterMap.put("/user/getVerifyCodeNumber", "anon");
