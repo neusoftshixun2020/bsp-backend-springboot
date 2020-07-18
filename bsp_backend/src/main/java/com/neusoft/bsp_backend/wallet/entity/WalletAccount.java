@@ -10,6 +10,7 @@ public class WalletAccount implements BaseEntity<Integer> {
     String account_name;
     String email;
     String password;
+    int man_id;
     Date active_time;
     String is_active;
     int status;
@@ -21,6 +22,14 @@ public class WalletAccount implements BaseEntity<Integer> {
     String hold_order_time;
     String auto_pay_status;
     WalletAccountFund walletAccountFund;
+
+    public int getMan_id() {
+        return man_id;
+    }
+
+    public void setMan_id(int man_id) {
+        this.man_id = man_id;
+    }
 
     public WalletAccountFund getWalletAccountFund() {
         return walletAccountFund;
@@ -154,8 +163,9 @@ public class WalletAccount implements BaseEntity<Integer> {
                 ", account_name='" + account_name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", man_id=" + man_id +
                 ", active_time=" + active_time +
-                ", is_active=" + is_active +
+                ", is_active='" + is_active + '\'' +
                 ", status=" + status +
                 ", create_by='" + create_by + '\'' +
                 ", create_time=" + create_time +
