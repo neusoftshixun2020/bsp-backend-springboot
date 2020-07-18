@@ -1,9 +1,9 @@
 package com.neusoft.bsp_backend.user.mapper;
 
 import com.neusoft.bsp_backend.common.base.BaseMapper;
-import com.neusoft.bsp_backend.user.entity.User;
+import com.neusoft.bsp_backend.user.entity.ChildrenRoute;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserMapper extends BaseMapper<String, User> {
+public interface ChildrenRouteMapper extends BaseMapper<Integer, ChildrenRoute> {
 }

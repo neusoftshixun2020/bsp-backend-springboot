@@ -1,5 +1,6 @@
 package com.neusoft.bsp_backend.common.exception;
 
+
 public class BusinessException extends RuntimeException {
     public static final BusinessException NOT_EXISTS = new BusinessException(504, "doesn't exist", new Object[0]);
     public static final BusinessException PRODUCT_NOT_EXISTS = new BusinessException(504, "product doesn't exist", new Object[0]);
@@ -11,6 +12,11 @@ public class BusinessException extends RuntimeException {
     public static final BusinessException UPLOAD_FILE_FAIL = new BusinessException(504, "file upload failed", new Object[0]);
     public static final BusinessException FILETYPE_NOT_PICTURE = new BusinessException(504, "file type is not picture", new Object[0]);
     public static final BusinessException OPERATION_FAIL = new BusinessException(504, "operation failed", new Object[0]);
+    public static final BusinessException NO_LOGIN = new BusinessException(504, "You need to login", new Object[0]);
+    public static final BusinessException PERMISSION_TOKEN_EXPIRED = new BusinessException(504, "permission token expired", new Object[0]);
+    public static final BusinessException PERMISSION_TOKEN_INVALID = new BusinessException(504, "permission token invalid", new Object[0]);
+    public static final BusinessException DUPLICATE_PATH = new BusinessException(504, "duplicate path", new Object[0]);
+    public static final BusinessException DUPLICATE_USERNAME = new BusinessException(504, "duplicate username", new Object[0]);
 
     int code;
     String msg;

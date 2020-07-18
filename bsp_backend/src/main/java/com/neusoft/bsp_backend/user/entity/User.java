@@ -1,5 +1,6 @@
 package com.neusoft.bsp_backend.user.entity;
 
+
 import com.neusoft.bsp_backend.common.base.BaseEntity;
 import com.neusoft.bsp_backend.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp_backend.common.validationGroup.InsertGroup;
@@ -9,14 +10,14 @@ import com.neusoft.bsp_backend.common.validationGroup.UpdateGroup;
 import javax.validation.constraints.NotNull;
 
 public class User implements BaseEntity<String> {
-    @NotNull(groups={InsertGroup.class, UpdateGroup.class, SelectGroup.class, DeleteGroup.class}, message = "userid should not be null")
+//    @NotNull(groups={InsertGroup.class, UpdateGroup.class, SelectGroup.class, DeleteGroup.class}, message = "userid should not be null")
     String user_id;
     @NotNull(message = "The username shouldn't be null", groups = {InsertGroup.class, UpdateGroup.class})
     String username;
     String password;
     String name;
     String rights;
-    String role_id;
+    int role_id;
     String last_login;
     String ip;
     String status;
@@ -26,6 +27,7 @@ public class User implements BaseEntity<String> {
     String number;
     String phone;
     int man_buyer_id;
+    Role role;
 
     public String getId() { return user_id; }
 
@@ -69,11 +71,12 @@ public class User implements BaseEntity<String> {
         this.rights = rights;
     }
 
-    public String getRole_id() {
+
+    public int getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(String role_id) {
+    public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
 
@@ -149,6 +152,14 @@ public class User implements BaseEntity<String> {
         this.man_buyer_id = man_buyer_id;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -157,7 +168,7 @@ public class User implements BaseEntity<String> {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", rights='" + rights + '\'' +
-                ", role_id='" + role_id + '\'' +
+                ", role_id=" + role_id +
                 ", last_login='" + last_login + '\'' +
                 ", ip='" + ip + '\'' +
                 ", status='" + status + '\'' +
@@ -167,6 +178,7 @@ public class User implements BaseEntity<String> {
                 ", number='" + number + '\'' +
                 ", phone='" + phone + '\'' +
                 ", man_buyer_id=" + man_buyer_id +
+                ", role=" + role +
                 '}';
     }
 }

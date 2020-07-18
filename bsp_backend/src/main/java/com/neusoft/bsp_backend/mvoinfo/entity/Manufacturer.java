@@ -25,7 +25,7 @@ public class Manufacturer implements BaseEntity<String> {
     int call_cnt;
     String remark;
     String sts_cd;
-    int user_id;
+    String user_id;
 
     public int getMan_id() {
         return man_id;
@@ -131,11 +131,11 @@ public class Manufacturer implements BaseEntity<String> {
         this.sts_cd = sts_cd;
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 

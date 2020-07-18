@@ -2,10 +2,11 @@ server:
   port: 8088
 spring:
   datasource:
-    username: root
-    password: "54321dachuang"
-    url: jdbc:mysql://49.232.199.44:3306/bsp?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      username: root
+      password: "54321dachuang"
+      url: jdbc:mysql://49.232.199.44:3306/bsp_database?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   mapper-locations: classpath:mappers/*/*Mapper.xml
