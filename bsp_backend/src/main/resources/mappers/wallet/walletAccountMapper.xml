@@ -16,7 +16,7 @@
         account_name = #{account_name},
         email = #{email},
         password = #{password},
-        man_id = #{man_id}
+        man_id = #{man_id},
         active_time = #{active_time},
         is_active = #{is_active},
         status = #{status},

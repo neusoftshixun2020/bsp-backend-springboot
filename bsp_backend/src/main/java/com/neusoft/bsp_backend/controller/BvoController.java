@@ -118,7 +118,7 @@ public class BvoController extends BaseController {
                     new Object[]{wishList.toString()});
         } else {
             BaseModel result = new BaseModel();
-            int i = wishListService.delete(wishList.getId());
+            int i = wishListService.delete(wishList.getWit_id());
             if (i == 1) {
                 result.code = 200;
                 return result;
