@@ -34,6 +34,15 @@ public class ManController extends BaseController {
             throw new BusinessException().INSERT_FAIL.newInstance("504", this.getErrorResponse(bindingResult), new Object[]{manufacturer.toString()});
         } else {
             BaseModel result = new BaseModel();
+            String description=manufacturer.getDescription();
+            // <p>段落替换为换行
+            description = description.replaceAll("<p .*?>", "\r\n");
+            // <br><br/>替换为换行
+            description = description.replaceAll("<br\\s*/?>", "\r\n");
+            // 去掉其它的<>之间的东西
+            description = description.replaceAll("\\<.*?>", "");
+            System.out.println(description);
+            manufacturer.setDescription(description);
             int i = manService.insert(manufacturer);
             if (i == 1) {
                 result.code = 200;
