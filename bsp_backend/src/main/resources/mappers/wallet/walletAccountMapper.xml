@@ -5,9 +5,9 @@
 <mapper namespace="com.neusoft.bsp_backend.wallet.mapper.WalletAccountMapper">
     <insert id="insert"  parameterType="WalletAccount" useGeneratedKeys="true" keyProperty="buyer_id">
         insert into waa_wallet_account values(
-        null, #{account_name}, #{email}, #{password}, #{man_id}, #{active_time}, #{is_active},
+        null, #{account_name}, #{email}, #{password}, #{active_time}, #{is_active},
          #{status}, #{create_by}, #{create_time}, #{last_update_by}, #{last_update_time},
-          #{account_type}, #{hold_order_time}, #{auto_pay_status})
+          #{account_type}, #{hold_order_time}, #{auto_pay_status}, #{man_id})
     </insert>
 
     <update id="update" parameterType="WalletAccount">
